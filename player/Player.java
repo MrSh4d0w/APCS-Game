@@ -1,5 +1,3 @@
-package player;
-
 public class Player {
     private int HP, locX, locY;
     public enum status {NONE,FROZEN,BURNING}
