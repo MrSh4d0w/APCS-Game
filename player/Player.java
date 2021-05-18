@@ -1,6 +1,7 @@
 public class Player {
     private int HP, locX, locY;
     public enum status {NONE,FROZEN,BURNING}
+    public enum direction {UP,DOWN,LEFT,RIGHT}
     private status s;
 
     public Player(int HP, int locX, int locY, status s) {
@@ -22,4 +23,6 @@ public class Player {
 
     private status getStatus(){return s;}// returns status of Player object
     private void setStatus(status s){this.s = s;}
+
+    public void move(direction dir, int amnt){}// move char [amnt] tiles in [dir] direction
 }
