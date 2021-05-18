@@ -5,7 +5,12 @@ public class Player {
     public enum status {NONE,FROZEN,BURNING}
     private status s;
 
-    public Player(){}
+    public Player(int HP, int locX, int locY, status s) {
+        this.HP = HP;
+        this.locX = locX;
+        this.locY = locY;
+        this.s = s;
+    }
 
     private int getLocationX(){
         return locX;
