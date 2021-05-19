@@ -3,5 +3,7 @@ public class Character1 extends Player {
         super(HP, locX, locY, s);
     }
 
-    public void move(direction dir, int amnt){}// move char [amnt] tiles in [dir] direction
+    public void move(direction dir, int amnt){
+        //put animation here
+    }// move char [amnt] tiles in [dir] direction
 }
