@@ -4,4 +4,4 @@
 2. Maybe status effects?? or elemental stuffs?
 3. Classes: Assault, Heavy, Sniper, Melee (Fast dude)
 4. Move characters: Either use a command line thing, pokemon style thing or Into the Breach thing (mouse).
-5. For Alex: each character 96x96
+5. For Alex: each character 16x16
