@@ -25,4 +25,17 @@ public class Player {
     private void setStatus(status s){this.s = s;}
 
     public void move(direction dir, int amnt){}// move char [amnt] tiles in [dir] direction
+
+    public void iHateWarnings(){
+        getLocationX();
+        getLocationY();
+        setLocationX(0);
+        setLocationY(0);
+        getHP();
+        setHP(0);
+        removeHP(0);
+        addHP(0);
+        getStatus();
+        setStatus(s);
+    }
 }
