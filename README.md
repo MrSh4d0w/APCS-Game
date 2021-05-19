@@ -1,10 +1,5 @@
 # APCS-Game
-
-## Table of Contents
-
-**GameRunner.java**
-
-# Class Hierarchy and Class Definitions
+## Class Hierarchy and Class Definitions
 TitleScreen.java
     : Runs the title screen <br> 
 GameRunner.java
