@@ -9,11 +9,27 @@ public class Player extends JLayeredPane implements ActionListener{
     public enum direction {UP,DOWN,LEFT,RIGHT}
     private pClass c;
 
-    public Player(int HP, int locX, int locY, pClass c, int speed, int acc) {
+    public Player(int HP, int locX, int locY, String c, int speed, int acc) {
         this.HP = HP;
         this.locX = locX;
         this.locY = locY;
         this.c = c;
+        switch(c){
+            case "ASSAULT":
+                this.c = pClass.ASSAULT;
+                break;
+            case "TANK":
+                this.c = pClass.TANK;
+                break;
+            case "MELEE":
+                this.c = pClass.MELEE;
+                break;
+            case "SNIPER":
+                this.c = pClass.SNIPER;
+                break;
+            default: 
+                System.exit(0);
+        }
         this.speed = speed;
         this.acc = acc;
 
@@ -22,19 +38,19 @@ public class Player extends JLayeredPane implements ActionListener{
         setFocusTraversalKeysEnabled(false);
     }
 
-    private int getLocationX(){return locX;}// returns location of Player object x
-    private int getLocationY(){return locY;}// returns location of Player object y
-    private void setLocationX(int x){locX = x;}// sets location of Player object x
-    private void setLocationY(int y){locY = y;}// sets location of Player object y
+    public int getLocationX(){return locX;}// returns location of Player object x
+    public int getLocationY(){return locY;}// returns location of Player object y
+    public void setLocationX(int x){locX = x;}// sets location of Player object x
+    public void setLocationY(int y){locY = y;}// sets location of Player object y
 
-    private int getHP(){return HP;}// returns HP of Player object
-    private void setHP(int HP){this.HP = HP;}// sets HP of Player object
-    private void removeHP(int x){HP-=x;}// removes x HP of Player object
-    private void addHP(int x){HP+=x;}// adds x HP of Player object
+    public int getHP(){return HP;}// returns HP of Player object
+    public void setHP(int HP){this.HP = HP;}// sets HP of Player object
+    public void removeHP(int x){HP-=x;}// removes x HP of Player object
+    public void addHP(int x){HP+=x;}// adds x HP of Player object
 
-    private pClass getPClass(){return c;}// returns status of Player object
-    private int getAcc(){return acc;}// returns accuracy
-    private int getSpeed(){return speed;}// returns speed
+    public pClass getPClass(){return c;}// returns status of Player object
+    public int getAcc(){return acc;}// returns accuracy
+    public int getSpeed(){return speed;}// returns speed
     
     public void move(pClass p, direction dir, int amnt){}// move char [amnt] tiles in [dir] direction
 
