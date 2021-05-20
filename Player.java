@@ -13,7 +13,6 @@ public class Player extends JLayeredPane implements ActionListener{
         this.HP = HP;
         this.locX = locX;
         this.locY = locY;
-        this.c = c;
         switch(c){
             case "ASSAULT":
                 this.c = pClass.ASSAULT;
