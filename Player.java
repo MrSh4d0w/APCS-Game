@@ -1,5 +1,7 @@
 import java.awt.*;
 import java.awt.event.*;
+import java.io.*;
+
 import javax.swing.*;
 
 public class Player extends JLayeredPane implements ActionListener{
@@ -10,6 +12,8 @@ public class Player extends JLayeredPane implements ActionListener{
     private pClass c;
 
     public Player(int HP, int locX, int locY, String c, int speed, int acc) {
+        File file = new File("screenshot.png");
+
         this.HP = HP;
         this.locX = locX;
         this.locY = locY;
