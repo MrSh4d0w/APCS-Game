@@ -1,14 +1,28 @@
-public class Player {
-    private int HP, locX, locY;
-    public enum status {NONE,FROZEN,BURNING}
-    public enum direction {UP,DOWN,LEFT,RIGHT}
-    private status s;
+import javax.swing.JPanel;
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
 
-    public Player(int HP, int locX, int locY, status s) {
+public class Player extends JLayeredPane implements ActionListener{
+    private Timer time = new Timer(5, this);
+    private int HP, locX, locY, speed, acc;
+    public enum pClass {ASSAULT,TANK,SNIPER,MELEE}
+    public enum direction {UP,DOWN,LEFT,RIGHT}
+    private pClass c;
+
+    public Player(int HP, int locX, int locY, pClass c, int speed, int acc) {
         this.HP = HP;
         this.locX = locX;
         this.locY = locY;
-        this.s = s;
+        this.c = c;
+        this.speed = speed;
+        this.acc = acc;
+
+
+
+        time.start();
+        setFocusable(true);
+        setFocusTraversalKeysEnabled(false);
     }
 
     private int getLocationX(){return locX;}// returns location of Player object x
@@ -21,10 +35,61 @@ public class Player {
     private void removeHP(int x){HP-=x;}// removes x HP of Player object
     private void addHP(int x){HP+=x;}// adds x HP of Player object
 
-    private status getStatus(){return s;}// returns status of Player object
-    private void setStatus(status s){this.s = s;}
-
+    private pClass getPClass(){return c;}// returns status of Player object
+    private int getAcc(){return acc;}// returns accuracy
+    private int getSpeed(){return speed;}// returns speed
+    
     public void move(direction dir, int amnt){}// move char [amnt] tiles in [dir] direction
+
+    
+
+
+    public void paintComponent(Graphics g){
+        super.paintComponent(g);
+        //ASSAULT,TANK,SNIPER,MELEE
+        switch(c){
+            case ASSAULT:
+                animateASSAULT();
+                break;
+            case TANK:
+                animateTANK();
+                break;
+            case SNIPER:
+                animateSNIPER();
+                break;
+            case MELEE:
+                animateMELEE();
+                break;
+        }
+    }
+
+    public void actionPerformed(ActionEvent e) {
+        repaint();
+        
+    }
+
+    public void animateASSAULT(){}
+    public void animateSNIPER(){}
+    public void animateTANK(){}
+    public void animateMELEE(){}
+
+
+
+
+
+
+/*switch(c){
+    case ASSAULT:
+        break;
+    case TANK:
+        break;
+    case SNIPER:
+        break;
+    case MELEE:
+        break;
+}
+        */
+
 
     public void iHateWarnings(){
         getLocationX();
@@ -35,7 +100,8 @@ public class Player {
         setHP(0);
         removeHP(0);
         addHP(0);
-        getStatus();
-        setStatus(s);
+        getAcc();
+        getSpeed();
+        getPClass();
     }
 }
