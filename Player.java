@@ -1,4 +1,3 @@
-import javax.swing.JPanel;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -17,8 +16,6 @@ public class Player extends JLayeredPane implements ActionListener{
         this.c = c;
         this.speed = speed;
         this.acc = acc;
-
-
 
         time.start();
         setFocusable(true);
@@ -39,7 +36,7 @@ public class Player extends JLayeredPane implements ActionListener{
     private int getAcc(){return acc;}// returns accuracy
     private int getSpeed(){return speed;}// returns speed
     
-    public void move(direction dir, int amnt){}// move char [amnt] tiles in [dir] direction
+    public void move(pClass p, direction dir, int amnt){}// move char [amnt] tiles in [dir] direction
 
     
 
@@ -49,29 +46,28 @@ public class Player extends JLayeredPane implements ActionListener{
         //ASSAULT,TANK,SNIPER,MELEE
         switch(c){
             case ASSAULT:
-                animateASSAULT();
+                g = animateASSAULT(g);
                 break;
             case TANK:
-                animateTANK();
+                g = animateTANK(g);
                 break;
             case SNIPER:
-                animateSNIPER();
+                g = animateSNIPER(g);
                 break;
             case MELEE:
-                animateMELEE();
+                g = animateMELEE(g);
                 break;
         }
     }
 
     public void actionPerformed(ActionEvent e) {
-        repaint();
-        
+        repaint();   
     }
 
-    public void animateASSAULT(){}
-    public void animateSNIPER(){}
-    public void animateTANK(){}
-    public void animateMELEE(){}
+    public Graphics animateASSAULT(Graphics g){return g;}
+    public Graphics animateSNIPER(Graphics g){return g;}
+    public Graphics animateTANK(Graphics g){return g;}
+    public Graphics animateMELEE(Graphics g){return g;}
 
 
 
