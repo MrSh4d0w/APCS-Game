@@ -6,7 +6,6 @@ public class majorPain extends JPanel{
 
     public majorPain(String img){
         this(new ImageIcon(img).getImage());
-
     }
 
     public majorPain(Image img) {
