@@ -1,7 +1,6 @@
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
-import java.awt.image.*;
 import javax.imageio.ImageIO;
 import javax.swing.*;   
 
@@ -14,14 +13,9 @@ public class Player extends JLayeredPane implements ActionListener{
     Image img;
 
     public Player(int HP, int locX, int locY, String c, int speed, int acc) {
-        File file = new File("screenshot.png");
         try {
             img = ImageIO.read(new File("screenshot.png"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-
+        } catch (IOException e) {e.printStackTrace(); }
 
         this.HP = HP;
         this.locX = locX;
