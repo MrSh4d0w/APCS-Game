@@ -19,5 +19,7 @@ public class GameRunner {
         f.add(p2);
         f.setVisible(true);
         f.setResizable(false);
+
+        //imsad 
     }
 }
