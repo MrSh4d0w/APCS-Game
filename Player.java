@@ -4,7 +4,7 @@ import java.io.*;
 import javax.imageio.ImageIO;
 import javax.swing.*;   
 
-public class Player extends JLayeredPane implements ActionListener{
+public class Player extends JPanel implements ActionListener{
     private Timer time = new Timer(5, this);
     private int HP, locX, locY, speed, acc;
     public enum pClass {ASSAULT,TANK,SNIPER,MELEE}
@@ -14,7 +14,7 @@ public class Player extends JLayeredPane implements ActionListener{
 
     public Player(int HP, int locX, int locY, String c, int speed, int acc) {
         try {
-            img = ImageIO.read(new File("screenshot.png"));
+            img = ImageIO.read(new File("otter.png"));
         } catch (IOException e) {e.printStackTrace(); }
 
         this.HP = HP;
@@ -65,7 +65,7 @@ public class Player extends JLayeredPane implements ActionListener{
 
     public void paintComponent(Graphics g){
         super.paintComponent(g);
-        g.drawImage(img, 0, 0, null);
+        g.drawImage(img, locX, locY, null);
         //ASSAULT,TANK,SNIPER,MELEE
         switch(c){
             case ASSAULT:
