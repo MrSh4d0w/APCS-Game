@@ -20,7 +20,7 @@ public class major {
         layeredPane.add(new majorPain("house.png"), 0);//makes otter image at z of 1 in JLayeredPane
         fram.add(layeredPane);//adds JLayeredPane to JFrame
 
-        
+        fram.setResizable(false);
         fram.setVisible(true); //makes JFrame visible
     }
 }
