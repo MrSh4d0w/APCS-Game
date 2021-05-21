@@ -1,8 +1,9 @@
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
-
-import javax.swing.*;
+import java.awt.image.*;
+import javax.imageio.ImageIO;
+import javax.swing.*;   
 
 public class Player extends JLayeredPane implements ActionListener{
     private Timer time = new Timer(5, this);
@@ -10,9 +11,17 @@ public class Player extends JLayeredPane implements ActionListener{
     public enum pClass {ASSAULT,TANK,SNIPER,MELEE}
     public enum direction {UP,DOWN,LEFT,RIGHT}
     private pClass c;
+    Image img;
 
     public Player(int HP, int locX, int locY, String c, int speed, int acc) {
         File file = new File("screenshot.png");
+        try {
+            img = ImageIO.read(new File("screenshot.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
 
         this.HP = HP;
         this.locX = locX;
@@ -62,6 +71,7 @@ public class Player extends JLayeredPane implements ActionListener{
 
     public void paintComponent(Graphics g){
         super.paintComponent(g);
+        g.drawImage(img, 0, 0, null);
         //ASSAULT,TANK,SNIPER,MELEE
         switch(c){
             case ASSAULT:

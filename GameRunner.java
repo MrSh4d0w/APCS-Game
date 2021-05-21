@@ -16,5 +16,6 @@ public class GameRunner {
         f.add(p);
 
         f.setVisible(true);
+        f.setResizable(false);
     }
 }
