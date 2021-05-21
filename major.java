@@ -17,14 +17,14 @@ public class major {
         layeredPane.setPreferredSize(new Dimension(300, 310));//sets size of JLayeredPane
         layeredPane.setLayout(null);
 
-        majorPain c1 = new majorPain("levels/Level-0.png");
+        majorPain c1 = new majorPain("images/Level-0.png");
         c1.setBounds(0,0, 256, 256);
         layeredPane.add(c1, -1);
 
 
         BufferedImage p1 = null;
         try {
-            p1 = ImageIO.read(new File("AllCharacters_Idle.png"));
+            p1 = ImageIO.read(new File("images/AllCharacters_Idle.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
