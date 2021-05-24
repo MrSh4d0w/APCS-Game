@@ -1,11 +1,12 @@
 import java.awt.*;
 import javax.swing.*; 
 
+
 public class majorPain extends JPanel{
     private Image img;
 
     public majorPain(String img){
-        this(new ImageIcon(img).getImage());
+      this(new ImageIcon(img).getImage());
     }
 
     public majorPain(Image img) {

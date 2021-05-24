@@ -1,25 +1,22 @@
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.image.BufferedImage;
 import java.io.*;
 import javax.imageio.ImageIO;
 import javax.swing.*;   
 
 public class Player extends JPanel implements ActionListener{
     private Timer time = new Timer(5, this);
-    private int HP, locX, locY, speed, acc;
+    private int HP, speed, acc;
     public enum pClass {ASSAULT,TANK,SNIPER,MELEE}
     public enum direction {UP,DOWN,LEFT,RIGHT}
     private pClass c;
     Image img;
+    String image;
+    int[][] spriteSheetCords = { {0,0,96,96}, {96, 0, 96, 96}, {192,0,96,96}, {288,0,96,96}, {384, 0, 96,96}, {480,0,96,96} };
 
-    public Player(int HP, int locX, int locY, String c, int speed, int acc) {
-        try {
-            img = ImageIO.read(new File("otter.png"));
-        } catch (IOException e) {e.printStackTrace(); }
-
+    public Player(int HP, String c, int speed, int acc) {        
         this.HP = HP;
-        this.locX = locX;
-        this.locY = locY;
         switch(c){
             case "ASSAULT":
                 this.c = pClass.ASSAULT;
@@ -44,11 +41,6 @@ public class Player extends JPanel implements ActionListener{
         setFocusTraversalKeysEnabled(false);
     }
 
-    public int getLocationX(){return locX;}// returns location of Player object x
-    public int getLocationY(){return locY;}// returns location of Player object y
-    public void setLocationX(int x){locX = x;}// sets location of Player object x
-    public void setLocationY(int y){locY = y;}// sets location of Player object y
-
     public int getHP(){return HP;}// returns HP of Player object
     public void setHP(int HP){this.HP = HP;}// sets HP of Player object
     public void removeHP(int x){HP-=x;}// removes x HP of Player object
@@ -65,8 +57,6 @@ public class Player extends JPanel implements ActionListener{
 
     public void paintComponent(Graphics g){
         super.paintComponent(g);
-        g.drawImage(img, locX, locY, null);
-        //ASSAULT,TANK,SNIPER,MELEE
         switch(c){
             case ASSAULT:
                 g = animateASSAULT(g);
@@ -83,38 +73,44 @@ public class Player extends JPanel implements ActionListener{
         }
     }
 
-    public void actionPerformed(ActionEvent e) {
-        repaint();   
+    public Graphics animateASSAULT(Graphics g){
+        getImg("house");
+        resizeImg(0, 0, 50, 50);
+        g.drawImage(img, 0, 0, null);
+        return g;
+    }// !Do this
+    public Graphics animateSNIPER(Graphics g){
+        getImg("house");
+        g.drawImage(img, 0, 0, null);
+        return g;
+    }// !Do this
+    public Graphics animateTANK(Graphics g){
+        getImg("house"); 
+        g.drawImage(img, 0, 0, null);
+        return g;
+    }// !Do this
+    public Graphics animateMELEE(Graphics g){
+        getImg("house");
+        g.drawImage(img, 0, 0, null);
+        return g;
+    }// !Do this
+
+
+
+
+
+    private void resizeImg(int x1, int y1, int x2, int y2){
+        this.img = ((BufferedImage) img).getSubimage(x1,y1,x2,y2);
     }
-
-    public Graphics animateASSAULT(Graphics g){return g;}
-    public Graphics animateSNIPER(Graphics g){return g;}
-    public Graphics animateTANK(Graphics g){return g;}
-    public Graphics animateMELEE(Graphics g){return g;}
-
-
-
-
-
-
-/*switch(c){
-    case ASSAULT:
-        break;
-    case TANK:
-        break;
-    case SNIPER:
-        break;
-    case MELEE:
-        break;
-}
-        */
-
-
+    private void getImg(String name){
+        try {
+            img = ImageIO.read(new File("images/" + name + ".png"));
+        } catch (IOException e) {e.printStackTrace(); }
+    }
+    public void actionPerformed(ActionEvent e) {
+            repaint();   
+        }
     public void iHateWarnings(){
-        getLocationX();
-        getLocationY();
-        setLocationX(0);
-        setLocationY(0);
         getHP();
         setHP(0);
         removeHP(0);

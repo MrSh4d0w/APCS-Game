@@ -1,4 +1,5 @@
-import javax.swing.JFrame;
+import javax.swing.*;
+
 // import environment.*;
 // import enemy.*;
 // import system.*;
@@ -7,26 +8,30 @@ import java.awt.*;
 
 public class GameRunner {
     public static void main(String[] args) {
+        
         JFrame f = new JFrame();
-        f.setSize(1920, 1080);
-        // f.setLayout(null);
+        f.setSize(650, 650);
         f.getContentPane().setBackground(new Color(50, 50, 50));
         f.setUndecorated(true);
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.setLocation(0, 0);
 
-        Player p = new Player(100, 0, 0, "ASSAULT", 50, 20);
-        f.setBackground(new Color(50, 50, 50));
-        f.add(p, null, 0);
 
-        // f.setLayout(new GridLayout(0,1));
-        // Player p2 = new Player(100, 0, 0, "ASSAULT", 50, 20);
-        // p2.setBackground(new Color(50, 50, 50));
-        // f.add(p2, BorderLayout.CENTER);
 
-        f.setVisible(true);
+
+        JLayeredPane layeredPane = new JLayeredPane();//makes new JLayeredPane (only one)
+        layeredPane.setPreferredSize(new Dimension(300, 310));//sets size of JLayeredPane
+        layeredPane.setLayout(null);
+
+        majorPain back = new majorPain("images/Level-0-Resized.png");
+        layeredPane.add(back, -1);
+
+        Player p = new Player(100, "ASSAULT", 50, 20);
+        p.setBounds(0, 0, 100, 100);
+        layeredPane.add(p, 0);
+        
+        f.add(layeredPane);
         f.setResizable(false);
-
-        //imsad 
+        f.setVisible(true);
     }
 }
