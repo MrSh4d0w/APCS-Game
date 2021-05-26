@@ -13,8 +13,7 @@ public class Player extends JPanel implements ActionListener{
     private pClass c;
     Image img;
     String image;
-    int[][] spriteSheetCords = { {0,0,96,96}, {96, 0, 96, 96}, {192,0,96,96}, {288,0,96,96}, {384, 0, 96,96}, {480,0,96,96} };
-
+    
     public Player(int HP, String c, int speed, int acc) {        
         this.HP = HP;
         switch(c){
