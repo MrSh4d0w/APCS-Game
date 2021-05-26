@@ -5,10 +5,11 @@ import java.awt.event.*;
 public class map extends JPanel implements ActionListener {
     private static JTextField textField;
     private Image img;
+    private int[][] grid;
 
     public map(String img) {
         this(new ImageIcon(img).getImage());
-    }
+    }//128(+-32/2), 135(38/2)      15, 8
 
     public map(Image img) {
         this.img = img;
@@ -67,5 +68,5 @@ public class map extends JPanel implements ActionListener {
             }
         }
         return ret;
-    }   
+    }
 }
