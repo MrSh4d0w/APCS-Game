@@ -40,6 +40,10 @@ public class Player extends JPanel implements ActionListener{
         setFocusTraversalKeysEnabled(false);
     }
 
+    public void setLocation(String str){
+        GameRunner.setLocation(str);
+    }
+
     public int getHP(){return HP;}// returns HP of Player object
     public void setHP(int HP){this.HP = HP;}// sets HP of Player object
     public void removeHP(int x){HP-=x;}// removes x HP of Player object

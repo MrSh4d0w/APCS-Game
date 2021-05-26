@@ -39,7 +39,8 @@ public class GameRunner{
         mainPanel.add(c, 0);
 
         p = new Player(100, "ASSAULT", 50, 20);//*Player
-        p.setBounds(100, 100, 112, 112);
+        p.setSize(new Dimension(112, 112));
+        p.setLocation(grid[1][2]);
         mainPanel.add(p, 0);
         
 
