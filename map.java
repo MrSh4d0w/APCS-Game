@@ -10,6 +10,12 @@ public class map extends JPanel implements ActionListener {
     public map(String img) {
         this(new ImageIcon(img).getImage());
     }//128(+-32/2), 135(38/2)      15, 8
+    //1680 x 896
+    //1920 x 1080
+
+    public void createGrid() {
+
+    }
 
     public map(Image img) {
         this.img = img;
