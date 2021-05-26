@@ -19,7 +19,7 @@ public class console extends JPanel implements ActionListener{
         ActionListener l = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String txt = textField.getText();
-                System.out.println(textField.getText());
+                
                 if (includes(txt, "go to")) {
                     int[] parsed = parse(txt);
                     GameRunner.setLocation(parsed[0], parsed[1]);

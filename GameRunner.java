@@ -52,14 +52,12 @@ public class GameRunner{
         p = new Player(100, "ASSAULT", 50, 20);//*Player
         p.setBounds(0, 0, 112, 112);
         p.setLocation(100, 100);
-        gamePane.add(p, 0);
+        panel.add(p, 0);
         
 
         
 
-        // f.add(m);
         f.add(panel);
-        // f.add(gamePane);
         f.setResizable(false);
         f.setVisible(true);
     }
@@ -70,7 +68,6 @@ public class GameRunner{
     public static void setLocation(String str){
         int x;
         int y;
-        int counter = 0;
         String[] arr = str.split("\s");
         x = Integer.parseInt(arr[0]);
         y = Integer.parseInt(arr[1]);
