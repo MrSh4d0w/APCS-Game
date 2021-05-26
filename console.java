@@ -12,9 +12,10 @@ public class console extends JPanel implements ActionListener{
 
     public console(Image img) {
         this.decorations = img;
+        this.setLayout(null);
         setSize(new Dimension(464, 1080));
 
-        textField = new JTextField(5);
+        textField = new JTextField(1);
         ActionListener l = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String txt = textField.getText();
@@ -31,7 +32,8 @@ public class console extends JPanel implements ActionListener{
             }
         };
         textField.addActionListener(l);
-        textField.setSize(464, 25);
+        textField.setSize(463, 25);
+        textField.setLocation(0, 0);
         this.add(textField);
     }
     

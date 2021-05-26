@@ -25,39 +25,41 @@ public class GameRunner{
         JFrame f = new JFrame();
         f.setSize(1920, 1080);
         f.setUndecorated(true);
-        
-        
 
+        JLayeredPane panel = new JLayeredPane();
+        panel.setSize(1920, 1080);
 
 
 
         JLayeredPane gamePane = new JLayeredPane();//makes new JLayeredPane (only one)
         gamePane.setPreferredSize(new Dimension(1456, 1008));//sets size of JLayeredPane
-        // layeredPane.setLayout(null);
+        panel.add(gamePane, 1);
 
         JLayeredPane textPane = new JLayeredPane();
         textPane.setPreferredSize(new Dimension(464, 1080));
-        textPane.setBackground(new Color(25, 25, 25));
         textPane.setLocation(1009, 0);        
 
 
-        m = new map("images/grid.png");
-        c = new console("images/house.png");
-        textPane.add(c);
+        m = new map("images/grid.png");//*Map
+        m.setLocation(0, 0);
+        panel.add(m, -1);
 
-        
+        c = new console("");//*Console
+        c.setBounds(0,0, 464, 1080);
+        c.setLocation(1456, 0);
+        panel.add(c, 0);
 
-        p = new Player(100, "ASSAULT", 50, 20);
+        p = new Player(100, "ASSAULT", 50, 20);//*Player
         p.setBounds(0, 0, 112, 112);
-        gamePane.add(p, 0);
         p.setLocation(100, 100);
+        gamePane.add(p, 0);
+        
 
         
 
-        f.add(m);
-        f.add(c);
-        f.add(textPane);
-        f.add(gamePane);
+        // f.add(m);
+        f.add(panel);
+        // f.add(gamePane);
         f.setResizable(false);
         f.setVisible(true);
     }
