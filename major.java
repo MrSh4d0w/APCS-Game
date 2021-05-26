@@ -17,7 +17,7 @@ public class major {
         layeredPane.setPreferredSize(new Dimension(300, 310));//sets size of JLayeredPane
         layeredPane.setLayout(null);
 
-        majorPain c1 = new majorPain("images/Level-0.png");
+        map c1 = new map("images/Level-0.png");
         c1.setBounds(0,0, 256, 256);
         layeredPane.add(c1, -1);
 
@@ -29,7 +29,7 @@ public class major {
             e.printStackTrace();
         }
         Image subSprite = p1.getSubimage(0, 0, 78, 78);
-        majorPain p2 = new majorPain(subSprite);
+        map p2 = new map(subSprite);
         p2.setBounds(96, 96, 78, 78); 
         layeredPane.add(p2, 0);
     
