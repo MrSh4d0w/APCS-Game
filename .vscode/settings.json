@@ -1,0 +1,16 @@
+{
+    "java.project.sourcePaths": [
+        "enemy",
+        "environment",
+        "player",
+        "system",
+        ""
+    ],
+    "cSpell.words": [
+        "fram"
+    ],
+    "files.exclude":{
+        "**/*.class": true,
+        "README.md": true
+    }
+}
