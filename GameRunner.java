@@ -40,7 +40,7 @@ public class GameRunner{
 
         p = new Player(100, "ASSAULT", 50, 20);//*Player
         p.setSize(new Dimension(112, 112));
-        p.setLocation(grid[12][8]);
+        p.setLocation(grid[11][7]);
         mainPanel.add(p, 0);
         
 
@@ -52,7 +52,9 @@ public class GameRunner{
     }
 
     public static void setLocation(int x, int y){
-        p.setLocation(x, y);
+        if(x<112 || y<112 || x>=1344 || y>=896){
+        } else {p.setLocation(x, y);}
+        
     }
     public static void setLocation(String str){
         int x;
