@@ -1,6 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.image.*;
+// import java.awt.image.*;
 
 public class GameRunner {
     private static map m;
@@ -36,7 +36,7 @@ public class GameRunner {
         m.setBounds(0, 0, 1456, 1008);
         mainPanel.add(m, -1);
 
-        c = new console("images/console_backdrop.png");// *Console
+        c = new console("");// *Console
         c.setBounds(1456, 0, 464, 1080);
         mainPanel.add(c, 0);
 
@@ -44,7 +44,7 @@ public class GameRunner {
         p.setSize(new Dimension(112, 112));
         p.setLocation(grid[11][7]);
         p.setOpaque(false);
-        mainPanel.add(p, 0);
+        mainPanel.add(p, 1);
 
         f.getContentPane().add(mainPanel);
         f.setResizable(false);
