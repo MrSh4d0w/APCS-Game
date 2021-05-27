@@ -89,7 +89,7 @@ public class console extends JPanel implements ActionListener{
         textField.setLocation(0, 0);
     }
     private void textAreaInitializer() {
-        textArea.setSize(464, 1000);
+        textArea.setSize(464, 1060);
         textArea.setBackground(Color.BLACK);
         textArea.setEditable(false);      
         textArea.setLineWrap(true);
