@@ -78,7 +78,7 @@ public class Player extends JPanel implements ActionListener{
 
     public Graphics animateASSAULT(Graphics g){
         getImg("Character1_Gun");
-        resizeImg(0, 0, 96, 96);
+        resizeImg(0, 0, 112, 112);
         g.drawImage(img, 0, 0, null);
         return g;
     }// !Do this
