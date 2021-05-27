@@ -30,7 +30,7 @@ public class GameRunner{
         mainPanel.setSize(1920, 1080);
   
 
-        m = new map("images/grid.png");//*Map
+        m = new map("images/labeled-grid.png");//*Map
         m.setBounds(0, 0, 1456, 1008);
         mainPanel.add(m, -1);
 

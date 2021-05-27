@@ -71,46 +71,5 @@ public class console extends JPanel implements ActionListener{
         return txt.substring(command.length()).trim().split("\s");
     }
 
-    private int[] parse(String str){
-        int[] ret = new int[str.length()];
-        
-        str = str.substring(8);
-        str = str.replace(',', ' ');
-        String[] arr = str.split("\s");
-        
-        int counter = 0;
-        for(int i=0;i<arr.length;i++){
-            if(arr[i].equalsIgnoreCase("move") || arr[i].equalsIgnoreCase("to")){
-            } else 
-            
-            
-            
-            if(!arr[i].equals("") && Character.isDigit(arr[i].charAt(0))){
-                if(Integer.parseInt(arr[i])<=0 || Integer.parseInt(arr[i])>=12){
-                    System.out.println("error: not a grid location");
-                    return null;
-                } else {
-                    ret[counter] = Integer.parseInt(arr[i]);
-                    counter++;
-                } 
-            }
-        }
-        return ret;
-    }
-
-    private int[] parseLegacy(String str){
-        int[] ret = new int[str.length()];
-        int counter = 0;
-        str = str.replace(',', ' ');
-        String[] arr = str.split("\s");
-        for(int i=0;i<arr.length;i++){
-            System.out.println(arr[i]);
-            if(!arr[i].equals("") && Character.isDigit(arr[i].charAt(0))){
-                ret[counter] = Integer.parseInt(arr[i]);
-                counter++; 
-            }
-        }
-        return ret;
-    }
     public void actionPerformed(ActionEvent e) {/*gamer*/}
 }
