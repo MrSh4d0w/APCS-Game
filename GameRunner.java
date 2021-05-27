@@ -36,7 +36,7 @@ public class GameRunner {
         m.setBounds(0, 0, 1456, 1008);
         mainPanel.add(m, -1);
 
-        c = new console("");// *Console
+        c = new console("images/console_backdrop.png");// *Console
         c.setBounds(1456, 0, 464, 1080);
         mainPanel.add(c, 0);
 
