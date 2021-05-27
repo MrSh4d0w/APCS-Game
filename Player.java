@@ -1,20 +1,34 @@
 import java.awt.*;
 import java.awt.event.*;
-import java.awt.image.BufferedImage;
+import java.awt.image.*;
 import java.io.*;
 import javax.imageio.ImageIO;
 import javax.swing.*;   
 
 public class Player extends JPanel implements ActionListener{
-    private Timer time = new Timer(5, this);
     private int HP, speed, acc;
+    private int i = 0; // This is for the animations DONT TOUCH
     public enum pClass {ASSAULT,TANK,SNIPER,MELEE}
     public enum direction {UP,DOWN,LEFT,RIGHT}
     private pClass c;
-    Image img;
+    BufferedImage img;
     String image;
+    int[][] assualtSpriteSheetCoords = { {0,0,112,112}, {108,0,112,112}, {208,0,112,112}, {316,0,112,112}, {420,0,112,112}, {524,0,112,112}, {628,0,112,112}, {728,0,112,112} };
+    
+    private ActionListener actionListener = new ActionListener() { 
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            i++;
+            if (i == assualtSpriteSheetCoords.length) {i=0;}
+            revalidate();
+            repaint();   
+        }
+    };
     
     public Player(int HP, String c, int speed, int acc) {        
+        Timer timer = new Timer(100, actionListener);
+        timer.setInitialDelay(0);
+        timer.start();
         this.HP = HP;
         switch(c){
             case "ASSAULT":
@@ -34,8 +48,6 @@ public class Player extends JPanel implements ActionListener{
         }
         this.speed = speed;
         this.acc = acc;
-
-        time.start();
         setFocusable(true);
         setFocusTraversalKeysEnabled(false);
     }
@@ -55,9 +67,7 @@ public class Player extends JPanel implements ActionListener{
     
     public void move(pClass p, direction dir, int amnt){}// move char [amnt] tiles in [dir] direction
 
-    
-
-
+    @Override
     public void paintComponent(Graphics g){
         super.paintComponent(g);
         switch(c){
@@ -76,10 +86,12 @@ public class Player extends JPanel implements ActionListener{
         }
     }
 
-    public Graphics animateASSAULT(Graphics g){
+    public Graphics animateASSAULT(Graphics g){        
         getImg("Character1_Gun");
-        resizeImg(0, 0, 112, 112);
-        g.drawImage(img, 0, 0, null);
+        Image subSprite;
+        subSprite = img.getSubimage(assualtSpriteSheetCoords[i][0], assualtSpriteSheetCoords[i][1], assualtSpriteSheetCoords[i][2], assualtSpriteSheetCoords[i][3]);
+        //resizeImg(0, 0, 112, 112);
+        g.drawImage(subSprite, 0, 0, null);
         return g;
     }// !Do this
     public Graphics animateSNIPER(Graphics g){
@@ -110,9 +122,6 @@ public class Player extends JPanel implements ActionListener{
             img = ImageIO.read(new File("images/" + name + ".png"));
         } catch (IOException e) {e.printStackTrace(); }
     }
-    public void actionPerformed(ActionEvent e) {
-            repaint();   
-        }
     public void iHateWarnings(){
         getHP();
         setHP(0);
@@ -122,4 +131,11 @@ public class Player extends JPanel implements ActionListener{
         getSpeed();
         getPClass();
     }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        // TODO Auto-generated method stub
+        
+    }
+
 }
