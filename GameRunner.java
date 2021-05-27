@@ -43,7 +43,7 @@ public class GameRunner {
         p = new Player(100, "ASSAULT", 50, 20);// *Player
         p.setSize(new Dimension(112, 112));
         p.setLocation(grid[11][7]);
-        p.setBackground(new Color(0, 0, 0, 0));
+        p.setOpaque(false);
         mainPanel.add(p, 0);
 
         f.getContentPane().add(mainPanel);
