@@ -26,7 +26,7 @@ public class GameRunner{
         f.setSize(1920, 1080);
         f.setUndecorated(true);
 
-        JPanel mainPanel = new JPanel();
+        JLayeredPane mainPanel = new JLayeredPane();
         mainPanel.setSize(1920, 1080);
         mainPanel.setLayout(null);
   
