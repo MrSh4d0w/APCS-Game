@@ -33,7 +33,7 @@ public class GameRunner {
         mainPanel.setLayout(null);
 
         m = new map("images/labeled-grid.png");// *Map
-        m.setBounds(0, 0, 1456, 1008);
+        m.setBounds(0, 0, 1456, 1080);
         mainPanel.add(m, -1);
 
         c = new console("");// *Console
@@ -54,7 +54,7 @@ public class GameRunner {
     public static void setLocation(int x, int y) {
         if (x < 112 || y < 112 || x >= 1344 || y >= 896) {
         } else {
-            p.setLocation(x, y);
+            p.setLocation(x, y+36);
         }
 
     }
@@ -65,6 +65,6 @@ public class GameRunner {
         String[] arr = str.split("\s");
         x = Integer.parseInt(arr[0]);
         y = Integer.parseInt(arr[1]);
-        p.setLocation(x, y);
+        p.setLocation(x, y+36);
     }
 }

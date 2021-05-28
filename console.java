@@ -17,9 +17,9 @@ public class console extends JPanel implements ActionListener{
     } 
 
     public console(Image img) {
-        // notBlack = new Color(20,12,28);
-        notBlack = Color.BLACK;
-        // notWhite = new Color(102,106,105);
+        notBlack = new Color(20,12,28);
+        // notBlack = Color.BLACK;
+        notWhite = new Color(102,106,105);
         // notWhite = new Color(140,140,140);
         notWhite = Color.WHITE;
 
@@ -52,8 +52,8 @@ public class console extends JPanel implements ActionListener{
         String txt = textField.getText();
             textArea.insert(" "+txt, 0);
             
-            if(includes(txt, "move to")){
-                String[] args = parser("move to");
+            if(includes(txt, "move red to")){
+                String[] args = parser("move red to");
                 if(args==null){System.exit(0);}
                 try{
                     int y = Character.getNumericValue(args[0].charAt(1));
