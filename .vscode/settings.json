@@ -12,5 +12,9 @@
     "files.exclude":{
         "**/*.class": true,
         "README.md": true
-    }
+    },
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "json-20210307.jar"
+    ]
 }
