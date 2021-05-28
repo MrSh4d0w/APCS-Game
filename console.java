@@ -26,9 +26,6 @@ public class console extends JPanel implements ActionListener{
         this.decorations = img;
         this.setLayout(null);
         this.setSize(new Dimension(464, 1080));
-
-        
-
         
         textArea = new JTextArea(5, 20);
             textAreaInitializer();
@@ -36,9 +33,7 @@ public class console extends JPanel implements ActionListener{
             labelInitializer();
         textField = new JTextField(1);
             textFieldInitializer();
-        setFonts();
-        
-        
+        setFonts();     
         
         this.add(textField);
         this.add(textArea);

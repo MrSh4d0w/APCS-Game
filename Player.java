@@ -13,7 +13,9 @@ public class Player extends JPanel implements ActionListener{
     private pClass c;
     BufferedImage img;
     String image;
-    int[][] assualtSpriteSheetCoords = { {0,0,112,112}, {108,0,112,112}, {208,0,112,112}, {316,0,112,112}, {420,0,112,112}, {524,0,112,112}, {628,0,112,112}, {728,0,112,112} };
+    int[][] assualtSpriteSheetCoords = { { 0, 0, 112, 112 }, { 112, 0, 112, 112 }, { 224, 0, 112, 112 },
+                    { 336, 0, 112, 112 }, { 448, 0, 112, 112 }, { 560, 0, 112, 112 }, { 672, 0, 112, 112 },
+                    { 784, 0, 112, 112 } };
     
     private ActionListener actionListener = new ActionListener() { 
         @Override
@@ -87,10 +89,10 @@ public class Player extends JPanel implements ActionListener{
     }
 
     public Graphics animateASSAULT(Graphics g){        
-        getImg("Character1_Gun");
+        wait(1000);
+        getImg("Character1_IdleGun_Updated");
         Image subSprite;
         subSprite = img.getSubimage(assualtSpriteSheetCoords[i][0], assualtSpriteSheetCoords[i][1], assualtSpriteSheetCoords[i][2], assualtSpriteSheetCoords[i][3]);
-        //resizeImg(0, 0, 112, 112);
         g.drawImage(subSprite, 0, 0, null);
         return g;
     }// !Do this
@@ -110,10 +112,6 @@ public class Player extends JPanel implements ActionListener{
         return g;
     }// !Do this
 
-
-
-
-
     private void resizeImg(int x1, int y1, int x2, int y2){
         this.img = ((BufferedImage) img).getSubimage(x1,y1,x2,y2);
     }
@@ -130,6 +128,14 @@ public class Player extends JPanel implements ActionListener{
         getAcc();
         getSpeed();
         getPClass();
+    }
+
+    public static void wait(int milli) {
+        try {
+            Thread.sleep(milli);
+        } catch (InterruptedException e) {
+            System.out.println(e);
+        }
     }
 
     @Override
