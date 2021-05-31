@@ -39,7 +39,8 @@ public class Player extends JPanel implements ActionListener{
         }
     };
     
-    public Player(int HP, String c, int speed, int acc) {        
+    public Player(int HP, String c, int speed, int acc) {  
+        animate();
         Timer timer = new Timer(100, actionListener);
         timer.setInitialDelay(0);
         timer.start();
@@ -165,8 +166,12 @@ public class Player extends JPanel implements ActionListener{
             jsonFile = Files.readString( Path.of("animations.json"));
         } catch (Exception e) { System.out.println("im sad");}
         JSONObject obj = new JSONObject(jsonFile);
-        JSONArray arr = (JSONArray) obj.get("Right");
-        System.out.println(arr);
+        System.out.println((((JSONObject) ((JSONObject) ((JSONObject) obj.get("Idle")).get("Right")).get("frame0")).get("x")));
+        System.out.println(getFromJSON(obj, "Right", "frame0", "x"));
+    }
+
+    public static Object getFromJSON(JSONObject json, String dir, String Frame, String x){
+        return ((((JSONObject) ((JSONObject) ((JSONObject) json.get("Idle")).get(dir)).get(Frame)).get(x)));
     }
 
 }
