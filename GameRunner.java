@@ -4,7 +4,7 @@ import java.awt.*;
 
 public class GameRunner {
     private static map m;
-    private static Player p;
+    private static Player p, p2, p3, p4;
     private static String[][] grid;
     private static console c;
 
@@ -32,11 +32,11 @@ public class GameRunner {
         mainPanel.setSize(1920, 1080);
         mainPanel.setLayout(null);
 
-        m = new map("images/labeled-grid.png");// *Map
-        m.setBounds(0, 0, 1456, 1008);
+        m = new map("images/Gameboard.png");// *Map
+        m.setBounds(0, 0, 1456, 1080);
         mainPanel.add(m, -1);
 
-        c = new console("");// *Console
+        c = new console("images/console_backdrop.png");// *Console
         c.setBounds(1456, 0, 464, 1080);
         mainPanel.add(c, 0);
 

@@ -25,7 +25,7 @@ public class Player extends JPanel implements ActionListener{
     private pClass c;
     BufferedImage img;
     String image, jsonFile ;
-    int[][] assualtSpriteSheetCoords = { { 0, 0, 112, 112 }, { 112, 0, 112, 112 }, { 224, 0, 112, 112 },
+    int[][] spriteSheetCords = { { 0, 0, 112, 112 }, { 112, 0, 112, 112 }, { 224, 0, 112, 112 },
                     { 336, 0, 112, 112 }, { 448, 0, 112, 112 }, { 560, 0, 112, 112 }, { 672, 0, 112, 112 },
                     { 784, 0, 112, 112 } };
     
@@ -33,7 +33,7 @@ public class Player extends JPanel implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
             i++;
-            if (i == assualtSpriteSheetCoords.length) {i=0;}
+            if (i == spriteSheetCords.length) {i=0;}
             revalidate();
             repaint();   
         }
@@ -86,15 +86,7 @@ public class Player extends JPanel implements ActionListener{
         super.paintComponent(g);
         switch(c){
             case ASSAULT:
-                getImg("Character1_IdleGun_Updated");
-                Image subSprite = null;
-                int[] arr = { 10,  15, 8, 18};
-                for(int k = 0; k < 3; k++) {
-                    for (int f = 0 ; f < arr[k]; f++) {
-                        subSprite = img.getSubimage(assualtSpriteSheetCoords[k][0], assualtSpriteSheetCoords[k][1], assualtSpriteSheetCoords[k][2], assualtSpriteSheetCoords[k][3]);
-                    }
-                }
-                g.drawImage(subSprite, 0, 0, null);
+                g = animateASSAULT(g);
                 break;
             case TANK:
                 g = animateTANK(g);
@@ -108,38 +100,33 @@ public class Player extends JPanel implements ActionListener{
         }
     }
 
-    // public Graphics animateASSAULT(Graphics g){        
-    //     getImg("Character1_IdleGun_Updated");
-    //     Image subSprite = null;
-    //     int[] arr = { 10,  15, 8, 18};
-    //     for(int k = 0; k < 3; k++) {
-    //         for (int f = 0 ; f < arr[k]; f++) {
-    //             if (assaultCounter == k) {counter++;}
-    //             subSprite = img.getSubimage(assualtSpriteSheetCoords[f][0], assualtSpriteSheetCoords[f][1], assualtSpriteSheetCoords[f][2], assualtSpriteSheetCoords[f][3]);
-    //         }
-    //     }
-    //     if (counter == 1) {assaultCounter++;}
-    //     g.drawImage(subSprite, 0, 0, null);
-    //     return g;
-    // }// !Do this
-    public Graphics animateSNIPER(Graphics g){
-        getImg("house");
-        g.drawImage(img, 0, 0, null);
+    public Graphics animateASSAULT(Graphics g){        
+        getImg("Character1_IdleGun_Updated");
+        Image subSprite = null;
+        subSprite = img.getSubimage(spriteSheetCords[i][0], spriteSheetCords[i][1], spriteSheetCords[i][2], spriteSheetCords[i][3]);
+        g.drawImage(subSprite, 0, 0, null);
         return g;
-    }// !Do this
-    public Graphics animateTANK(Graphics g){
-        getImg("house"); 
-        g.drawImage(img, 0, 0, null);
+    }
+    public Graphics animateTANK(Graphics g){        
+        getImg("Character2_IdleGun_Updated");
+        Image subSprite = null;
+        subSprite = img.getSubimage(spriteSheetCords[i][0], spriteSheetCords[i][1], spriteSheetCords[i][2], spriteSheetCords[i][3]);
+        g.drawImage(subSprite, 0, 0, null);
         return g;
-    }// !Do this
-    public Graphics animateMELEE(Graphics g){
-        getImg("house");
-        g.drawImage(img, 0, 0, null);
+    }
+    public Graphics animateSNIPER(Graphics g){        
+        getImg("Character3_IdleGun_Updated");
+        Image subSprite = null;
+        subSprite = img.getSubimage(spriteSheetCords[i][0], spriteSheetCords[i][1], spriteSheetCords[i][2], spriteSheetCords[i][3]);
+        g.drawImage(subSprite, 0, 0, null);
         return g;
-    }// !Do this
-
-    private void resizeImg(int x1, int y1, int x2, int y2){
-        this.img = ((BufferedImage) img).getSubimage(x1,y1,x2,y2);
+    }
+    public Graphics animateMELEE(Graphics g){        
+        getImg("Character4_IdleGun_Updated");
+        Image subSprite = null;
+        subSprite = img.getSubimage(spriteSheetCords[i][0], spriteSheetCords[i][1], spriteSheetCords[i][2], spriteSheetCords[i][3]);
+        g.drawImage(subSprite, 0, 0, null);
+        return g;
     }
     private void getImg(String name){
         try {
@@ -160,13 +147,4 @@ public class Player extends JPanel implements ActionListener{
         // TODO Auto-generated method stub
         
     }
-    public void animate(){
-        try {
-            jsonFile = Files.readString( Path.of("animations.json"));
-        } catch (Exception e) { System.out.println("im sad");}
-        JSONObject obj = new JSONObject(jsonFile);
-        JSONArray arr = (JSONArray) obj.get("Right");
-        System.out.println(arr);
-    }
-
 }
