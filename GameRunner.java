@@ -32,23 +32,23 @@ public class GameRunner {
         mainPanel.setSize(1920, 1080);
         mainPanel.setLayout(null);
 
-        m = new map("images/labeled-grid.png");// *Map
+        m = new map("images/labeled-grid.png");// *Create Map object
         m.setBounds(0, 0, 1456, 1080);
-        mainPanel.add(m, -1);
+        mainPanel.add(m, -1);//add map to mainPanel
 
-        c = new console("");// *Console
+        c = new console("");// *Create Console object
         c.setBounds(1456, 0, 464, 1080);
-        mainPanel.add(c, 0);
+        mainPanel.add(c, 0);//add console to mainPanel
 
-        p = new Player(100, "ASSAULT", 50, 20);// *Player
+        p = new Player(100, "ASSAULT", 50, 20);// *Create Player object
         p.setSize(new Dimension(112, 112));
         p.setLocation(grid[11][7]);
         p.setOpaque(false);
-        mainPanel.add(p, 1);
+        mainPanel.add(p, 1);//add player to mainPanel
 
-        f.getContentPane().add(mainPanel);
-        f.setResizable(false);
-        f.setVisible(true);
+        f.getContentPane().add(mainPanel); //add mainPanel to frame
+        f.setResizable(false); //set frame not resizable
+        f.setVisible(true); //make fram visible
     }
 
     public static void setLocation(int x, int y) {

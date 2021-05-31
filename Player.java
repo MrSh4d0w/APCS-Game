@@ -13,13 +13,12 @@ public class Player extends JPanel implements ActionListener{
     private pClass c;
     BufferedImage img;
     String image;
-    int[][] assualtSpriteSheetCoords = { {0,0,112,112}, {108,0,112,112}, {208,0,112,112}, {316,0,112,112}, {420,0,112,112}, {524,0,112,112}, {628,0,112,112}, {728,0,112,112} };
-    
+    int[][] assaultSpriteSheetCoords = { {0,0,112,112}, {108,0,112,112}, {208,0,112,112}, {316,0,112,112}, {420,0,112,112}, {524,0,112,112}, {628,0,112,112}, {728,0,112,112} };
     private ActionListener actionListener = new ActionListener() { 
         @Override
         public void actionPerformed(ActionEvent e) {
             i++;
-            if (i == assualtSpriteSheetCoords.length) {i=0;}
+            if (i == assaultSpriteSheetCoords.length) {i=0;}
             revalidate();
             repaint();   
         }
@@ -66,6 +65,8 @@ public class Player extends JPanel implements ActionListener{
     public int getSpeed(){return speed;}// returns speed
     
     public void move(pClass p, direction dir, int amnt){}// move char [amnt] tiles in [dir] direction
+    public static void checkValidMovement(){}
+
 
     @Override
     public void paintComponent(Graphics g){
@@ -89,7 +90,7 @@ public class Player extends JPanel implements ActionListener{
     public Graphics animateASSAULT(Graphics g){        
         getImg("Character1_Gun");
         Image subSprite;
-        subSprite = img.getSubimage(assualtSpriteSheetCoords[i][0], assualtSpriteSheetCoords[i][1], assualtSpriteSheetCoords[i][2], assualtSpriteSheetCoords[i][3]);
+        subSprite = img.getSubimage(assaultSpriteSheetCoords[i][0], assaultSpriteSheetCoords[i][1], assaultSpriteSheetCoords[i][2], assaultSpriteSheetCoords[i][3]);
         //resizeImg(0, 0, 112, 112);
         g.drawImage(subSprite, 0, 0, null);
         return g;

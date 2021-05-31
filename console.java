@@ -52,8 +52,8 @@ public class console extends JPanel implements ActionListener{
         String txt = textField.getText();
             textArea.insert(" "+txt, 0);
             
-            if(includes(txt, "move red to")){
-                String[] args = parser("move red to");
+            if(includes(txt, "move to")){
+                String[] args = parser("move to");
                 if(args==null){System.exit(0);}
                 try{
                     int y = Character.getNumericValue(args[0].charAt(1));
