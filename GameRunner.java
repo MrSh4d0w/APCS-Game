@@ -70,10 +70,10 @@ public class GameRunner {
         f.setVisible(true);
     }
 
-    public static void setLocation(int x, int y) {
+    public static void setLocation(int c, int x, int y) {
         if (x < 112 || y < 112 || x >= 1344 || y >= 896) {
         } else {
-            switch(console.getTurn()){
+            switch(c){
                 case 0:
                     p1.setLocation(x, y);
                     break;

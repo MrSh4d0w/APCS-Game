@@ -13,8 +13,6 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
-import org.json.JSONObject;
-import org.json.JSONArray;
 
 public class Player extends JPanel implements ActionListener{
     private static int counter, assaultCounter;

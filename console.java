@@ -19,8 +19,8 @@ public class console extends JPanel implements ActionListener{
     } 
 
     public console(Image img) {
-        // notBlack = new Color(20,12,28);
-        notBlack = Color.BLACK;
+        notBlack = new Color(20,12,28);
+        // notBlack = Color.BLACK;
         // notWhite = new Color(102,106,105);
         // notWhite = new Color(140,140,140);
         notWhite = Color.WHITE;
@@ -60,10 +60,12 @@ public class console extends JPanel implements ActionListener{
                     System.exit(0);
                     break;
                 case "move":
-                    if(GameController.setLocation(0, text)==-1){
-                        
+                    if(GameController.setLocation(turn, text)==-1){
                     }
                     break;
+                case "next":
+                    if(turn==3){turn=0;}
+                    else{turn++;}
             }
 
 
