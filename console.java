@@ -49,7 +49,7 @@ public class console extends JPanel implements ActionListener{
     }
     public void actionPerformed(ActionEvent e) {
         String txt = textField.getText();
-            textArea.insert(" "+txt, 0);
+            textArea.insert(""+txt, 0);
             String[] text = parser();
 
             
@@ -80,7 +80,7 @@ public class console extends JPanel implements ActionListener{
                     textArea.setText(null);
                     break;
                 default:
-                    textArea.insert("\n>", 0);
+                    insert("That is not a command. If you need help, type \"help\"");
                     break;
                 }
             textField.setText("");
@@ -88,8 +88,11 @@ public class console extends JPanel implements ActionListener{
     
     public void insert(String msg){
         String[] arr = textArea.getText().split(">");
-        textArea.insert(msg + "\n\n", arr[0].length());
-        textArea.insert("\n>", 0);
+        if(arr.length==1){
+            textArea.insert("\n" + msg + "\n\n", arr[0].length());
+        } else {
+        textArea.insert(msg + "\n\n", arr[0].length());}
+        textArea.insert("\n> ", 0);
     }
     
 
