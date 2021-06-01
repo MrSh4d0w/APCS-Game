@@ -1,4 +1,3 @@
-import java.awt.Frame;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -6,8 +5,6 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
@@ -15,7 +12,7 @@ import javax.swing.Timer;
 
 
 public class Player extends JPanel implements ActionListener{
-    private static int counter, assaultCounter;
+    // private static int counter, assaultCounter;
     private int HP, speed, acc;
     private int i = 0; // This is for the animations DONT TOUCH
     public enum pClass {ASSAULT,TANK,SNIPER,MELEE}
@@ -141,8 +138,5 @@ public class Player extends JPanel implements ActionListener{
         getPClass();
     }
     @Override
-    public void actionPerformed(ActionEvent e) {
-        // TODO Auto-generated method stub
-        
-    }
+    public void actionPerformed(ActionEvent e) {}
 }

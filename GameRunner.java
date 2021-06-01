@@ -100,12 +100,16 @@ public class GameRunner {
         switch(console.getTurn()){
             case 0:
                 p1.setLocation(x, y);
+                break;
             case 1:
                 p2.setLocation(x, y);
+                break;
             case 2:
                 p3.setLocation(x, y);
+                break;
             case 3:
                 p4.setLocation(x, y);
+                break;
         }
 
     }
