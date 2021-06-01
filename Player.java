@@ -1,30 +1,45 @@
-import java.awt.*;
-import java.awt.event.*;
-import java.awt.image.*;
-import java.io.*;
+import java.awt.Frame;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+
 import javax.imageio.ImageIO;
-import javax.swing.*;   
+import javax.swing.JPanel;
+import javax.swing.Timer;
+
+import org.json.JSONObject;
+import org.json.JSONArray;
 
 public class Player extends JPanel implements ActionListener{
+    private static int counter, assaultCounter;
     private int HP, speed, acc;
     private int i = 0; // This is for the animations DONT TOUCH
     public enum pClass {ASSAULT,TANK,SNIPER,MELEE}
     public enum direction {UP,DOWN,LEFT,RIGHT}
     private pClass c;
     BufferedImage img;
-    String image;
-    int[][] assaultSpriteSheetCoords = { {0,0,112,112}, {108,0,112,112}, {208,0,112,112}, {316,0,112,112}, {420,0,112,112}, {524,0,112,112}, {628,0,112,112}, {728,0,112,112} };
+    String image, jsonFile ;
+    int[][] spriteSheetCords = { { 0, 0, 112, 112 }, { 112, 0, 112, 112 }, { 224, 0, 112, 112 },
+                    { 336, 0, 112, 112 }, { 448, 0, 112, 112 }, { 560, 0, 112, 112 }, { 672, 0, 112, 112 },
+                    { 784, 0, 112, 112 } };
+    
     private ActionListener actionListener = new ActionListener() { 
         @Override
         public void actionPerformed(ActionEvent e) {
             i++;
-            if (i == assaultSpriteSheetCoords.length) {i=0;}
+            if (i == spriteSheetCords.length) {i=0;}
             revalidate();
             repaint();   
         }
     };
     
-    public Player(int HP, String c, int speed, int acc) {        
+    public Player(int HP, String c, int speed, int acc) {  
         Timer timer = new Timer(100, actionListener);
         timer.setInitialDelay(0);
         timer.start();
@@ -65,8 +80,6 @@ public class Player extends JPanel implements ActionListener{
     public int getSpeed(){return speed;}// returns speed
     
     public void move(pClass p, direction dir, int amnt){}// move char [amnt] tiles in [dir] direction
-    public static void checkValidMovement(){}
-
 
     @Override
     public void paintComponent(Graphics g){
@@ -88,35 +101,32 @@ public class Player extends JPanel implements ActionListener{
     }
 
     public Graphics animateASSAULT(Graphics g){        
-        getImg("Character1_Gun");
-        Image subSprite;
-        subSprite = img.getSubimage(assaultSpriteSheetCoords[i][0], assaultSpriteSheetCoords[i][1], assaultSpriteSheetCoords[i][2], assaultSpriteSheetCoords[i][3]);
-        //resizeImg(0, 0, 112, 112);
+        getImg("Character1_IdleGun_Updated");
+        Image subSprite = null;
+        subSprite = img.getSubimage(spriteSheetCords[i][0], spriteSheetCords[i][1], spriteSheetCords[i][2], spriteSheetCords[i][3]);
         g.drawImage(subSprite, 0, 0, null);
         return g;
-    }// !Do this
-    public Graphics animateSNIPER(Graphics g){
-        getImg("house");
-        g.drawImage(img, 0, 0, null);
+    }
+    public Graphics animateTANK(Graphics g){        
+        getImg("Character2_IdleGun_Updated");
+        Image subSprite = null;
+        subSprite = img.getSubimage(spriteSheetCords[i][0], spriteSheetCords[i][1], spriteSheetCords[i][2], spriteSheetCords[i][3]);
+        g.drawImage(subSprite, 0, 0, null);
         return g;
-    }// !Do this
-    public Graphics animateTANK(Graphics g){
-        getImg("house"); 
-        g.drawImage(img, 0, 0, null);
+    }
+    public Graphics animateSNIPER(Graphics g){        
+        getImg("Character3_IdleGun_Updated");
+        Image subSprite = null;
+        subSprite = img.getSubimage(spriteSheetCords[i][0], spriteSheetCords[i][1], spriteSheetCords[i][2], spriteSheetCords[i][3]);
+        g.drawImage(subSprite, 0, 0, null);
         return g;
-    }// !Do this
-    public Graphics animateMELEE(Graphics g){
-        getImg("house");
-        g.drawImage(img, 0, 0, null);
+    }
+    public Graphics animateMELEE(Graphics g){        
+        getImg("Character4_IdleGun_Updated");
+        Image subSprite = null;
+        subSprite = img.getSubimage(spriteSheetCords[i][0], spriteSheetCords[i][1], spriteSheetCords[i][2], spriteSheetCords[i][3]);
+        g.drawImage(subSprite, 0, 0, null);
         return g;
-    }// !Do this
-
-
-
-
-
-    private void resizeImg(int x1, int y1, int x2, int y2){
-        this.img = ((BufferedImage) img).getSubimage(x1,y1,x2,y2);
     }
     private void getImg(String name){
         try {
@@ -132,11 +142,9 @@ public class Player extends JPanel implements ActionListener{
         getSpeed();
         getPClass();
     }
-
     @Override
     public void actionPerformed(ActionEvent e) {
         // TODO Auto-generated method stub
         
     }
-
 }
