@@ -15,7 +15,7 @@ public class GameRunner {
         for (int row = 0; row < 13; row++) {
             rowCoords = (row * 112);
             for (int column = 0; column < 9; column++) {
-                columnCoords = (column * 112);
+                columnCoords = (column * 112)+36;
                 grid[row][column] = rowCoords + " " + columnCoords;
             }
         }
