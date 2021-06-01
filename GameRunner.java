@@ -51,12 +51,24 @@ public class GameRunner {
         f.setVisible(true); //make fram visible
     }
 
-    public static void setLocation(int x, int y) {
-        if (x < 112 || y < 112 || x >= 1344 || y >= 896) {
-        } else {
-            p.setLocation(x, y+36);
+    public static void setLocation(int c, int x, int y) {
+        switch(c){
+            case 0:
+                p.setLocation(x,y);
+                break;
+            case 1:
+                p.setLocation(x,y);
+                break;
+            case 2:
+                p.setLocation(x,y);
+                break;
+            case 3:
+                p.setLocation(x,y);
+                break;
+            default:
+                System.out.println("Error: invalid character selected when calling GameRunner.setLocation");
+                break;
         }
-
     }
 
     public static void setLocation(String str) {

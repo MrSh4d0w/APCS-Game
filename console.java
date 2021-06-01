@@ -51,35 +51,34 @@ public class console extends JPanel implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         String txt = textField.getText();
             textArea.insert(" "+txt, 0);
+            String[] text = parser();
+
             
-            if(includes(txt, "move to")){
-                String[] args = parser("move to");
-                if(args==null){System.exit(0);}
-                try{
-                    int y = Character.getNumericValue(args[0].charAt(1));
-                    int x = (Character.getNumericValue(args[0].charAt(0)))-9;
-                    GameRunner.setLocation(x*112, y*112);
-                    System.out.println(x + " " + y);
-                } catch (Exception ex){
-                    System.out.println("NumberFormatException");
-                }        
+            switch(text[0]){
+                case "exit":
+                    System.exit(0);
+                    break;
+                case "close":
+                    System.exit(0);
+                    break;
+                case "move":
+                    if(GameController.setLocation(0, text)==-1){
+                        
+                    }
+                    break;
             }
+
+
             if(includes(txt, "help")){
                 textArea.insert("\ngo fuck yourself\n", 5);
-            }
-            if(txt.equalsIgnoreCase("exit") || txt.equalsIgnoreCase("close")) {
-                System.exit(0);
             }
             if(includes(txt, "clear")){textArea.setText(null);} else {textArea.insert("\n>", 0);}
             textField.setText("");
     }
     
-    private String[] parser(String command){
+    private String[] parser(){
         String txt = textField.getText().replace(",", "");
-        if(txt.indexOf(command) < -1){
-            return null;
-        }
-        return txt.substring(command.length()).trim().split("\s");
+        return txt.trim().split("\s");
     }
     private void labelInitializer() {
         label.setForeground(notWhite);
