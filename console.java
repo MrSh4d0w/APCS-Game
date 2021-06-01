@@ -11,24 +11,21 @@ public class console extends JLayeredPane implements ActionListener{
     private JLabel label;
     private Color notBlack;
     private Color notWhite;
-
+    public static int turn; 
     public console(String img) {
         this(new ImageIcon(img).getImage());
     } 
 
     public console(Image img) {
-        notBlack = new Color(20,12,28);
-        // notBlack = Color.BLACK;
-        notWhite = new Color(102,106,105);
+        // notBlack = new Color(20,12,28);
+        notBlack = Color.BLACK;
+        // notWhite = new Color(102,106,105);
         // notWhite = new Color(140,140,140);
         notWhite = Color.WHITE;
 
         this.decorations = img;
         this.setLayout(null);
         this.setSize(new Dimension(464, 1080));
-
-        
-
         
         textArea = new JTextArea(5, 20);
             textAreaInitializer();
@@ -36,9 +33,8 @@ public class console extends JLayeredPane implements ActionListener{
             labelInitializer();
         textField = new JTextField(1);
             textFieldInitializer();
-        setFonts();
-        
-        
+        setFonts();     
+        turn = 0;
         
         this.add(textField);
         this.add(textArea);
@@ -125,4 +121,6 @@ public class console extends JLayeredPane implements ActionListener{
         }
         return false;
     }
+    private static void setTurn(int t){turn = t;}
+    public static int getTurn(){return turn;}
 }
