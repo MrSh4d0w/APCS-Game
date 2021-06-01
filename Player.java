@@ -67,7 +67,7 @@ public class Player extends JPanel implements ActionListener{
     }
 
     public void setLocation(String str){
-        GameRunner.setLocation(str);
+        GameRunner.setLocation(str, this);
     }
 
     public int getHP(){return HP;}// returns HP of Player object

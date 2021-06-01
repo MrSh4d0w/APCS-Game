@@ -4,7 +4,7 @@ import java.awt.*;
 
 public class GameRunner {
     private static map m;
-    private static Player p, p2, p3, p4;
+    private static Player p1, p2, p3, p4;
     private static String[][] grid;
     private static console c;
 
@@ -40,11 +40,30 @@ public class GameRunner {
         c.setBounds(1456, 0, 464, 1080);
         mainPanel.add(c, 0);
 
-        p = new Player(100, "ASSAULT", 50, 20);// *Player
-        p.setSize(new Dimension(112, 112));
-        p.setLocation(grid[11][7]);
-        p.setOpaque(false);
-        mainPanel.add(p, 1);
+        p1 = new Player(100, "ASSAULT", 50, 20);// *Player
+        p2 = new Player(100, "TANK", 50, 20);
+        p3 = new Player(100, "SNIPER", 50, 20);
+        p4 = new Player(100, "MELEE", 50, 20);
+        
+        p1.setSize(new Dimension(112, 112));
+        p1.setLocation(grid[5][5]);
+        p1.setOpaque(false);
+        mainPanel.add(p1, 1);
+
+        p2.setSize(new Dimension(112, 112));
+        p2.setLocation(grid[6][5]);
+        p2.setOpaque(false);
+        mainPanel.add(p2, 1);
+
+        p3.setSize(new Dimension(112, 112));
+        p3.setLocation(grid[7][5]);
+        p3.setOpaque(false);
+        mainPanel.add(p3, 1);
+
+        p4.setSize(new Dimension(112, 112));
+        p4.setLocation(grid[8][5]);
+        p4.setOpaque(false);
+        mainPanel.add(p4, 1);
 
         f.getContentPane().add(mainPanel);
         f.setResizable(false);
@@ -54,17 +73,26 @@ public class GameRunner {
     public static void setLocation(int x, int y) {
         if (x < 112 || y < 112 || x >= 1344 || y >= 896) {
         } else {
-            p.setLocation(x, y);
+            p1.setLocation(x, y);
+            p2.setLocation(x,y);
+            p3.setLocation(x, y);
+            p4.setLocation(x, y);
         }
 
     }
 
-    public static void setLocation(String str) {
+    public static void setLocation(String str, Player p) {
         int x;
         int y;
         String[] arr = str.split("\s");
         x = Integer.parseInt(arr[0]);
         y = Integer.parseInt(arr[1]);
-        p.setLocation(x, y);
+        if(p==p1){
+            p1.setLocation(x, y);
+        } else if (p==p2) {
+            p2.setLocation(x, y);
+        } else if (p == p3) {p3.setLocation(x, y);}
+        else if (p == p4) {p4.setLocation(x,y);}
+
     }
 }
