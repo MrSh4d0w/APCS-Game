@@ -51,6 +51,7 @@ public class console extends JPanel implements ActionListener{
                 String[] args = parser("move to");
                 if(args==null){System.exit(0);}
                 try{
+                    // if(args[0].length()>2){textArea.insert("That's not a valid location", 3);}
                     int y = Character.getNumericValue(args[0].charAt(1));
                     int x = (Character.getNumericValue(args[0].charAt(0)))-9;
                     GameRunner.setLocation(x*112, y*112);
