@@ -91,23 +91,23 @@ public class GameRunner {
 
     }
 
-    public static void setLocation(String str) {
+    public static void setLocation(String str, Player p) {
         int x;
         int y;
         String[] arr = str.split("\s");
         x = Integer.parseInt(arr[0]);
         y = Integer.parseInt(arr[1]);
-        switch(console.getTurn()){
-            case 0:
+        switch(p.getPClass()){
+            case "ASSAULT":
                 p1.setLocation(x, y);
                 break;
-            case 1:
+            case "TANK":
                 p2.setLocation(x, y);
                 break;
-            case 2:
+            case "SNIPER":
                 p3.setLocation(x, y);
                 break;
-            case 3:
+            case "MELEE":
                 p4.setLocation(x, y);
                 break;
         }

@@ -62,21 +62,37 @@ public class console extends JPanel implements ActionListener{
                     break;
                 case "move":
                     if(GameController.setLocation(turn, text)==-1){
+                        break;
                     }
+                    insert("Moved to " + text[2]);
                     break;
                 case "next":
+                    if(text.length<=1 || !text[1].equalsIgnoreCase("turn")){textArea.insert("\n>", 0);break;}
                     if(turn==3){turn=0;}
                     else{turn++;}
-            }
-
-
-            if(includes(txt, "help")){
-                textArea.insert("\ngo fuck yourself\n", 5);
-            }
-            if(includes(txt, "clear")){textArea.setText(null);} else {textArea.insert("\n>", 0);}
+                    insert("Turn is now: " + turn);
+                    break;
+                case "help":
+                    insert("go fuck yourself");
+                    
+                    break;
+                case "clear":
+                    textArea.setText(null);
+                    break;
+                default:
+                    textArea.insert("\n>", 0);
+                    break;
+                }
             textField.setText("");
     }
     
+    public void insert(String msg){
+        String[] arr = textArea.getText().split(">");
+        textArea.insert(msg + "\n\n", arr[0].length());
+        textArea.insert("\n>", 0);
+    }
+    
+
     private String[] parser(){
         String txt = textField.getText().replace(",", "");
         return txt.trim().split("\s");

@@ -17,7 +17,7 @@ public class Player extends JPanel implements ActionListener{
     private int i = 0; // This is for the animations DONT TOUCH
     public enum pClass {ASSAULT,TANK,SNIPER,MELEE}
     public enum direction {UP,DOWN,LEFT,RIGHT}
-    private pClass c;
+    private String c;
     BufferedImage img;
     String image, jsonFile ;
     int[][] spriteSheetCords = { { 0, 0, 112, 112 }, { 112, 0, 112, 112 }, { 224, 0, 112, 112 },
@@ -39,22 +39,7 @@ public class Player extends JPanel implements ActionListener{
         timer.setInitialDelay(0);
         timer.start();
         this.HP = HP;
-        switch(c){
-            case "ASSAULT":
-                this.c = pClass.ASSAULT;
-                break;
-            case "TANK":
-                this.c = pClass.TANK;
-                break;
-            case "MELEE":
-                this.c = pClass.MELEE;
-                break;
-            case "SNIPER":
-                this.c = pClass.SNIPER;
-                break;
-            default: 
-                System.exit(0);
-        }
+        this.c = c;
         this.speed = speed;
         this.acc = acc;
         setFocusable(true);
@@ -62,7 +47,7 @@ public class Player extends JPanel implements ActionListener{
     }
 
     public void setLocation(String str){
-        GameRunner.setLocation(str);
+        GameRunner.setLocation(str, this);
     }
 
     public int getHP(){return HP;}// returns HP of Player object
@@ -70,7 +55,7 @@ public class Player extends JPanel implements ActionListener{
     public void removeHP(int x){HP-=x;}// removes x HP of Player object
     public void addHP(int x){HP+=x;}// adds x HP of Player object
 
-    public pClass getPClass(){return c;}// returns status of Player object
+    public String getPClass(){return c;}// returns status of Player object
     public int getAcc(){return acc;}// returns accuracy
     public int getSpeed(){return speed;}// returns speed
     
@@ -80,16 +65,16 @@ public class Player extends JPanel implements ActionListener{
     public void paintComponent(Graphics g){
         super.paintComponent(g);
         switch(c){
-            case ASSAULT:
+            case "ASSAULT":
                 g = animateASSAULT(g);
                 break;
-            case TANK:
+            case "TANK":
                 g = animateTANK(g);
                 break;
-            case SNIPER:
+            case "SNIPER":
                 g = animateSNIPER(g);
                 break;
-            case MELEE:
+            case "MELEE":
                 g = animateMELEE(g);
                 break;
         }
@@ -137,6 +122,5 @@ public class Player extends JPanel implements ActionListener{
         getSpeed();
         getPClass();
     }
-    @Override
     public void actionPerformed(ActionEvent e) {}
 }
