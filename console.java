@@ -3,15 +3,17 @@ import javax.swing.*;
 import java.awt.event.*;
 import java.io.File;
 import java.io.IOException;
+import java.awt.image.*;
 
 public class console extends JPanel implements ActionListener{
     private static JTextField textField;
     private Image decorations;
     private JTextArea textArea;
     private JLabel label;
+    private JPanel background;
     private Color notBlack;
     private Color notWhite;
-
+    public static int turn;
     public console(String img) {
         this(new ImageIcon(img).getImage());
     } 
@@ -34,6 +36,7 @@ public class console extends JPanel implements ActionListener{
         textField = new JTextField(1);
             textFieldInitializer();
         setFonts();     
+        turn = 0;
         
         this.add(textField);
         this.add(textArea);
@@ -65,6 +68,10 @@ public class console extends JPanel implements ActionListener{
             }
             if(txt.equalsIgnoreCase("exit") || txt.equalsIgnoreCase("close")) {
                 System.exit(0);
+            }
+            if(txt.equalsIgnoreCase("next turn")){
+                if(turn == 3){turn = 0;
+                } else {turn++;}
             }
             if(includes(txt, "clear")){textArea.setText(null);} else {textArea.insert("\n>", 0);}
             textField.setText("");
@@ -122,4 +129,7 @@ public class console extends JPanel implements ActionListener{
         }
         return false;
     }
+    private static void setTurn(int t){turn = t;}
+    public static int getTurn(){return turn;}
+
 }

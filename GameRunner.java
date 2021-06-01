@@ -36,7 +36,7 @@ public class GameRunner {
         m.setBounds(0, 0, 1456, 1080);
         mainPanel.add(m, -1);
 
-        c = new console("images/console_backdrop.png");// *Console
+        c = new console(new ImageIcon("images/console_backdrop.png").getImage());// *Console
         c.setBounds(1456, 0, 464, 1080);
         mainPanel.add(c, 0);
 
@@ -73,26 +73,40 @@ public class GameRunner {
     public static void setLocation(int x, int y) {
         if (x < 112 || y < 112 || x >= 1344 || y >= 896) {
         } else {
-            p1.setLocation(x, y);
-            p2.setLocation(x,y);
-            p3.setLocation(x, y);
-            p4.setLocation(x, y);
+            switch(console.getTurn()){
+                case 0:
+                    p1.setLocation(x, y);
+                    break;
+                case 1:
+                    p2.setLocation(x, y);
+                    break;
+                case 2:
+                    p3.setLocation(x, y);
+                    break;
+                case 3:
+                    p4.setLocation(x, y);
+                    break;
+            }
         }
 
     }
 
-    public static void setLocation(String str, Player p) {
+    public static void setLocation(String str) {
         int x;
         int y;
         String[] arr = str.split("\s");
         x = Integer.parseInt(arr[0]);
         y = Integer.parseInt(arr[1]);
-        if(p==p1){
-            p1.setLocation(x, y);
-        } else if (p==p2) {
-            p2.setLocation(x, y);
-        } else if (p == p3) {p3.setLocation(x, y);}
-        else if (p == p4) {p4.setLocation(x,y);}
+        switch(console.getTurn()){
+            case 0:
+                p1.setLocation(x, y);
+            case 1:
+                p2.setLocation(x, y);
+            case 2:
+                p3.setLocation(x, y);
+            case 3:
+                p4.setLocation(x, y);
+        }
 
     }
 }
