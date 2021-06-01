@@ -4,7 +4,7 @@ import java.awt.event.*;
 import java.io.File;
 import java.io.IOException;
 
-public class console extends JPanel implements ActionListener{
+public class console extends JLayeredPane implements ActionListener{
     private static JTextField textField;
     private Image decorations;
     private JTextArea textArea;

@@ -4,13 +4,6 @@ public class GameController {
         if(!args[0].equalsIgnoreCase("move") && !args[1].equalsIgnoreCase("to")){
             return -1;
         }
-        int a = 1;
-        for(int i=0; i<args.length; i++){//finds location of "to" so that 
-            if(args[i].equals("to")){
-                a = i;
-            }
-        }
-
         try{
             int y = Character.getNumericValue(args[2].charAt(1))*112;
             int x = (Character.getNumericValue(args[2].charAt(0))-9)*112;
