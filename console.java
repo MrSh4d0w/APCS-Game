@@ -21,9 +21,6 @@ public class console extends JPanel implements ActionListener{
 
     public console(Image img) {
         notBlack = new Color(20,12,28);
-        // notBlack = Color.BLACK;
-        // notWhite = new Color(102,106,105);
-        // notWhite = new Color(140,140,140);
         notWhite = Color.WHITE;
 
         this.decorations = img;
@@ -67,14 +64,13 @@ public class console extends JPanel implements ActionListener{
                     insert("Moved to " + text[2]);
                     break;
                 case "next":
-                    if(text.length<=1 || !text[1].equalsIgnoreCase("turn")){textArea.insert("\n>", 0);break;}
+                    if(text.length<=1 || !text[1].equalsIgnoreCase("turn")){insert("That is not a command. If you need help, type \"help\"");break;}
                     if(turn==3){turn=0;}
                     else{turn++;}
                     insert("Turn is now: " + turn);
                     break;
                 case "help":
                     insert("go fuck yourself");
-                    
                     break;
                 case "clear":
                     textArea.setText(null);
@@ -94,8 +90,6 @@ public class console extends JPanel implements ActionListener{
         textArea.insert(msg + "\n\n", arr[0].length());}
         textArea.insert("\n> ", 0);
     }
-    
-
     private String[] parser(){
         String txt = textField.getText().replace(",", "");
         return txt.trim().split("\s");

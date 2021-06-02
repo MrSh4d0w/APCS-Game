@@ -15,12 +15,10 @@ public class Player extends JPanel implements ActionListener{
     // private static int counter, assaultCounter;
     private int HP, speed, acc;
     private int i = 0; // This is for the animations DONT TOUCH
-    public enum pClass {ASSAULT,TANK,SNIPER,MELEE}
-    public enum direction {UP,DOWN,LEFT,RIGHT}
     private String c;
-    BufferedImage img;
-    String image, jsonFile ;
-    int[][] spriteSheetCords = { { 0, 0, 112, 112 }, { 112, 0, 112, 112 }, { 224, 0, 112, 112 },
+    private BufferedImage img;
+    private String image, jsonFile ;
+    private final int[][] spriteSheetCords = { { 0, 0, 112, 112 }, { 112, 0, 112, 112 }, { 224, 0, 112, 112 },
                     { 336, 0, 112, 112 }, { 448, 0, 112, 112 }, { 560, 0, 112, 112 }, { 672, 0, 112, 112 },
                     { 784, 0, 112, 112 } };
     
@@ -59,7 +57,7 @@ public class Player extends JPanel implements ActionListener{
     public int getAcc(){return acc;}// returns accuracy
     public int getSpeed(){return speed;}// returns speed
     
-    public void move(pClass p, direction dir, int amnt){}// move char [amnt] tiles in [dir] direction
+    // public void move(pClass p, int amnt){}// move char [amnt] tiles in [dir] direction
 
     @Override
     public void paintComponent(Graphics g){

@@ -15,4 +15,27 @@ public class GameController {
         }
         return 1;
     }
+
+    public int[][] getGrid(){
+        int[][] ret = new int[13][9];
+
+        String[][] grid = new String[13][9];
+        int rowCoords = 0;
+        int columnCoords = 0;
+        for (int row = 0; row < 13; row++) {
+            rowCoords = (row * 112);
+            for (int column = 0; column < 9; column++) {
+                columnCoords = (column * 112)+36;
+                grid[row][column] = rowCoords + " " + columnCoords;
+            }
+        }
+        
+        
+        return ret;
+    }
+
+    public int getPosition(int posX, int posY){
+        int[][] grid = getGrid();
+        return grid[posX][posY];
+    }
 }
