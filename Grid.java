@@ -1,25 +1,26 @@
 import java.awt.*;
 import javax.swing.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
 
 public class Grid extends JPanel{
-    public final int x;
-    public final int y;
+    private BufferedImage img;
 
-    public Grid(String coordinates){
+    public Grid(String color){
         setSize(112, 112);
-        String[] c = coordinates.split(" ");
-        x = Integer.parseInt(c[0]);
-        y = Integer.parseInt(c[1]);
+        setOpaque(false);
+        getImg(color);
     }
 
     public void paintComponent(Graphics g){
-        g.setColor(new Color(200,0,0));
-        g.fillRect(0, 0, 4, 112);//left
-        g.fillRect(0, 112-4, 112, 4);//bottom
-        g.fillRect(112-4, 0, 4, 112);//right
-        g.fillRect(0, 0, 112, 4);//top
+        super.paintComponent(g);
+        g.drawImage(img, 0, 0, null);
     }
-
-    public int getX() {return x;}
-    public int getY() {return y;}
+    private void getImg(String name){
+        try {
+            img = ImageIO.read(new File("images/" + name + ".png"));
+        } catch (IOException e) {e.printStackTrace(); }
+    }
 }

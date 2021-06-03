@@ -9,6 +9,7 @@ public class GameRunner {
     private static Player p1, p2, p3, p4;
     private static String[][] grid;
     private static console c;
+    private static JLayeredPane mainPanel;
 
     
 
@@ -19,7 +20,7 @@ public class GameRunner {
         f.setSize(1920, 1080);
         f.setUndecorated(true);
 
-        JLayeredPane mainPanel = new JLayeredPane();
+        mainPanel = new JLayeredPane();
         mainPanel.setSize(1920, 1080);
         mainPanel.setLayout(null);
 
@@ -44,17 +45,17 @@ public class GameRunner {
         p2.setSize(new Dimension(112, 112));
         p2.setLocation(grid[6][5]);
         p2.setOpaque(false);
-        mainPanel.add(p2, 1);
+        mainPanel.add(p2, 2);
 
         p3.setSize(new Dimension(112, 112));
         p3.setLocation(grid[7][5]);
         p3.setOpaque(false);
-        mainPanel.add(p3, 1);
+        mainPanel.add(p3, 3);
 
         p4.setSize(new Dimension(112, 112));
         p4.setLocation(grid[8][5]);
         p4.setOpaque(false);
-        mainPanel.add(p4, 1);
+        mainPanel.add(p4, 4);
 
         drawGrid();
         f.getContentPane().add(mainPanel);
@@ -142,14 +143,20 @@ public class GameRunner {
                 String[] gLoc = g[i][j].split(" ");
                 int x2 = Integer.parseInt(gLoc[0]);
                 int y2 = Integer.parseInt(gLoc[1]);
-                
-                if(Math.abs(x-x2)<(112*speed)&&Math.abs(y-y2)<(36+(112*speed))){
-                    grids.add(new Grid(g[i][j]));
+                if(x==x2 && y==y2){
+                    grids.add(new Grid("gold"));
                     counter++;
                     grids.get(counter).setLocation(x2, y2);
-                    f.add(grids.get(counter));
+                    mainPanel.add(grids.get(counter), 5);
+                }else if(Math.abs(x-x2)<=(112*speed)&&Math.abs(y-y2)<(36+(112*speed))){
+                    grids.add(new Grid ("green"));
+                    counter++;
+                    grids.get(counter).setLocation(x2, y2);
+                    mainPanel.add(grids.get(counter), 5);
                 }
             }
         }
     }
+
+    // public static void removeGrid(){}
 }
