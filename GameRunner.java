@@ -1,8 +1,10 @@
 import javax.swing.*;
 import java.awt.*;
+import java.util.*;
 // import java.awt.image.*;
 
 public class GameRunner {
+    private static JFrame f;
     private static map m;
     private static Player p1, p2, p3, p4;
     private static String[][] grid;
@@ -13,7 +15,7 @@ public class GameRunner {
     public static void main(String[] args) {
         grid = GameController.createGrid();
 
-        JFrame f = new JFrame();
+        f = new JFrame();
         f.setSize(1920, 1080);
         f.setUndecorated(true);
 
@@ -54,6 +56,7 @@ public class GameRunner {
         p4.setOpaque(false);
         mainPanel.add(p4, 1);
 
+        drawGrid();
         f.getContentPane().add(mainPanel);
         f.setResizable(false);
         f.setVisible(true);
@@ -123,5 +126,30 @@ public class GameRunner {
                 return p4;
         }
         return null;
+    }
+
+    public static void drawGrid(){
+        String[][] g = GameController.createGrid();
+        String[] loc = GameRunner.getP(console.getTurn()).getLoc().split(" ");
+        int x = Integer.parseInt(loc[0]);
+        int y = Integer.parseInt(loc[1]);
+        int speed = GameRunner.getP(console.getTurn()).getSpeed();
+        ArrayList<Grid> grids = new ArrayList<Grid>();
+        int counter = -1;
+
+        for(int i = 0; i < g.length; i++){
+            for(int j = 0; j < g[0].length; j++){
+                String[] gLoc = g[i][j].split(" ");
+                int x2 = Integer.parseInt(gLoc[0]);
+                int y2 = Integer.parseInt(gLoc[1]);
+                
+                if(Math.abs(x-x2)<(112*speed)&&Math.abs(y-y2)<(36+(112*speed))){
+                    grids.add(new Grid(g[i][j]));
+                    counter++;
+                    grids.get(counter).setLocation(x2, y2);
+                    f.add(grids.get(counter));
+                }
+            }
+        }
     }
 }

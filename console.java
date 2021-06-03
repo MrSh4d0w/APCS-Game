@@ -3,6 +3,7 @@ import javax.swing.*;
 import java.awt.event.*;
 import java.io.File;
 import java.io.IOException;
+import java.util.*;
 // import java.awt.image.*;
 
 public class console extends JPanel implements ActionListener{
@@ -46,46 +47,44 @@ public class console extends JPanel implements ActionListener{
     }
     public void actionPerformed(ActionEvent e) {
         String txt = textField.getText();
-            textArea.insert(""+txt, 0);
-            String[] text = parser();
-
-            
-            switch(text[0]){
-                case "exit":
-                    System.exit(0);
-                    break;
-                case "close":
-                    System.exit(0);
-                    break;
-                case "move":
-                    int state = GameController.setLocation(turn, text);
-                    if(state ==-1){break;}
-                    else if(state == -2){insert("That location is too far away");break;}
-                    insert("Moved to " + text[2]);
-                    break;
-                case "next":
-                    if(text.length<=1 || !text[1].equalsIgnoreCase("turn")){insert("That is not a command. If you need help, type \"help\"");break;}
-                    if(turn==3){turn=0;}
-                    else{turn++;}
-                    insert("Turn is now: " + turn);
-                    break;
-                case "help":
-                    insert("no");
-                    break;
-                case "clear":
-                    textArea.setText(null);
-                    break;
-                default:
-                    insert("That is not a command. If you need help, type \"help\"");
-                    break;
-                }
-            textField.setText("");
-    }
-
-    public void drawGrid(){
-        String[][] g = GameController.createGrid();
+        textArea.insert(""+txt, 0);
+        String[] text = parser();
         
+
+        
+        switch(text[0]){
+            case "exit":
+                System.exit(0);
+                break;
+            case "close":
+                System.exit(0);
+                break;
+            case "move":
+                int state = GameController.setLocation(turn, text);
+                if(state ==-1){break;}
+                else if(state == -2){insert("That location is too far away");break;}
+                insert("Moved to " + text[2]);
+                break;
+            case "next":
+                if(text.length<=1 || !text[1].equalsIgnoreCase("turn")){insert("That is not a command. If you need help, type \"help\"");break;}
+                if(turn==3){turn=0;}
+                else{turn++;}
+                insert("Turn is now: " + turn);
+                break;
+            case "help":
+                insert("no");
+                break;
+            case "clear":
+                textArea.setText(null);
+                break;
+            default:
+                insert("That is not a command. If you need help, type \"help\"");
+                break;
+            }
+        textField.setText("");
     }
+
+    
     
     public void insert(String msg){
         String[] arr = textArea.getText().split(">");
