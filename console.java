@@ -81,6 +81,11 @@ public class console extends JPanel implements ActionListener{
                 }
             textField.setText("");
     }
+
+    public void drawGrid(){
+        String[][] g = GameController.createGrid();
+        
+    }
     
     public void insert(String msg){
         String[] arr = textArea.getText().split(">");
