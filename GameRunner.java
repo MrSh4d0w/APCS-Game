@@ -40,10 +40,10 @@ public class GameRunner {
         c.setBounds(1456, 0, 464, 1080);
         mainPanel.add(c, 0);
 
-        p1 = new Player(100, "ASSAULT", 50, 20);// *Player
-        p2 = new Player(100, "TANK", 50, 20);
-        p3 = new Player(100, "SNIPER", 50, 20);
-        p4 = new Player(100, "MELEE", 50, 20);
+        p1 = new Player(100, "ASSAULT", 3, 20);// *Player
+        p2 = new Player(100, "TANK", 2, 20);
+        p3 = new Player(100, "SNIPER", 4, 20);
+        p4 = new Player(100, "MELEE", 5, 20);
         
         p1.setSize(new Dimension(112, 112));
         p1.setLocation(grid[5][5]);
@@ -76,15 +76,19 @@ public class GameRunner {
             switch(c){
                 case 0:
                     p1.setLocation(x, y);
+                    p1.setLoc(x,y);
                     break;
                 case 1:
                     p2.setLocation(x, y);
+                    p2.setLoc(x,y);
                     break;
                 case 2:
                     p3.setLocation(x, y);
+                    p3.setLoc(x,y);
                     break;
                 case 3:
                     p4.setLocation(x, y);
+                    p4.setLoc(x,y);
                     break;
             }
         }
@@ -100,17 +104,35 @@ public class GameRunner {
         switch(p.getPClass()){
             case "ASSAULT":
                 p1.setLocation(x, y);
+                p1.setLoc(x,y);
                 break;
             case "TANK":
                 p2.setLocation(x, y);
+                p2.setLoc(x,y);
                 break;
             case "SNIPER":
                 p3.setLocation(x, y);
+                p3.setLoc(x,y);
                 break;
             case "MELEE":
                 p4.setLocation(x, y);
+                p4.setLoc(x,y);
                 break;
         }
 
+    }
+
+    public static Player getP(int c){
+        switch(c){
+            case 0:
+                return p1;
+            case 1:
+                return p2;
+            case 2:
+                return p3;
+            case 3:
+                return p4;
+        }
+        return null;
     }
 }

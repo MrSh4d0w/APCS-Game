@@ -58,9 +58,9 @@ public class console extends JPanel implements ActionListener{
                     System.exit(0);
                     break;
                 case "move":
-                    if(GameController.setLocation(turn, text)==-1){
-                        break;
-                    }
+                    int state = GameController.setLocation(turn, text);
+                    if(state ==-1){break;}
+                    else if(state == -2){insert("That location is too far away");break;}
                     insert("Moved to " + text[2]);
                     break;
                 case "next":
@@ -70,7 +70,7 @@ public class console extends JPanel implements ActionListener{
                     insert("Turn is now: " + turn);
                     break;
                 case "help":
-                    insert("go fuck yourself");
+                    insert("no");
                     break;
                 case "clear":
                     textArea.setText(null);
@@ -132,13 +132,15 @@ public class console extends JPanel implements ActionListener{
             e.printStackTrace();
         }
     }
-    private boolean includes(String beg,String str) {
+    
+    /*private boolean includes(String beg,String str) {
         if(str.length()==0) return false;
         if(beg.toLowerCase().indexOf(str.toLowerCase())>=0){
             return true;
         }
         return false;
-    }
+    }*/
+
     // private static void setTurn(int t){turn = t;}
     public static int getTurn(){return turn;}
 

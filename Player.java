@@ -12,12 +12,12 @@ import javax.swing.Timer;
 
 
 public class Player extends JPanel implements ActionListener{
-    // private static int counter, assaultCounter;
+                                             // private static int counter, assaultCounter;
     private int HP, speed, acc;
-    private int i = 0; // This is for the animations DONT TOUCH
+    private int i = 0;                       // This is for the animations DONT TOUCH
     private String c;
     private BufferedImage img;
-    private String image, jsonFile ;
+    private String loc;
     private final int[][] spriteSheetCords = { { 0, 0, 112, 112 }, { 112, 0, 112, 112 }, { 224, 0, 112, 112 },
                     { 336, 0, 112, 112 }, { 448, 0, 112, 112 }, { 560, 0, 112, 112 }, { 672, 0, 112, 112 },
                     { 784, 0, 112, 112 } };
@@ -48,18 +48,19 @@ public class Player extends JPanel implements ActionListener{
         GameRunner.setLocation(str, this);
     }
 
-    public int getHP(){return HP;}// returns HP of Player object
-    public void setHP(int HP){this.HP = HP;}// sets HP of Player object
-    public void removeHP(int x){HP-=x;}// removes x HP of Player object
-    public void addHP(int x){HP+=x;}// adds x HP of Player object
+    public int getHP(){return HP;}           // returns HP of Player object
+    public void setHP(int HP){this.HP = HP;} // sets HP of Player object
+    public void removeHP(int x){HP-=x;}      // removes x HP of Player object
+    public void addHP(int x){HP+=x;}         // adds x HP of Player object
 
-    public String getPClass(){return c;}// returns status of Player object
-    public int getAcc(){return acc;}// returns accuracy
-    public int getSpeed(){return speed;}// returns speed
+    public String getPClass(){return c;}     // returns status of Player object
+    public int getAcc(){return acc;}         // returns accuracy
+    public int getSpeed(){return speed;}     // returns speed
+    public void setLoc(int x, int y){loc = x + " " + y;}
+    public String getLoc(){return loc;}
     
     // public void move(pClass p, int amnt){}// move char [amnt] tiles in [dir] direction
 
-    @Override
     public void paintComponent(Graphics g){
         super.paintComponent(g);
         switch(c){
@@ -121,4 +122,6 @@ public class Player extends JPanel implements ActionListener{
         getPClass();
     }
     public void actionPerformed(ActionEvent e) {}
+
+    
 }
