@@ -7,6 +7,7 @@ public class GameRunner {
     private static JFrame f;
     private static map m;
     private static Player p1, p2, p3, p4;
+    private static Enemy e1, e2, e3, e4, e5;
     private static String[][] grid;
     private static console c;
     private static JLayeredPane mainPanel;
@@ -53,10 +54,16 @@ public class GameRunner {
         p3.setOpaque(false);
         mainPanel.add(p3, 3);
 
-        p4.setSize(new Dimension(112, 112));
-        p4.setLocation(grid[8][5]);
-        p4.setOpaque(false);
-        mainPanel.add(p4, 4);
+        // p4.setSize(new Dimension(112, 112));
+        // p4.setLocation(grid[8][5]);
+        // p4.setOpaque(false);
+        // mainPanel.add(p4, 4);
+
+        e1 = new Enemy(100, "COP", 3, 20);
+        e1.setSize(new Dimension(112, 112));
+        e1.setLocation(grid[5][3]);
+        e1.setOpaque(false);
+        mainPanel.add(e1,4);
 
         drawGrid();
         f.getContentPane().add(mainPanel);
@@ -116,7 +123,6 @@ public class GameRunner {
                 p4.setLoc(x,y);
                 break;
         }
-
     }
 
     public static Player getP(int c){
@@ -132,6 +138,80 @@ public class GameRunner {
         }
         return null;
     }
+
+    public static void setLocation(String str, Enemy p) {
+        int x;
+        int y;
+        
+        String[] arr = str.split("\s");
+        x = Integer.parseInt(arr[0]);
+        y = Integer.parseInt(arr[1]);
+        
+        switch(p.getEClass()){
+            case "COP":
+                e1.setLocation(x, y);
+                e1.setLoc(x,y);
+                e2.setLocation(x, y);
+                e2.setLoc(x, y);
+                break;
+            case "ROBOT":
+                e3.setLocation(x, y);
+                e3.setLoc(x,y);
+                e4.setLocation(x, y);
+                e4.setLoc(x, y);
+                break;
+            case "BOOMER":
+                e5.setLocation(x, y);
+                e5.setLoc(x,y);
+                break;
+        }
+    }
+
+    public static Enemy getE(int c){
+        switch(c){
+            case 0:
+                return e1;
+            case 1:
+                return e2;
+            case 2:
+                return e3;
+            case 3:
+                return e4;
+            case 4:
+                return e5;
+        }
+        return null;
+    }
+
+    public static void setLocationE(int c, int x, int y) {
+        if (x < 112 || y < 112 || x >= 1344 || y >= 896) {
+        } else {
+            switch(c){
+                case 0:
+                    e1.setLocation(x, y);
+                    e1.setLoc(x,y);
+                    break;
+                case 1:
+                    e2.setLocation(x, y);
+                    e2.setLoc(x,y);
+                    break;
+                case 2:
+                    e3.setLocation(x, y);
+                    e3.setLoc(x,y);
+                    break;
+                case 3:
+                    e4.setLocation(x, y);
+                    e4.setLoc(x,y);
+                    break;
+                case 4:
+                    e5.setLocation(x, y);
+                    e5.setLoc(x,y);
+                    break;
+            }
+        }
+
+    }
+
 
     public static void drawGrid(){
         String[][] g = GameController.createGrid();
