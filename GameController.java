@@ -13,6 +13,8 @@ public class GameController {
             if(Math.abs(x-oldX)>(112*speed)||Math.abs(y-oldY)>(36+112*speed)){return -2;}//return -2 if location is not valid
             if (x >= 112 && y >= 112 && x < 1344 && y < 896) {
                 GameRunner.setLocation(c, x, y+36);
+                GameRunner.removeGrid();
+                GameRunner.drawGrid();
             }
         } catch (Exception ex){
             System.out.println("NumberFormatException: " + ex);

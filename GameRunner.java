@@ -69,28 +69,20 @@ public class GameRunner {
         } else {
             switch(c){
                 case 0:
-                    removeGrid();
                     p1.setLocation(x, y);
                     p1.setLoc(x,y);
-                    drawGrid();
                     break;
                 case 1:
-                    removeGrid();
                     p2.setLocation(x, y);
                     p2.setLoc(x,y);
-                    drawGrid();
                     break;
                 case 2:
-                    removeGrid();
                     p3.setLocation(x, y);
                     p3.setLoc(x,y);
-                    drawGrid();
                     break;
                 case 3:
-                    removeGrid();
                     p4.setLocation(x, y);
                     p4.setLoc(x,y);
-                    drawGrid();
                     break;
             }
         }
@@ -147,8 +139,8 @@ public class GameRunner {
         grids = new ArrayList<Grid>();
         int counter = -1;
 
-        for(int i = 0; i < g.length; i++){
-            for(int j = 0; j < g[0].length; j++){
+        for(int i = 1; i < g.length-1; i++){
+            for(int j = 1; j < g[0].length-1; j++){
                 String[] gLoc = g[i][j].split(" ");
                 int x2 = Integer.parseInt(gLoc[0]);
                 int y2 = Integer.parseInt(gLoc[1]);

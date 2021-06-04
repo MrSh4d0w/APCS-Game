@@ -70,6 +70,8 @@ public class console extends JPanel implements ActionListener{
                 if(turn==3){turn=0;}
                 else{turn++;}
                 insert("Turn is now: " + turn);
+                GameRunner.removeGrid();
+                GameRunner.drawGrid();
                 break;
             case "help":
                 insert("no");
