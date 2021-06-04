@@ -63,7 +63,7 @@ public class console extends JPanel implements ActionListener{
                 int state = GameController.setLocation(turn, text);
                 if(state ==-1){break;}
                 else if(state == -2){insert("That location is too far away");break;}
-                else if(state == -3){insert("There is a player there");break;}
+                else if(state == -3){insert("There is a player or enemy there");break;}
                 insert("Moved to " + text[2]);
                 break;
             case "next":
@@ -79,6 +79,10 @@ public class console extends JPanel implements ActionListener{
                 break;
             case "clear":
                 textArea.setText(null);
+                break;
+            case "setEnemyLoc":
+                GameRunner.getE(0).setLocation(112, 112);
+                insert("Set Enemy Loc to 112, 112");
                 break;
             default:
                 insert("That is not a command. If you need help, type \"help\"");

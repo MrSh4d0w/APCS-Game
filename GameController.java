@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class GameController {
     public static int setLocation(int c, String[] args) {
         if(args==null){return -1;}//return -1 if the command does not start with "move to" (edge case where nothing after "move")
@@ -34,21 +36,10 @@ public class GameController {
 
         for(int i = 0; i < returnArr.length; i++){
             for(int k = 0; k < returnArr[0].length; k++){
-                if(playerLocations[0].equals(stringGrid[i][k])){
-                    // System.out.println("1: " + k + " " + i);
-                    returnArr[i][k] = 1;
-                }
-                if(playerLocations[1].equals(stringGrid[i][k])){
-                    // System.out.println("2: " + k + " " + i);
-                    returnArr[i][k] = 1;
-                }
-                if(playerLocations[2].equals(stringGrid[i][k])){
-                    // System.out.println("3: " + k + " " + i);
-                    returnArr[i][k] = 1;
-                }
-                if(playerLocations[3].equals(stringGrid[i][k])){
-                    // System.out.println("4: " + k + " " + i);
-                    returnArr[i][k] = 1;
+                for(String s:playerLocations){
+                    if(s.equals(stringGrid[i][k])){
+                        returnArr[i][k] = 1;
+                    }
                 }
             }
         }
@@ -61,9 +52,16 @@ public class GameController {
     }
 
     public static String[] getLocations(){
-        String[] ret = new String[4];
+        ArrayList<String> arr = new ArrayList<String>();
         for(int i=0; i<4; i++){
-            ret[i] = GameRunner.getP(i).getLoc();
+            arr.add(GameRunner.getP(i).getLoc());
+        }
+        for(int i=0;i<1;i++){
+            arr.add(GameRunner.getE(i).getLoc());
+        }
+        String[] ret = new String[arr.size()];
+        for(int i=0;i<arr.size();i++){
+            ret[i] = arr.get(i);
         }
         return ret;
     }

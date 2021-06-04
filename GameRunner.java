@@ -54,17 +54,18 @@ public class GameRunner {
         p3.setOpaque(false);
         mainPanel.add(p3, 3);
 
-        // p4.setSize(new Dimension(112, 112));
-        // p4.setLocation(grid[8][5]);
-        // p4.setOpaque(false);
-        // mainPanel.add(p4, 4);
+        p4.setSize(new Dimension(112, 112));
+        p4.setLocation(grid[8][5]);
+        p4.setOpaque(false);
+        mainPanel.add(p4, 4);
 
         e1 = new Enemy(100, "COP", 3, 20);
         e1.setSize(new Dimension(112, 112));
         e1.setLocation(grid[5][3]);
         e1.setOpaque(false);
-        mainPanel.add(e1,4);
-
+        mainPanel.add(e1,5);
+        
+        GameRunner.drawGrid();
         f.getContentPane().add(mainPanel);
         f.setResizable(false);
         f.setVisible(true);
@@ -95,7 +96,6 @@ public class GameRunner {
         }
 
     }
-
     public static void setLocation(String str, Player p) {
         int x;
         int y;
@@ -123,7 +123,6 @@ public class GameRunner {
                 break;
         }
     }
-
     public static Player getP(int c){
         switch(c){
             case 0:
@@ -150,14 +149,18 @@ public class GameRunner {
             case "COP":
                 e1.setLocation(x, y);
                 e1.setLoc(x,y);
-                e2.setLocation(x, y);
-                e2.setLoc(x, y);
+                if(e2 != null){
+                    e2.setLocation(x, y);
+                    e2.setLoc(x, y);
+                }
                 break;
             case "ROBOT":
                 e3.setLocation(x, y);
                 e3.setLoc(x,y);
-                e4.setLocation(x, y);
-                e4.setLoc(x, y);
+                if(e4 != null){
+                    e4.setLocation(x, y);
+                    e4.setLoc(x, y);
+                }
                 break;
             case "BOOMER":
                 e5.setLocation(x, y);
@@ -165,7 +168,6 @@ public class GameRunner {
                 break;
         }
     }
-
     public static Enemy getE(int c){
         switch(c){
             case 0:
@@ -181,7 +183,6 @@ public class GameRunner {
         }
         return null;
     }
-
     public static void setLocationE(int c, int x, int y) {
         if (x < 112 || y < 112 || x >= 1344 || y >= 896) {
         } else {
@@ -234,22 +235,20 @@ public class GameRunner {
                     grids.add(new Grid("gold"));
                     counter++;
                     grids.get(counter).setLocation(x2, y2);
-                    mainPanel.add(grids.get(counter), 5);
+                    mainPanel.add(grids.get(counter), 6);
                 } else
                 if(idk[i][j]==1){} else
                 if(Math.abs(x-x2)<=(112*speed)&&Math.abs(y-y2)<(36+(112*speed))){
                     grids.add(new Grid ("green"));
                     counter++;
                     grids.get(counter).setLocation(x2, y2);
-                    mainPanel.add(grids.get(counter), 5);
+                    mainPanel.add(grids.get(counter), 6);
                 }
             }
         }
     }
-
-    public static void removeGrid(){   
-    for(Grid g:grids)
-        {
+    public static void removeGrid(){
+    for(Grid g:grids){
             g.setVisible(false);
             mainPanel.remove(g);
         }

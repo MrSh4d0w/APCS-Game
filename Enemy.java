@@ -61,6 +61,10 @@ public class Enemy extends JPanel implements ActionListener {
     public void setLoc(int x, int y){loc = x + " " + y;}
     public String getLoc(){return loc;}
 
+
+
+
+
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         switch(c) {
@@ -75,7 +79,6 @@ public class Enemy extends JPanel implements ActionListener {
                 break;
         }
     }
-
     public Graphics animateCOP(Graphics g) {
         getImg("Enemy1_IdleGun");
         Image subSprite = null;
@@ -97,15 +100,11 @@ public class Enemy extends JPanel implements ActionListener {
         g.drawImage(subSprite, 0, 0, null);
         return g;
     }
-    
-
     private void getImg(String name){
         try {
             img = ImageIO.read(new File("images/" + name + ".png"));
         } catch (IOException e) {e.printStackTrace(); }
     }
-
-    @Override
     public void actionPerformed(ActionEvent e) {
         // TODO Auto-generated method stub
         
