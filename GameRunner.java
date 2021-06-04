@@ -144,6 +144,9 @@ public class GameRunner {
                 String[] gLoc = g[i][j].split(" ");
                 int x2 = Integer.parseInt(gLoc[0]);
                 int y2 = Integer.parseInt(gLoc[1]);
+                if(GameController.getPosition(i, j) == 1){
+                    break;
+                }
                 if(x==x2 && y==y2){
                     grids.add(new Grid("gold"));
                     counter++;
