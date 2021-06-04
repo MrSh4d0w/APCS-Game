@@ -6,6 +6,7 @@ import java.util.*;
 public class GameRunner {
     private static JFrame f;
     private static map m;
+    private static TitleScreen t;
     private static Player p1, p2, p3, p4;
     private static String[][] grid;
     private static console c;
@@ -25,6 +26,10 @@ public class GameRunner {
         mainPanel.setSize(1920, 1080);
         mainPanel.setLayout(null);
 
+        /* t = new TitleScreen("images/Titlescreen.png");
+        t.setBounds(0,0,1920,1080);
+        mainPanel.add(t,100); */
+        
         m = new map("images/Gameboard.png");// *Map
         m.setBounds(0, 0, 1456, 1080);
         mainPanel.add(m, -1);
