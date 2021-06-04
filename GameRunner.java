@@ -65,7 +65,6 @@ public class GameRunner {
         e1.setOpaque(false);
         mainPanel.add(e1,4);
 
-        drawGrid();
         f.getContentPane().add(mainPanel);
         f.setResizable(false);
         f.setVisible(true);

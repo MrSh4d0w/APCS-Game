@@ -33,87 +33,25 @@ public class GameController {
 
 
         for(int i = 0; i < returnArr.length; i++){
-
-
             for(int k = 0; k < returnArr[0].length; k++){
-
-
                 if(playerLocations[0].equals(stringGrid[i][k])){
-                    System.out.println("1: " + k + " " + i);
+                    // System.out.println("1: " + k + " " + i);
                     returnArr[i][k] = 1;
-                    // System.out.println(returnArr[i][k]);
-
                 }
                 if(playerLocations[1].equals(stringGrid[i][k])){
-                    System.out.println("2: " + k + " " + i);
+                    // System.out.println("2: " + k + " " + i);
                     returnArr[i][k] = 1;
-
                 }
                 if(playerLocations[2].equals(stringGrid[i][k])){
-                    System.out.println("3: " + k + " " + i);
+                    // System.out.println("3: " + k + " " + i);
                     returnArr[i][k] = 1;
-
                 }
                 if(playerLocations[3].equals(stringGrid[i][k])){
-                    System.out.println("4: " + k + " " + i);
+                    // System.out.println("4: " + k + " " + i);
                     returnArr[i][k] = 1;
-
-                }
-
-            }
-
-
-
-
-        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-        // int[][] ret = new int[13][9];
-        // String[][] cGrid = createGrid();
-        // int c1 = 0;
-        // int c2 = 0;
-
-        // for(String[] sArr: cGrid){
-        //     c2 = -1;
-        //     for(String s: sArr){
-        //         for(String ps: getLocations()){
-        //             if(s.equals(ps)){
-        //                 ret[c1][c2] = 1;
-        //             }
-        //         }
-        //         c2++;
-        //     }
-        //     c1++;
-        // }
-
-        /*
-        String[][] grid = new String[13][9];
-        int rowCoords = 0;
-        int columnCoords = 0;
-        for (int y = 1; y < 12; y++) {
-            rowCoords = (y * 112);
-            for (int x = 1; x < 8; x++) {
-                columnCoords = (x * 112)+36;
-                grid[y][x] = rowCoords + " " + columnCoords;
-                for(String s: getLocations()){
-                    if(grid[x][y].equals(s)){
-                        ret[x][y] = 1;
-                    }
                 }
             }
         }
-        */
         return returnArr;//b2, e5
     }
 
