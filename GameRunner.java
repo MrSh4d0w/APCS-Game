@@ -62,6 +62,7 @@ public class GameRunner {
         f.getContentPane().add(mainPanel);
         f.setResizable(false);
         f.setVisible(true);
+        GameController.getEntities();
     }
 
     public static void setLocation(int c, int x, int y) {
@@ -92,9 +93,11 @@ public class GameRunner {
     public static void setLocation(String str, Player p) {
         int x;
         int y;
+        
         String[] arr = str.split("\s");
         x = Integer.parseInt(arr[0]);
         y = Integer.parseInt(arr[1]);
+        
         switch(p.getPClass()){
             case "ASSAULT":
                 p1.setLocation(x, y);
@@ -141,18 +144,21 @@ public class GameRunner {
 
         for(int i = 1; i < g.length-1; i++){
             for(int j = 1; j < g[0].length-1; j++){
+
+
                 String[] gLoc = g[i][j].split(" ");
                 int x2 = Integer.parseInt(gLoc[0]);
                 int y2 = Integer.parseInt(gLoc[1]);
-                if(GameController.getPosition(i, j) == 1){
-                    break;
-                }
+                int[][] idk = GameController.getEntities();
+
                 if(x==x2 && y==y2){
                     grids.add(new Grid("gold"));
                     counter++;
                     grids.get(counter).setLocation(x2, y2);
                     mainPanel.add(grids.get(counter), 5);
-                }else if(Math.abs(x-x2)<=(112*speed)&&Math.abs(y-y2)<(36+(112*speed))){
+                } else
+                if(idk[i][j]==1){} else
+                if(Math.abs(x-x2)<=(112*speed)&&Math.abs(y-y2)<(36+(112*speed))){
                     grids.add(new Grid ("green"));
                     counter++;
                     grids.get(counter).setLocation(x2, y2);

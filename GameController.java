@@ -7,9 +7,13 @@ public class GameController {
         int oldY = Integer.parseInt(loc[1]);
         int speed = GameRunner.getP(c).getSpeed();
 
+        
+        
         try{
+            int[][] idk = GameController.getEntities();
             int y = Character.getNumericValue(args[2].charAt(1))*112;
             int x = (Character.getNumericValue(args[2].charAt(0))-9)*112;
+            if(idk[x/112][y/112]==1){return -3;} else
             if(Math.abs(x-oldX)>(112*speed)||Math.abs(y-oldY)>(36+112*speed)){return -2;}//return -2 if location is not valid
             if (x >= 112 && y >= 112 && x < 1344 && y < 896) {
                 GameRunner.setLocation(c, x, y+36);
@@ -23,28 +27,75 @@ public class GameController {
     }
 
     public static int[][] getEntities(){
-        int[][] ret = new int[13][9];
-        String[][] cGrid = createGrid();
-        int c1 = 0;
-        int c2 = 0;
+        int[][] returnArr = new int[13][9];
+        String[][] stringGrid = createGrid();
+        String [] playerLocations = getLocations();
 
-        for(String[] sArr: cGrid){
-            c2 = -1;
-            for(String s: sArr){
-                for(String ps: getLocations()){
-                    if(s.equals(ps)){
-                        ret[c1][c2] = 1;
-                    }
+
+        for(int i = 0; i < returnArr.length; i++){
+
+
+            for(int k = 0; k < returnArr[0].length; k++){
+
+
+                if(playerLocations[0].equals(stringGrid[i][k])){
+                    System.out.println("1: " + k + " " + i);
+                    returnArr[i][k] = 1;
+                    // System.out.println(returnArr[i][k]);
+
                 }
-                c2++;
+                if(playerLocations[1].equals(stringGrid[i][k])){
+                    System.out.println("2: " + k + " " + i);
+                    returnArr[i][k] = 1;
+
+                }
+                if(playerLocations[2].equals(stringGrid[i][k])){
+                    System.out.println("3: " + k + " " + i);
+                    returnArr[i][k] = 1;
+
+                }
+                if(playerLocations[3].equals(stringGrid[i][k])){
+                    System.out.println("4: " + k + " " + i);
+                    returnArr[i][k] = 1;
+
+                }
+
             }
-            c1++;
+
+
+
+
         }
 
 
 
 
 
+
+
+
+
+
+
+
+
+        // int[][] ret = new int[13][9];
+        // String[][] cGrid = createGrid();
+        // int c1 = 0;
+        // int c2 = 0;
+
+        // for(String[] sArr: cGrid){
+        //     c2 = -1;
+        //     for(String s: sArr){
+        //         for(String ps: getLocations()){
+        //             if(s.equals(ps)){
+        //                 ret[c1][c2] = 1;
+        //             }
+        //         }
+        //         c2++;
+        //     }
+        //     c1++;
+        // }
 
         /*
         String[][] grid = new String[13][9];
@@ -63,7 +114,7 @@ public class GameController {
             }
         }
         */
-        return ret;//b2, e5
+        return returnArr;//b2, e5
     }
 
     public static int getPosition(int posX, int posY){
