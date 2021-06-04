@@ -1,7 +1,7 @@
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
-import java.util.*;
+// import java.util.*;
 
 public class map extends JPanel implements ActionListener{
     private Image background;

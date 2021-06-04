@@ -10,6 +10,7 @@ public class GameRunner {
     private static String[][] grid;
     private static console c;
     private static JLayeredPane mainPanel;
+    private static ArrayList<Grid> grids;
 
     
 
@@ -68,20 +69,28 @@ public class GameRunner {
         } else {
             switch(c){
                 case 0:
+                    removeGrid();
                     p1.setLocation(x, y);
                     p1.setLoc(x,y);
+                    drawGrid();
                     break;
                 case 1:
+                    removeGrid();
                     p2.setLocation(x, y);
                     p2.setLoc(x,y);
+                    drawGrid();
                     break;
                 case 2:
+                    removeGrid();
                     p3.setLocation(x, y);
                     p3.setLoc(x,y);
+                    drawGrid();
                     break;
                 case 3:
+                    removeGrid();
                     p4.setLocation(x, y);
                     p4.setLoc(x,y);
+                    drawGrid();
                     break;
             }
         }
@@ -135,7 +144,7 @@ public class GameRunner {
         int x = Integer.parseInt(loc[0]);
         int y = Integer.parseInt(loc[1]);
         int speed = GameRunner.getP(console.getTurn()).getSpeed();
-        ArrayList<Grid> grids = new ArrayList<Grid>();
+        grids = new ArrayList<Grid>();
         int counter = -1;
 
         for(int i = 0; i < g.length; i++){
@@ -158,5 +167,11 @@ public class GameRunner {
         }
     }
 
-    // public static void removeGrid(){}
+    public static void removeGrid(){   
+    for(Grid g:grids)
+        {
+            g.setVisible(false);
+            mainPanel.remove(g);
+        }
+    }
 }
