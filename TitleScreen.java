@@ -1,5 +1,5 @@
 import java.awt.*;
-import java.awt.Graphics.*;
+// import java.awt.Graphics.*;
 import javax.swing.*;
 import java.awt.event.*;
 
@@ -19,7 +19,7 @@ public class TitleScreen {
         f.add(p);
         f.addKeyListener(new KeyListener() {
             public void keyTyped(KeyEvent ke) {
-                if(ke.getKeyCode() == KeyEvent.VK_LEFT){System.out.println("helllo");};
+                // if(ke.getKeyCode() == KeyEvent.VK_LEFT){System.out.println("");};
             }
             public void keyPressed(KeyEvent ke) {
                 if(ke.getKeyCode() == KeyEvent.VK_SPACE){GameRunner.main(null);};

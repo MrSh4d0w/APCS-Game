@@ -106,8 +106,6 @@ public class Enemy extends JPanel implements ActionListener {
         } catch (IOException e) {e.printStackTrace(); }
     }
     public void actionPerformed(ActionEvent e) {
-        // TODO Auto-generated method stub
-        
     }
 
 }
