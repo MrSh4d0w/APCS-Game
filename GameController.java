@@ -29,7 +29,6 @@ public class GameController {
     }
 
     public static int[][] getEntities(){
-        int c = 2;
         int[][] returnArr = new int[13][9];
         String[][] stringGrid = createGrid();
         String [] playerLocations = getPLocations();
@@ -46,7 +45,6 @@ public class GameController {
                 for(String s:enemyLocations){
                     if(s.equals(stringGrid[i][k])){
                         returnArr[i][k] = 2;
-                        c++;
                         System.out.println(i + " " + k);
                     }
                 }
@@ -115,8 +113,8 @@ public class GameController {
             int x = (Character.getNumericValue(args[1].charAt(0))-9)*112;
             if(idk[x/112][y/112]==1){return -3;} else//if there is someone at new x and y then return fail state of -3
             if (x >= 112 && y >= 112 && x < 1344 && y < 896) {//checks if within bounds
-                if(GameRunner.getP(c).getPClass().equals("MELEE")){//if the char is melee
-                    if(Math.abs(x-oldX)>112 && Math.abs(y-oldY)>112){return -2;}//if enemy is too far away from char return fail state of -2
+                if(GameRunner.getP(c).getPClass().equals("MELEE")&&Math.abs(x-oldX)>112 && Math.abs(y-oldY)>112){//if the char is melee
+                    return -2;//if enemy is too far away from char return fail state of -2
                 }
                 int rand = (int)(Math.random()*100+1);//gen random number of 1-100
                 if(rand<acc){//if random number is lower than accuracy: attack
