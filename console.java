@@ -88,6 +88,15 @@ public class console extends JPanel implements ActionListener{
                 state = GameController.attack(turn, text);
                 insert("attacked location");
                 break;
+            case "continue":
+                if(!GameController.canContinue()){insert("There are still enemies alive");} 
+                else if (Level.getCurrentLevel() == 3) { } // TODO: Implement 
+                else {
+                    Level.setCurrentLevel(Level.getCurrentLevel()+1);
+                    GameRunner.level2();
+                }
+                System.out.println(Level.getCurrentLevel());
+                break;
             case "getHP":
                 insert("" + GameRunner.getE(0).getHP());
                 break;

@@ -1,8 +1,11 @@
 import java.util.*;
 
 public class Level {
-    public Level() {
-
+    private static int currentLevel;
+    private static boolean gameOver;
+    
+    public Level(int c) {
+        currentLevel = c;
     }
     public static String[] getLevel1Cords() {
         String[] ret = new String[16]; // Yes this is inefficient, but it works.
@@ -44,5 +47,8 @@ public class Level {
         ret[15] = "1008 708";
         return ret;
     }
+
+    public static int getCurrentLevel() {return currentLevel;}
+    public static void setCurrentLevel(int i){currentLevel = i;}
 
 }

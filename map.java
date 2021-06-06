@@ -23,7 +23,9 @@ public class map extends JPanel implements ActionListener{
         System.out.println("gamer");
     }
 
-    
+    public void setMap(String img) {
+        background = new ImageIcon(img).getImage();
+    }    
 
     
 }

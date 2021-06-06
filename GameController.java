@@ -45,7 +45,6 @@ public class GameController {
                 for(String s:enemyLocations){
                     if(s.equals(stringGrid[i][k])){
                         returnArr[i][k] = 2;
-                        System.out.println(i + " " + k);
                     }
                 }
                 for(String s:level1WallLocations){
@@ -76,8 +75,12 @@ public class GameController {
     }
 
     public static String[] getELocations(){
+        int numEnemies = 3;
+        if (Level.getCurrentLevel() == 1){numEnemies = 3;}
+        if (Level.getCurrentLevel() == 2){numEnemies = 4;}
+        if (Level.getCurrentLevel() == 3){numEnemies = 5;}
         ArrayList<String> arr = new ArrayList<String>();
-        for(int i=0;i<5;i++){
+        for(int i=0;i<numEnemies;i++){
             arr.add(GameRunner.getE(i).getLoc());
         }
         String[] ret = new String[arr.size()];
@@ -159,6 +162,16 @@ public class GameController {
             }
         }
         return null;
-    } 
+    }
+    public static boolean canContinue() {
+        if(Level.getCurrentLevel() == 1) {
+            if (GameRunner.e1.getHP()==0 && GameRunner.e2.getHP()== 0 && GameRunner.e3.getHP()==0){return true;}
+        } if(Level.getCurrentLevel() == 2) {
+            if (GameRunner.e1.getHP()==0 && GameRunner.e2.getHP()== 0 && GameRunner.e3.getHP()==0 && GameRunner.e4.getHP()==0){return true;}
+        } if(Level.getCurrentLevel() == 3) {
+            if (GameRunner.e1.getHP()==0 && GameRunner.e2.getHP()== 0 && GameRunner.e3.getHP()==0&& GameRunner.e4.getHP()==0 && GameRunner.e5.getHP()==0){return true;}
+        }
+        return false;
+    }
     
 }
