@@ -24,7 +24,7 @@ public class GameRunner {
         mainPanel.setSize(1920, 1080);
         mainPanel.setLayout(null);
 
-        m = new map("images/Gameboard.png");// *Map
+        m = new map("images/Level1.png");// *Map
         m.setBounds(0, 0, 1456, 1080);
         mainPanel.add(m, -1);
 

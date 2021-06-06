@@ -33,7 +33,7 @@ public class GameController {
         String[][] stringGrid = createGrid();
         String [] playerLocations = getPLocations();
         String [] enemyLocations = getELocations();
-
+        String [] level1WallLocations = Level.getLevel1Cords();
 
         for(int i = 0; i < returnArr.length; i++){
             for(int k = 0; k < returnArr[0].length; k++){
@@ -46,6 +46,11 @@ public class GameController {
                     if(s.equals(stringGrid[i][k])){
                         returnArr[i][k] = 2;
                         System.out.println(i + " " + k);
+                    }
+                }
+                for(String s:level1WallLocations){
+                    if(s.equals(stringGrid[i][k])){
+                        returnArr[i][k] = 1;
                     }
                 }
             }

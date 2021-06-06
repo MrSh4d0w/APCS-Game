@@ -12,7 +12,7 @@ public class map extends JPanel implements ActionListener{
 
     public map(Image img) {
         this.background = img;
-        setSize(new Dimension(1456, 1008));
+        setSize(new Dimension(1456, 1080));
     }
 
     public void paintComponent(Graphics g) {
