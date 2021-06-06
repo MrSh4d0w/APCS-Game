@@ -262,6 +262,12 @@ public class GameRunner {
                     mainPanel.add(grids.get(counter), 6);
                 } else
                 if(idk[i][j]==1){} else
+                if(idk[i][j]>1){
+                    grids.add(new Grid ("red"));
+                    counter++;
+                    grids.get(counter).setLocation(x2, y2);
+                    mainPanel.add(grids.get(counter), 6);
+                } else
                 if(Math.abs(x-x2)<=(112*speed)&&Math.abs(y-y2)<(36+(112*speed))){
                     grids.add(new Grid ("green"));
                     counter++;

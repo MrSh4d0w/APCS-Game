@@ -15,7 +15,7 @@ public class GameController {
             int[][] idk = GameController.getEntities();
             int y = Character.getNumericValue(args[2].charAt(1))*112;
             int x = (Character.getNumericValue(args[2].charAt(0))-9)*112;
-            if(idk[x/112][y/112]==1){return -3;} else
+            if(idk[x/112][y/112]>0){return -3;} else
             if(Math.abs(x-oldX)>(112*speed)||Math.abs(y-oldY)>(36+112*speed)){return -2;}//return -2 if location is not valid
             if (x >= 112 && y >= 112 && x < 1344 && y < 896) {
                 GameRunner.setLocation(c, x, y+36);
@@ -74,12 +74,13 @@ public class GameController {
 
     public static String[] getELocations(){
         ArrayList<String> arr = new ArrayList<String>();
-        for(int i=0;i<1;i++){
+        for(int i=0;i<5;i++){
             arr.add(GameRunner.getE(i).getLoc());
         }
         String[] ret = new String[arr.size()];
         for(int i=0;i<arr.size();i++){
             ret[i] = arr.get(i);
+            // System.out.println(ret[i]);
         }
         return ret;
     }
