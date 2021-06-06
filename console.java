@@ -90,10 +90,28 @@ public class console extends JPanel implements ActionListener{
                 break;
             case "continue":
                 if(!GameController.canContinue()){insert("There are still enemies alive");} 
-                else if (Level.getCurrentLevel() == 3) { } // TODO: Implement 
                 else {
-                    Level.setCurrentLevel(Level.getCurrentLevel()+1);
-                    GameRunner.level2();
+                    if(Level.getCurrentLevel() == 1) {
+                        insert("Continued to level 2");
+                        Level.setCurrentLevel(Level.getCurrentLevel()+1);
+                        GameRunner.level2();
+                        GameRunner.removeGrid();
+                        GameRunner.drawGrid();
+                        break;
+                    }
+                    if(Level.getCurrentLevel() == 2) {
+                        insert("Continued to level 3");
+                        Level.setCurrentLevel(Level.getCurrentLevel()+1);
+                        GameRunner.level3();
+                        GameRunner.removeGrid();
+                        GameRunner.drawGrid();
+                        break;
+                    }
+                    if(Level.getCurrentLevel() == 3) {
+                        insert("Good job, you won!");
+                        GameRunner.win();
+                        break;
+                    }
                 }
                 System.out.println(Level.getCurrentLevel());
                 break;

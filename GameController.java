@@ -33,24 +33,20 @@ public class GameController {
         String[][] stringGrid = createGrid();
         String [] playerLocations = getPLocations();
         String [] enemyLocations = getELocations();
-        String [] level1WallLocations = Level.getLevel1Cords();
+        String [] wallLocations = null;;
 
+        if(Level.getCurrentLevel()==1){wallLocations = Level.getLevel1Cords();}
+        else if(Level.getCurrentLevel()==2){wallLocations = Level.getLevel2Cords();}
+        else if(Level.getCurrentLevel()==3){wallLocations = Level.getLevel3Cords();}
+        
         for(int i = 0; i < returnArr.length; i++){
             for(int k = 0; k < returnArr[0].length; k++){
                 for(String s:playerLocations){
-                    if(s.equals(stringGrid[i][k])){
-                        returnArr[i][k] = 1;
-                    }
-                }
-                for(String s:enemyLocations){
-                    if(s.equals(stringGrid[i][k])){
-                        returnArr[i][k] = 2;
-                    }
-                }
-                for(String s:level1WallLocations){
-                    if(s.equals(stringGrid[i][k])){
-                        returnArr[i][k] = 1;
-                    }
+                    if(s.equals(stringGrid[i][k])){returnArr[i][k] = 1;}
+                } for(String s:enemyLocations){
+                    if(s.equals(stringGrid[i][k])){returnArr[i][k] = 2;}
+                } for(String s:wallLocations){
+                    if(s.equals(stringGrid[i][k])){returnArr[i][k] = 1;}
                 }
             }
         }

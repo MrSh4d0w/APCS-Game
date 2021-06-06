@@ -105,7 +105,7 @@ public class GameRunner {
         e2.setLocation(grid[3][5]);
         e3.setLocation(grid[4][3]);
 
-        e4 = new Enemy(100, "ROBOT2", 3, 20);
+        e4 = new Enemy(0, "ROBOT2", 3, 20);
         e4.setSize(new Dimension(112, 112));
         e4.setLocation(grid[6][6]);
         e4.setOpaque(false);
@@ -113,7 +113,7 @@ public class GameRunner {
     }
 
     public static void level3() {
-        m.setMap("images/Level2.png");
+        m.setMap("images/Level3.png");
 
         p1.setLocation(grid[5][6]);
         p2.setLocation(grid[10][7]);
@@ -123,14 +123,23 @@ public class GameRunner {
         e1.setLocation(grid[1][1]);
         e2.setLocation(grid[3][5]);
         e3.setLocation(grid[4][3]);
-
-        e4 = new Enemy(100, "ROBOT2", 3, 20);
-        e4.setSize(new Dimension(112, 112));
         e4.setLocation(grid[6][6]);
-        e4.setOpaque(false);
-        mainPanel.add(e4,5);
+
+        e5 = new Enemy(0, "BOOMER", 3, 20);
+        e5.setSize(new Dimension(112, 112));
+        e5.setLocation(grid[6][7]);
+        e5.setOpaque(false);
+        mainPanel.add(e5,5);
     }
 
+    public static void win() {
+        m.setMap("images/Win.png");
+        mainPanel.moveToFront(m);
+    }
+    public static void lose() {
+        m.setMap("images/lose.png");
+        mainPanel.moveToFront(m);
+    }
 
     public static void setLocation(int c, int x, int y) {
         if (x < 112 || y < 112 || x >= 1344 || y >= 896) {
