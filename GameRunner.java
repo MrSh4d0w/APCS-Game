@@ -13,8 +13,6 @@ public class GameRunner {
     private static JLayeredPane mainPanel;
     private static ArrayList<Grid> grids;
 
-    
-
     public static void main(String[] args) {
         grid = GameController.createGrid();
 
@@ -60,11 +58,41 @@ public class GameRunner {
         mainPanel.add(p4, 4);
 
         e1 = new Enemy(100, "COP", 3, 20);
+        e2 = new Enemy(100, "COP2", 3, 20);
+        e3 = new Enemy(100, "ROBOT", 3, 20);
+        e4 = new Enemy(100, "ROBOT2", 3, 20);
+        e5 = new Enemy(100, "BOOMER", 3, 20);
+        
+
         e1.setSize(new Dimension(112, 112));
-        e1.setLocation(grid[5][3]);
+        e1.setLocation(grid[3][6]);
         e1.setOpaque(false);
         mainPanel.add(e1,5);
+<<<<<<< Updated upstream
 
+=======
+        
+        e2.setSize(new Dimension(112, 112));
+        e2.setLocation(grid[4][6]);
+        e2.setOpaque(false);
+        mainPanel.add(e2,5);
+
+        e3.setSize(new Dimension(112, 112));
+        e3.setLocation(grid[5][6]);
+        e3.setOpaque(false);
+        mainPanel.add(e3,5);
+
+        e4.setSize(new Dimension(112, 112));
+        e4.setLocation(grid[6][6]);
+        e4.setOpaque(false);
+        mainPanel.add(e4,5);
+
+        e5.setSize(new Dimension(112, 112));
+        e5.setLocation(grid[7][6]);
+        e5.setOpaque(false);
+        mainPanel.add(e5,5);
+        
+>>>>>>> Stashed changes
         GameRunner.drawGrid();
         f.getContentPane().add(mainPanel);
         f.setResizable(false);
@@ -149,18 +177,18 @@ public class GameRunner {
             case "COP":
                 e1.setLocation(x, y);
                 e1.setLoc(x,y);
-                if(e2 != null){
-                    e2.setLocation(x, y);
-                    e2.setLoc(x, y);
-                }
+                break;
+            case "COP2":
+                e2.setLocation(x, y);
+                e2.setLoc(x,y);
                 break;
             case "ROBOT":
                 e3.setLocation(x, y);
                 e3.setLoc(x,y);
-                if(e4 != null){
-                    e4.setLocation(x, y);
-                    e4.setLoc(x, y);
-                }
+                break;
+            case "ROBOT2":
+                e4.setLocation(x, y);
+                e4.setLoc(x,y);
                 break;
             case "BOOMER":
                 e5.setLocation(x, y);
@@ -243,7 +271,7 @@ public class GameRunner {
                     counter++;
                     grids.get(counter).setLocation(x2, y2);
                     mainPanel.add(grids.get(counter), 6);
-                }
+                }   
             }
         }
     }

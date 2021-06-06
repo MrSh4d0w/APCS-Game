@@ -8,6 +8,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
+import javax.swing.ImageIcon;
 import javax.swing.Timer;
 
 public class Enemy extends JPanel implements ActionListener {
@@ -62,17 +63,20 @@ public class Enemy extends JPanel implements ActionListener {
     public String getLoc(){return loc;}
 
 
-
-
-
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         switch(c) {
             case "COP":
                 g = animateCOP(g);
                 break;
+            case "COP2":
+                g = animateCOP2(g);
+                break;
             case "ROBOT": 
                 g = animateROBOT(g);
+                break;
+            case "ROBOT2":
+                g =animateROBOT2(g);
                 break;
             case "BOOMER":
                 g = animateBOOMER(g);
@@ -80,24 +84,28 @@ public class Enemy extends JPanel implements ActionListener {
         }
     }
     public Graphics animateCOP(Graphics g) {
-        getImg("Enemy1_IdleGun");
-        Image subSprite = null;
-        subSprite = img.getSubimage(spriteSheetCords[i][0], spriteSheetCords[i][1], spriteSheetCords[i][2], spriteSheetCords[i][3]);
-        g.drawImage(subSprite, 0, 0, null);
+        Image ii = new ImageIcon(this.getClass().getResource("images/Cop_Idle.gif")).getImage();
+        g.drawImage(ii, 0, 0, null);
+        return g;
+    }
+    public Graphics animateCOP2(Graphics g) {
+        Image ii = new ImageIcon(this.getClass().getResource("images/Cop_Idle.gif")).getImage();
+        g.drawImage(ii, 0, 0, null);
         return g;
     }
     public Graphics animateROBOT(Graphics g) {
-        getImg("Robot");
-        Image subSprite = null;
-        subSprite = img.getSubimage(spriteSheetCords[i][0], spriteSheetCords[i][1], spriteSheetCords[i][2], spriteSheetCords[i][3]);
-        g.drawImage(subSprite, 0, 0, null);
+        Image ii = new ImageIcon(this.getClass().getResource("images/Robot_Idle.gif")).getImage();
+        g.drawImage(ii, 0, 0, null);
+        return g;
+    }
+    public Graphics animateROBOT2(Graphics g) {
+        Image ii = new ImageIcon(this.getClass().getResource("images/Robot_Idle.gif")).getImage();
+        g.drawImage(ii, 0, 0, null);
         return g;
     }
     public Graphics animateBOOMER(Graphics g) {
-        getImg("Boomer");
-        Image subSprite = null;
-        subSprite = img.getSubimage(spriteSheetCords[i][0], spriteSheetCords[i][1], spriteSheetCords[i][2], spriteSheetCords[i][3]);
-        g.drawImage(subSprite, 0, 0, null);
+        Image ii = new ImageIcon(this.getClass().getResource("images/Boomer_Idle.gif")).getImage();
+        g.drawImage(ii, 0, 0, null);
         return g;
     }
     private void getImg(String name){

@@ -8,6 +8,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
+import javax.swing.ImageIcon;
 import javax.swing.Timer;
 
 
@@ -80,31 +81,23 @@ public class Player extends JPanel implements ActionListener{
     }
 
     public Graphics animateASSAULT(Graphics g){        
-        getImg("Character1_IdleGun_Updated");
-        Image subSprite = null;
-        subSprite = img.getSubimage(spriteSheetCords[i][0], spriteSheetCords[i][1], spriteSheetCords[i][2], spriteSheetCords[i][3]);
-        g.drawImage(subSprite, 0, 0, null);
+        Image ii = new ImageIcon(this.getClass().getResource("images/Character1_IdleGun.gif")).getImage();
+        g.drawImage(ii, 0, 0, null);
         return g;
     }
     public Graphics animateTANK(Graphics g){        
-        getImg("Character2_IdleGun_Updated");
-        Image subSprite = null;
-        subSprite = img.getSubimage(spriteSheetCords[i][0], spriteSheetCords[i][1], spriteSheetCords[i][2], spriteSheetCords[i][3]);
-        g.drawImage(subSprite, 0, 0, null);
+        Image ii = new ImageIcon(this.getClass().getResource("images/Character2_IdleGun.gif")).getImage();
+        g.drawImage(ii, 0, 0, null);
         return g;
     }
     public Graphics animateSNIPER(Graphics g){        
-        getImg("Character3_IdleGun_Updated");
-        Image subSprite = null;
-        subSprite = img.getSubimage(spriteSheetCords[i][0], spriteSheetCords[i][1], spriteSheetCords[i][2], spriteSheetCords[i][3]);
-        g.drawImage(subSprite, 0, 0, null);
+        Image ii = new ImageIcon(this.getClass().getResource("images/Character3_IdleGun.gif")).getImage();
+        g.drawImage(ii, 0, 0, null);
         return g;
     }
     public Graphics animateMELEE(Graphics g){        
-        getImg("Character4_IdleGun_Updated");
-        Image subSprite = null;
-        subSprite = img.getSubimage(spriteSheetCords[i][0], spriteSheetCords[i][1], spriteSheetCords[i][2], spriteSheetCords[i][3]);
-        g.drawImage(subSprite, 0, 0, null);
+        Image ii = new ImageIcon(this.getClass().getResource("images/Character4_IdleGun.gif")).getImage();
+        g.drawImage(ii, 0, 0, null);
         return g;
     }
     private void getImg(String name){
