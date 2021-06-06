@@ -51,7 +51,7 @@ public class Console extends JPanel implements ActionListener{
         String[] text = parser();
         
 
-        
+        int state;
         switch(text[0]){
             case "exit":
                 System.exit(0);
@@ -60,7 +60,7 @@ public class Console extends JPanel implements ActionListener{
                 System.exit(0);
                 break;
             case "move":
-                int state = GameController.setLocation(turn, text);
+                state = GameController.setLocation(turn, text);
                 if(state ==-1){break;}
                 else if(state == -2){insert("That location is too far away");break;}
                 else if(state == -3){insert("There is a player or enemy there");break;}
@@ -83,6 +83,13 @@ public class Console extends JPanel implements ActionListener{
             case "setEnemyLoc":
                 GameRunner.getE(0).setLocation(112, 112);
                 insert("Set Enemy Loc to 112, 112");
+                break;
+            case "attack":
+                state = GameController.attack(turn, text);
+                insert("attacked location");
+                break;
+            case "getHP":
+                insert("" + GameRunner.getE(0).getHP());
                 break;
             default:
                 insert("That is not a command. If you need help, type \"help\"");

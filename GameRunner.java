@@ -34,8 +34,8 @@ public class GameRunner {
         c.setBounds(1456, 0, 464, 1080);
         mainPanel.add(c, 0);
 
-        p1 = new Player(100, "ASSAULT", 3, 50);// *Player
-        p2 = new Player(100, "TANK", 2, 25);
+        p1 = new Player(100, "ASSAULT", 3, 75);// *Player
+        p2 = new Player(100, "TANK", 2, 60);
         p3 = new Player(100, "SNIPER", 4, 90);
         p4 = new Player(100, "MELEE", 5, 0);
         
