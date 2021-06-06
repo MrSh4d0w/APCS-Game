@@ -65,7 +65,6 @@ public class GameController {
         for(int i=0; i<4; i++){
             arr.add(GameRunner.getP(i).getLoc());
         }
-<<<<<<< Updated upstream
         String[] ret = new String[arr.size()];
         for(int i=0;i<arr.size();i++){
             ret[i] = arr.get(i);
@@ -76,9 +75,6 @@ public class GameController {
     public static String[] getELocations(){
         ArrayList<String> arr = new ArrayList<String>();
         for(int i=0;i<1;i++){
-=======
-        for(int i=0;i<5;i++){
->>>>>>> Stashed changes
             arr.add(GameRunner.getE(i).getLoc());
         }
         String[] ret = new String[arr.size()];

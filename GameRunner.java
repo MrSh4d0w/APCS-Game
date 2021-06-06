@@ -9,7 +9,7 @@ public class GameRunner {
     private static Player p1, p2, p3, p4;
     private static Enemy e1, e2, e3, e4, e5;
     private static String[][] grid;
-    private static Console c;
+    private static console c;
     private static JLayeredPane mainPanel;
     private static ArrayList<Grid> grids;
 
@@ -28,7 +28,7 @@ public class GameRunner {
         m.setBounds(0, 0, 1456, 1080);
         mainPanel.add(m, -1);
 
-        c = new Console(new ImageIcon("images/console_backdrop.png").getImage());// *Console
+        c = new console(new ImageIcon("images/console_backdrop.png").getImage());// *Console
         c.setBounds(1456, 0, 464, 1080);
         mainPanel.add(c, 0);
 
@@ -68,9 +68,6 @@ public class GameRunner {
         e1.setLocation(grid[3][6]);
         e1.setOpaque(false);
         mainPanel.add(e1,5);
-<<<<<<< Updated upstream
-
-=======
         
         e2.setSize(new Dimension(112, 112));
         e2.setLocation(grid[4][6]);
@@ -92,7 +89,6 @@ public class GameRunner {
         e5.setOpaque(false);
         mainPanel.add(e5,5);
         
->>>>>>> Stashed changes
         GameRunner.drawGrid();
         f.getContentPane().add(mainPanel);
         f.setResizable(false);
@@ -243,10 +239,10 @@ public class GameRunner {
 
     public static void drawGrid(){
         String[][] g = GameController.createGrid();
-        String[] loc = GameRunner.getP(Console.getTurn()).getLoc().split(" ");
+        String[] loc = GameRunner.getP(console.getTurn()).getLoc().split(" ");
         int x = Integer.parseInt(loc[0]);
         int y = Integer.parseInt(loc[1]);
-        int speed = GameRunner.getP(Console.getTurn()).getSpeed();
+        int speed = GameRunner.getP(console.getTurn()).getSpeed();
         grids = new ArrayList<Grid>();
         int counter = -1;
 

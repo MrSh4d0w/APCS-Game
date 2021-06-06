@@ -6,7 +6,7 @@ import java.io.IOException;
 // import java.util.*;
 // import java.awt.image.*;
 
-public class Console extends JPanel implements ActionListener{
+public class console extends JPanel implements ActionListener{
     private static JTextField textField;
     private Image decorations;
     private JTextArea textArea;
@@ -16,11 +16,11 @@ public class Console extends JPanel implements ActionListener{
     private Color notWhite;
     private static int turn;
 
-    public Console(String img) {
+    public console(String img) {
         this(new ImageIcon(img).getImage());
     } 
 
-    public Console(Image img) {
+    public console(Image img) {
         notBlack = new Color(20,12,28);
         notWhite = Color.WHITE;
 
