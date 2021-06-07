@@ -1,17 +1,22 @@
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
+import java.io.IOException;
 import java.util.*;
 // import java.awt.image.*;
 
 public class GameRunner {
     private static JFrame f;
     private static map m;
+    private static Level l;
     private static Player p1, p2, p3, p4;
-    private static Enemy e1, e2, e3, e4, e5;
+    public static Enemy e1, e2, e3, e4, e5;
     private static String[][] grid;
     private static console c;
     private static JLayeredPane mainPanel;
     private static ArrayList<Grid> grids;
+    private static boolean hasMoved = false;
 
     public static void main(String[] args) {
         grid = GameController.createGrid();
@@ -23,77 +28,118 @@ public class GameRunner {
         mainPanel = new JLayeredPane();
         mainPanel.setSize(1920, 1080);
         mainPanel.setLayout(null);
-
-        m = new map("images/Level1.png");// *Map
-        m.setBounds(0, 0, 1456, 1080);
-        mainPanel.add(m, -1);
-
+        
         c = new console(new ImageIcon("images/console_backdrop.png").getImage());// *Console
         c.setBounds(1456, 0, 464, 1080);
         mainPanel.add(c, 0);
 
-        p1 = new Player(100, "ASSAULT", 3, 75);// *Player
-        p2 = new Player(100, "TANK", 2, 60);
-        p3 = new Player(100, "SNIPER", 4, 90);
-        p4 = new Player(100, "MELEE", 5, 0);
-        
-        p1.setSize(new Dimension(112, 112));
-        p1.setLocation(grid[5][5]);
-        p1.setOpaque(false);
-        mainPanel.add(p1, 1);
-
-        p2.setSize(new Dimension(112, 112));
-        p2.setLocation(grid[6][5]);
-        p2.setOpaque(false);
-        mainPanel.add(p2, 2);
-
-        p3.setSize(new Dimension(112, 112));
-        p3.setLocation(grid[7][5]);
-        p3.setOpaque(false);
-        mainPanel.add(p3, 3);
-
-        p4.setSize(new Dimension(112, 112));
-        p4.setLocation(grid[8][5]);
-        p4.setOpaque(false);
-        mainPanel.add(p4, 4);
-
-        e1 = new Enemy(100, "COP", 3, 20);
-        e2 = new Enemy(100, "COP2", 3, 20);
-        e3 = new Enemy(100, "ROBOT", 3, 20);
-        e4 = new Enemy(100, "ROBOT2", 3, 20);
-        e5 = new Enemy(100, "BOOMER", 3, 20);
-        
-
-        e1.setSize(new Dimension(112, 112));
-        e1.setLocation(grid[3][6]);
-        e1.setOpaque(false);
-        mainPanel.add(e1,5);
-        
-        e2.setSize(new Dimension(112, 112));
-        e2.setLocation(grid[4][6]);
-        e2.setOpaque(false);
-        mainPanel.add(e2,5);
-
-        e3.setSize(new Dimension(112, 112));
-        e3.setLocation(grid[5][6]);
-        e3.setOpaque(false);
-        mainPanel.add(e3,5);
-
-        e4.setSize(new Dimension(112, 112));
-        e4.setLocation(grid[6][6]);
-        e4.setOpaque(false);
-        mainPanel.add(e4,5);
-
-        e5.setSize(new Dimension(112, 112));
-        e5.setLocation(grid[7][6]);
-        e5.setOpaque(false);
-        mainPanel.add(e5,5);
+        l = new Level(1);
+        level1();
         
         GameRunner.drawGrid();
         f.getContentPane().add(mainPanel);
         f.setResizable(false);
         f.setVisible(true);
         GameController.getEntities();
+    }
+
+
+    public static void level1() {
+        
+        m = new map("images/Level1.png");// *Map
+        m.setBounds(0, 0, 1456, 1080);
+        mainPanel.add(m, -1);
+
+        p1 = new Player(100, "ASSAULT", 2, 75);// *Player
+        p2 = new Player(100, "TANK", 2, 60);
+        p3 = new Player(100, "SNIPER", 2, 90);
+        p4 = new Player(100, "MELEE", 4, 0);
+        
+        p1.setSize(new Dimension(112, 112));
+        p1.setLocation(grid[10][6]);
+        p1.setOpaque(false);
+        mainPanel.add(p1, 1);
+
+        p2.setSize(new Dimension(112, 112));
+        p2.setLocation(grid[10][7]);
+        p2.setOpaque(false);
+        mainPanel.add(p2, 2);
+
+        p3.setSize(new Dimension(112, 112));
+        p3.setLocation(grid[11][6]);
+        p3.setOpaque(false);
+        mainPanel.add(p3, 3);
+
+        p4.setSize(new Dimension(112, 112));
+        p4.setLocation(grid[11][7]);
+        p4.setOpaque(false);
+        mainPanel.add(p4, 4);
+
+        e1 = new Enemy(0, "COP", 3, 20);
+        e2 = new Enemy(0, "COP2", 3, 20);
+        e3 = new Enemy(0, "ROBOT", 3, 20);       
+
+        e1.setSize(new Dimension(112, 112));
+        e1.setLocation(grid[1][1]);
+        e1.setOpaque(false);
+        mainPanel.add(e1,5);
+        
+        e2.setSize(new Dimension(112, 112));
+        e2.setLocation(grid[3][5]);
+        e2.setOpaque(false);
+        mainPanel.add(e2,5);
+
+        e3.setSize(new Dimension(112, 112));
+        e3.setLocation(grid[4][3]);
+        e3.setOpaque(false);
+        mainPanel.add(e3,5);
+    }
+
+    public static void level2() {
+        m.setMap("images/Level2.png");
+        p1.setLocation(grid[3][7]);
+        p2.setLocation(grid[2][7]);
+        p3.setLocation(grid[9][7]);
+        p4.setLocation(grid[10][7]);
+
+        e1.setLocation(grid[6][1]);
+        e2.setLocation(grid[6][4]);
+        e3.setLocation(grid[4][3]);
+
+        e4 = new Enemy(0, "ROBOT2", 3, 20);
+        e4.setSize(new Dimension(112, 112));
+        e4.setLocation(grid[8][3]);
+        e4.setOpaque(false);
+        mainPanel.add(e4,5);
+    }
+
+    public static void level3() {
+        m.setMap("images/Level3.png");
+
+        p1.setLocation(grid[10][6]);
+        p2.setLocation(grid[10][4]);
+        p3.setLocation(grid[11][1]);
+        p4.setLocation(grid[9][4]);
+
+        e1.setLocation(grid[4][1]);
+        e2.setLocation(grid[3][5]);
+        e3.setLocation(grid[4][3]);
+        e4.setLocation(grid[6][6]);
+
+        e5 = new Enemy(0, "BOOMER", 3, 20);
+        e5.setSize(new Dimension(112, 112));
+        e5.setLocation(grid[1][7]);
+        e5.setOpaque(false);
+        mainPanel.add(e5,5);
+    }
+
+    public static void win() {
+        m.setMap("images/Win.png");
+        mainPanel.moveToFront(m);
+    }
+    public static void lose() {
+        m.setMap("images/lose.png");
+        mainPanel.moveToFront(m);
     }
 
     public static void setLocation(int c, int x, int y) {
@@ -260,19 +306,20 @@ public class GameRunner {
                     counter++;
                     grids.get(counter).setLocation(x2, y2);
                     mainPanel.add(grids.get(counter), 6);
-                } else
-                if(idk[i][j]==1){} else
-                if(idk[i][j]>1){
+                } else if(idk[i][j]==1){} 
+                else if(idk[i][j]>1){
                     grids.add(new Grid ("red"));
                     counter++;
                     grids.get(counter).setLocation(x2, y2);
                     mainPanel.add(grids.get(counter), 6);
-                } else
-                if(Math.abs(x-x2)<=(112*speed)&&Math.abs(y-y2)<(36+(112*speed))){
+
+                } else if(Math.abs(x-x2)<=(112*speed)&&Math.abs(y-y2)<(36+(112*speed))) {
+                    if(hasMoved == false) {
                     grids.add(new Grid ("green"));
                     counter++;
                     grids.get(counter).setLocation(x2, y2);
                     mainPanel.add(grids.get(counter), 6);
+                    } 
                 }   
             }
         }
@@ -282,5 +329,11 @@ public class GameRunner {
             g.setVisible(false);
             mainPanel.remove(g);
         }
+    }
+    public static void setHasMoved(boolean b) {
+        hasMoved = b;
+    }
+    public static boolean getHasMoved() {
+        return hasMoved;
     }
 }
