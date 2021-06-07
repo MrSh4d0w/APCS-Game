@@ -61,7 +61,13 @@ public class Enemy extends JPanel implements ActionListener {
     public int getSpeed(){return speed;}     // returns speed
     public void setLoc(int x, int y){loc = x + " " + y;}
     public String getLoc(){return loc;}
+    public String getPos() {
+        String[] arr = loc.split(" ");
+        int x = (Integer.parseInt(arr[0]))/112;
+        int y = (Integer.parseInt(arr[1]))/112;
+        return GameController.letterParser(x) + y;
 
+    } // returns pos of enemy on the grid Ex. A1
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);

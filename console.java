@@ -76,7 +76,7 @@ public class console extends JPanel implements ActionListener{
                 if(turn==3){turn=0;}
                 else{turn++;}
                 GameRunner.setHasMoved(false);
-                insert("Turn is now: " + turn);
+                insert("Turn is now: " + (turn + 1));
                 GameRunner.removeGrid();
                 GameRunner.drawGrid();
                 break;
@@ -125,7 +125,9 @@ public class console extends JPanel implements ActionListener{
                 insert("" + GameRunner.getE(0).getHP());
                 break;
             case "info":
-                insert("Currently Selected Character's HP:");
+                insert(info());
+                // + "\nRobot2-HP: " + GameRunner.getE(3).getHP() + " Pos: " + GameRunner.getE(3).getLoc() +
+                // "\nBoomer-HP: " + GameRunner.getE(4).getHP() + " Pos: " + GameRunner.getE(4).getLoc());
                 break;
             default:
                 insert("That is not a command. If you need help, type \"help\"");
@@ -198,6 +200,22 @@ public class console extends JPanel implements ActionListener{
         }
         return false;
     }*/
+
+    private static String info() {
+        
+        String l2 = "";
+        String l3 = "";
+        if(Level.getCurrentLevel()==2 || Level.getCurrentLevel()==3){l2 = "\nRobot2-HP: " + GameRunner.getE(3).getHP() + " Pos: " + GameRunner.getE(3).getPos();}
+        if(Level.getCurrentLevel()==3){l3 = "\nBoomer-HP: " + GameRunner.getE(4).getHP() + " Pos: " + GameRunner.getE(4).getPos();}
+        
+        return "Red-HP: " + GameRunner.getP(0).getHP() + " Acc: " + GameRunner.getP(0).getAcc() + " Spd: " + GameRunner.getP(0).getSpeed() + 
+            "\nGreen-HP: " + GameRunner.getP(1).getHP() + " Acc: " + GameRunner.getP(1).getAcc() + " Spd: " + GameRunner.getP(1).getSpeed() + 
+            "\nPink-HP: " + GameRunner.getP(2).getHP() + " Acc: " + GameRunner.getP(2).getAcc() + " Spd: " + GameRunner.getP(2).getSpeed() + 
+            "\nWhite-HP: " + GameRunner.getP(3).getHP() + " Acc: " + GameRunner.getP(3).getAcc() + " Spd: " + GameRunner.getP(3).getSpeed() + '\n' +
+            "\nCop1-HP: " + GameRunner.getE(0).getHP() + " Pos: " + GameRunner.getE(0).getPos() +
+            "\nCop2-HP: " + GameRunner.getE(1).getHP() + " Pos: " + GameRunner.getE(1).getPos() +
+            "\nRobot1-HP: " + GameRunner.getE(2).getHP() + " Pos: " + GameRunner.getE(2).getPos() + l2 + l3;
+    }
 
     // private static void setTurn(int t){turn = t;}
     public static int getTurn(){return turn;}

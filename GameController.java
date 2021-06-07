@@ -170,5 +170,9 @@ public class GameController {
         }
         return false;
     }
+    public static String letterParser(int i) {
+        if(i==1){return "A";}if(i==2){return "B";}if(i==3){return "C";}if(i==4){return "D";}if(i==5){return "E";}if(i==6){return "F";}
+        if(i==7){return "G";}if(i==8){return "H";}if(i==9){return "I";}if(i==10){return"J";}if(i==11){return"K";}return "Z";
+    } 
     
 }
