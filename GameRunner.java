@@ -16,6 +16,7 @@ public class GameRunner {
     private static console c;
     private static JLayeredPane mainPanel;
     private static ArrayList<Grid> grids;
+    private static boolean hasMoved = false;
 
     public static void main(String[] args) {
         grid = GameController.createGrid();
@@ -96,18 +97,18 @@ public class GameRunner {
 
     public static void level2() {
         m.setMap("images/Level2.png");
-        p1.setLocation(grid[5][6]);
-        p2.setLocation(grid[10][7]);
-        p3.setLocation(grid[11][6]);
-        p4.setLocation(grid[11][7]);
+        p1.setLocation(grid[3][7]);
+        p2.setLocation(grid[2][7]);
+        p3.setLocation(grid[9][7]);
+        p4.setLocation(grid[10][7]);
 
-        e1.setLocation(grid[1][1]);
-        e2.setLocation(grid[3][5]);
+        e1.setLocation(grid[6][1]);
+        e2.setLocation(grid[6][4]);
         e3.setLocation(grid[4][3]);
 
         e4 = new Enemy(0, "ROBOT2", 3, 20);
         e4.setSize(new Dimension(112, 112));
-        e4.setLocation(grid[6][6]);
+        e4.setLocation(grid[8][3]);
         e4.setOpaque(false);
         mainPanel.add(e4,5);
     }
@@ -115,19 +116,19 @@ public class GameRunner {
     public static void level3() {
         m.setMap("images/Level3.png");
 
-        p1.setLocation(grid[5][6]);
-        p2.setLocation(grid[10][7]);
-        p3.setLocation(grid[11][6]);
-        p4.setLocation(grid[11][7]);
+        p1.setLocation(grid[10][6]);
+        p2.setLocation(grid[10][4]);
+        p3.setLocation(grid[11][1]);
+        p4.setLocation(grid[9][4]);
 
-        e1.setLocation(grid[1][1]);
+        e1.setLocation(grid[4][1]);
         e2.setLocation(grid[3][5]);
         e3.setLocation(grid[4][3]);
         e4.setLocation(grid[6][6]);
 
         e5 = new Enemy(0, "BOOMER", 3, 20);
         e5.setSize(new Dimension(112, 112));
-        e5.setLocation(grid[6][7]);
+        e5.setLocation(grid[1][7]);
         e5.setOpaque(false);
         mainPanel.add(e5,5);
     }
@@ -305,20 +306,20 @@ public class GameRunner {
                     counter++;
                     grids.get(counter).setLocation(x2, y2);
                     mainPanel.add(grids.get(counter), 6);
-                } else
-                if(idk[i][j]==1){} else
-                if(idk[i][j]>1){
+                } else if(idk[i][j]==1){} 
+                else if(idk[i][j]>1){
                     grids.add(new Grid ("red"));
                     counter++;
                     grids.get(counter).setLocation(x2, y2);
                     mainPanel.add(grids.get(counter), 6);
 
-                } else
-                if(Math.abs(x-x2)<=(112*speed)&&Math.abs(y-y2)<(36+(112*speed))){
+                } else if(Math.abs(x-x2)<=(112*speed)&&Math.abs(y-y2)<(36+(112*speed))) {
+                    if(hasMoved == false) {
                     grids.add(new Grid ("green"));
                     counter++;
                     grids.get(counter).setLocation(x2, y2);
                     mainPanel.add(grids.get(counter), 6);
+                    } 
                 }   
             }
         }
@@ -328,5 +329,11 @@ public class GameRunner {
             g.setVisible(false);
             mainPanel.remove(g);
         }
+    }
+    public static void setHasMoved(boolean b) {
+        hasMoved = b;
+    }
+    public static boolean getHasMoved() {
+        return hasMoved;
     }
 }

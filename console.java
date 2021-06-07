@@ -15,6 +15,7 @@ public class console extends JPanel implements ActionListener{
     private Color notBlack;
     private Color notWhite;
     private static int turn;
+    private static boolean hasMoved;
 
     public console(String img) {
         this(new ImageIcon(img).getImage());
@@ -63,13 +64,18 @@ public class console extends JPanel implements ActionListener{
                 state = GameController.setLocation(turn, text);
                 if(state ==-1){break;}
                 else if(state == -2){insert("That location is too far away");break;}
-                else if(state == -3){insert("There is a player or enemy there");break;}
+                else if(state == -3){insert("That location is obstructed");break;}
+                else if(state == -4){insert("You have already moved this character");break;}
+                GameRunner.setHasMoved(true);
+                GameRunner.removeGrid();
+                GameRunner.drawGrid();
                 insert("Moved to " + text[2]);
                 break;
             case "next":
                 if(text.length<=1 || !text[1].equalsIgnoreCase("turn")){insert("That is not a command. If you need help, type \"help\"");break;}
                 if(turn==3){turn=0;}
                 else{turn++;}
+                GameRunner.setHasMoved(false);
                 insert("Turn is now: " + turn);
                 GameRunner.removeGrid();
                 GameRunner.drawGrid();
@@ -117,6 +123,9 @@ public class console extends JPanel implements ActionListener{
                 break;
             case "getHP":
                 insert("" + GameRunner.getE(0).getHP());
+                break;
+            case "info":
+                insert("Currently Selected Character's HP:");
                 break;
             default:
                 insert("That is not a command. If you need help, type \"help\"");
@@ -176,6 +185,10 @@ public class console extends JPanel implements ActionListener{
         } catch(FontFormatException e) {
             e.printStackTrace();
         }
+    }
+
+    public static void hasMoved(boolean b) {
+        hasMoved = b;
     }
     
     /*private boolean includes(String beg,String str) {
