@@ -161,6 +161,7 @@ public class GameController {
         }
         return null;
     }
+    
     public static boolean canContinue() {
         if(Level.getCurrentLevel() == 1) {
             if (GameRunner.e1.getHP()==0 && GameRunner.e2.getHP()== 0 && GameRunner.e3.getHP()==0){return true;}
