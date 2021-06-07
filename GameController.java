@@ -119,6 +119,7 @@ public class GameController {
             int x = (Character.getNumericValue(args[1].charAt(0))-9)*112;
             if(idk[x/112][y/112]==1){return -3;} else//if there is someone at new x and y then return fail state of -3
             if (x >= 112 && y >= 112 && x < 1344 && y < 896) {//checks if within bounds
+                if(LineOfSight.doesCollide(LineOfSight.drawLine(oldX, oldY, x, y))) {return -5;}
                 if(GameRunner.getP(c).getPClass().equals("MELEE")&&Math.abs(x-oldX)>112 && Math.abs(y-oldY)>112){//if the char is melee
                     return -2;//if enemy is too far away from char return fail state of -2
                 }

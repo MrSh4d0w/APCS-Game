@@ -93,6 +93,7 @@ public class console extends JPanel implements ActionListener{
                 break;
             case "attack":
                 state = GameController.attack(turn, text);
+                if(state == -5){insert("There is something obstructing that position");break;}
                 insert("attacked location");
                 break;
             case "continue":

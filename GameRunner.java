@@ -75,9 +75,9 @@ public class GameRunner {
         p4.setOpaque(false);
         mainPanel.add(p4, 4);
 
-        e1 = new Enemy(0, "COP", 3, 20);
-        e2 = new Enemy(0, "COP2", 3, 20);
-        e3 = new Enemy(0, "ROBOT", 3, 20);       
+        e1 = new Enemy(100, "COP", 3, 20);
+        e2 = new Enemy(100, "COP2", 3, 20);
+        e3 = new Enemy(100, "ROBOT", 3, 20);       
 
         e1.setSize(new Dimension(112, 112));
         e1.setLocation(grid[1][1]);

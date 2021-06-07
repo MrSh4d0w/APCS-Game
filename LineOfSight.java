@@ -9,7 +9,7 @@ public class LineOfSight {
         System.out.println(Level.getLevel1MidCords()[0]);
     }
 
-    private static ArrayList<String> drawLine(int x1, int y1, int x2, int y2) {
+    public static ArrayList<String> drawLine(int x1, int y1, int x2, int y2) {
         // delta of exact value and rounded value of the dependent variable
         ArrayList<String> cords = new ArrayList<String>();
         int d = 0;
@@ -50,15 +50,15 @@ public class LineOfSight {
         return cords;
     }
 
-    public static void doesCollide(ArrayList<String> cords) {
+    public static boolean doesCollide(ArrayList<String> cords) {
         for (String s : cords) {
             for (int i = 0; i < 16; i++) {
                 if (s.equals(Level.getLevel1Cords()[i])) {
-                    System.out.println("hello");
+                    return true;
                 }
             }
         }
-
+        return false;
     }
 }
 
