@@ -27,6 +27,19 @@ public class Level {
         ret[15] = "1008 708";
         return ret;
     }
+    public static String[] getLevel1MidCords() {
+        String[] ret = new String[16];
+        for(int i = 0; i < 16; i++) {
+            String[] arr = getLevel1Cords()[i].split(" ");
+            int x = Integer.parseInt(arr[0]);
+            int y = Integer.parseInt(arr[1]);
+            int x2 = (x + (x+112))/2; // Midpoint of x
+            int y2 = (y + (y+112))/2; // Midpoint of y
+            ret[i] = String.valueOf(x2 + " " + y2);
+        }
+
+        return ret;
+    }
     public static String[] getLevel2Cords() {
         String[] ret = new String[20]; // Yes this is inefficient, but it works.
         ret[0] = "336 148";
