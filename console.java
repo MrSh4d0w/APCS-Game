@@ -66,6 +66,7 @@ public class console extends JPanel implements ActionListener{
                 else if(state == -2){insert("That location is too far away");break;}
                 else if(state == -3){insert("That location is obstructed");break;}
                 else if(state == -4){insert("You have already moved this character");break;}
+                else if(state == -5){insert("This location is not valid");break;}
                 GameRunner.setHasMoved(true);
                 GameRunner.removeGrid();
                 GameRunner.drawGrid();
@@ -81,7 +82,7 @@ public class console extends JPanel implements ActionListener{
                 GameRunner.drawGrid();
                 break;
             case "help":
-                insert("no");
+                insert("\nMove To - Moves the currently selected character to specified position\n\nTarget - Targets a specific position\n\nAttack - Attack position that you targeted\n\nInfo - Get stats about the currently selected character\n\nNext Turn - Goes to the next turn\n\nClose - Closes the game\n\nHelp - Displays this message\n\nClear - Clears the console");
                 break;
             case "clear":
                 textArea.setText(null);

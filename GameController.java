@@ -25,6 +25,7 @@ public class GameController {
             }
         } catch (Exception ex){
             System.out.println("NumberFormatException: " + ex);
+            return -5;
         }
         return 1;
     }
