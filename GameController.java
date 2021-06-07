@@ -171,8 +171,21 @@ public class GameController {
         return false;
     }
     public static String letterParser(int i) {
-        if(i==1){return "A";}if(i==2){return "B";}if(i==3){return "C";}if(i==4){return "D";}if(i==5){return "E";}if(i==6){return "F";}
-        if(i==7){return "G";}if(i==8){return "H";}if(i==9){return "I";}if(i==10){return"J";}if(i==11){return"K";}return "Z";
+        switch(i){
+            case 1:return "A";
+            case 2:return "B";
+            case 3:return "C";
+            case 4:return "D";
+            case 5:return "E";
+            case 6:return "F";
+            case 7:return "G";
+            case 8:return "H";
+            case 9:return "I";
+            case 10:return "J";
+            case 11:return "K";
+            case 12:return "L";
+            default:return null;
+        }
     } 
     
 }

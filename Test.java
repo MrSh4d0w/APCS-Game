@@ -8,14 +8,14 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
-import javax.swing.Timer;
+// import javax.swing.Timer;
 import javax.swing.ImageIcon;
 import java.awt.Image;
-import javax.imageio.ImageIO;
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.io.File;
+// import javax.imageio.ImageIO;
+// import java.io.IOException;
+// import java.net.MalformedURLException;
+// import java.net.URL;
+// import java.io.File;
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
 
@@ -23,18 +23,18 @@ public class Test extends Thread {
     private boolean isRunning = true;
     private Canvas canvas;
     private BufferStrategy strategy;
-    private BufferedImage background, img;
+    private BufferedImage background;// img;
     private Graphics2D backgroundGraphics;
     private Graphics2D graphics;
     private JFrame frame;
     private int width = 1920;
     private int height = 1080;
     private int scale = 1;
-    private int i = 0;
+    // private int i = 0;
     private GraphicsConfiguration config = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().getDefaultConfiguration();
-    private final int[][] spriteSheetCords = { { 0, 0, 112, 112 }, { 112, 0, 112, 112 }, { 224, 0, 112, 112 },
-                    { 336, 0, 112, 112 }, { 448, 0, 112, 112 }, { 560, 0, 112, 112 }, { 672, 0, 112, 112 },
-                    { 784, 0, 112, 112 } };
+    // private final int[][] spriteSheetCords = { { 0, 0, 112, 112 }, { 112, 0, 112, 112 }, { 224, 0, 112, 112 },
+    //                 { 336, 0, 112, 112 }, { 448, 0, 112, 112 }, { 560, 0, 112, 112 }, { 672, 0, 112, 112 },
+    //                 { 784, 0, 112, 112 } };
 
     // create a hardware accelerated image
     public final BufferedImage create(final int width, final int height, final boolean alpha) {
@@ -100,7 +100,7 @@ public class Test extends Thread {
     }
 
     public void run() {
-        int num = 0;
+        // int num = 0;
         backgroundGraphics = (Graphics2D) background.getGraphics();
         long fpsWait = (long) (1.0 / 30 * 1000);
         main: while (isRunning) {
@@ -147,7 +147,7 @@ public class Test extends Thread {
 
     }
 
-    public static void main(final String args[]) {
+    public static void main(final String[] args) {
         new Test();
     }
 

@@ -1,8 +1,8 @@
-import java.util.*;
+// import java.util.*;
 
 public class Level {
     private static int currentLevel;
-    private static boolean gameOver;
+    // private static boolean gameOver;
     
     public Level(int c) {
         currentLevel = c;

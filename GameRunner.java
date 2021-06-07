@@ -1,8 +1,8 @@
-import javax.imageio.ImageIO;
+// import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.io.File;
-import java.io.IOException;
+// import java.io.File;
+// import java.io.IOException;
 import java.util.*;
 // import java.awt.image.*;
 
@@ -314,7 +314,7 @@ public class GameRunner {
                     mainPanel.add(grids.get(counter), 6);
 
                 } else if(Math.abs(x-x2)<=(112*speed)&&Math.abs(y-y2)<(36+(112*speed))) {
-                    if(hasMoved == false) {
+                    if(!hasMoved) {
                     grids.add(new Grid ("green"));
                     counter++;
                     grids.get(counter).setLocation(x2, y2);
