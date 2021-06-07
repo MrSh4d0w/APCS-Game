@@ -22,8 +22,7 @@ public class Tutorial {
                 // if(ke.getKeyCode() == KeyEvent.VK_LEFT){System.out.println("");};
             }
             public void keyPressed(KeyEvent ke) {
-                if(ke.getKeyCode() == KeyEvent.VK_SPACE){GameRunner.main(null);};
-                f.setVisible(false);
+                if(ke.getKeyCode() == KeyEvent.VK_SPACE){GameRunner.main(null);f.setVisible(false);};
             }
             public void keyReleased(KeyEvent ke) {}
         });
