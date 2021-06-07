@@ -161,6 +161,21 @@ public class GameController {
         }
         return null;
     }
+
+    public static Player playerAt(int x, int y){
+        int[][] totalGrid = GameController.getEntities();
+        for(int i=0;i<totalGrid.length;i++){
+            for(int k=0;k<totalGrid[0].length;k++){
+                int x2 = (i*112);
+                int y2 = (k*112+36);
+
+                if((x2==x) && (y2==y) && totalGrid[i][k]==1){
+                    return GameRunner.getP(0);//totalGrid[i][k]-2
+                }
+            }
+        }
+        return null;
+    }
     
     public static boolean canContinue() {
         if(Level.getCurrentLevel() == 1) {
