@@ -12,18 +12,31 @@ public class EnemyController {
         if(Math.abs(enemyX-playerX)<=112 && Math.abs(enemyY-playerY)<=112){
             boomerAttack();
         } else {
-            if(enemyY-playerY>0){}//move right
-            else if(enemyY-playerY<0){}//move left
-            else if(enemyX-playerX>0){}//move down
-            else {}//move up
+            if(enemyY-playerY>0){GameRunner.getE(c).setLocation(enemyX+112, enemyY);}//move right
+            else if(enemyY-playerY<0){GameRunner.getE(c).setLocation(enemyX-112, enemyY);}//move left
+            else if(enemyX-playerX>0){GameRunner.getE(c).setLocation(enemyX, enemyY+112);}//move down
+            else {GameRunner.getE(c).setLocation(enemyX, enemyY-112);}//move up
         }
 
-        System.out.println(playerX + " " + playerY + " " + enemyX + " " + enemyY);
+        // System.out.println(playerX + " " + playerY + " " + enemyX + " " + enemyY);
    //move to closest player's y pos then x pos then blow up when 1 square away
     }
     public static void boomerAttack(){}
 
-    public static void copAction(){
+    public static void copAction(int c){
+        String[] enemyLoc = GameRunner.getE(c).getLoc().split(" ");
+        enemyX = Integer.parseInt(enemyLoc[0]);
+        enemyY = Integer.parseInt(enemyLoc[1]);
+        getClosestPlayer();
+
+        if(Math.abs(enemyX-playerX)<=112*3 && Math.abs(enemyY-playerY)<=112*3){
+            if(enemyY-playerY<0){GameRunner.getE(c).setLocation(enemyX+112, enemyY);}//move right
+            else if(enemyY-playerY>0){GameRunner.getE(c).setLocation(enemyX-112, enemyY);}//move left
+            else if(enemyX-playerX<0){GameRunner.getE(c).setLocation(enemyX, enemyY+112);}//move down
+            else {GameRunner.getE(c).setLocation(enemyX, enemyY-112);}//move up
+        } else {
+            copAttack();
+        }
    //stay x grids away from player and shoot
     }
     public static void copAttack(){}
