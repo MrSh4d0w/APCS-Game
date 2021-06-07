@@ -3,22 +3,33 @@ import java.util.ArrayList;
 public class EnemyController {
     private static int playerX, playerY, enemyX, enemyY;
 
-    public static void moveBoomer(int c){
+    public static void boomerAction(int c){
         String[] enemyLoc = GameRunner.getE(c).getLoc().split(" ");
         enemyX = Integer.parseInt(enemyLoc[0]);
         enemyY = Integer.parseInt(enemyLoc[1]);
         getClosestPlayer();
+
+        if(Math.abs(enemyX-playerX)<=112 && Math.abs(enemyY-playerY)<=112){
+            boomerAttack();
+        } else {
+            if(enemyY-playerY>0){}//move right
+            else if(enemyY-playerY<0){}//move left
+            else if(enemyX-playerX>0){}//move down
+            else {}//move up
+        }
+
         System.out.println(playerX + " " + playerY + " " + enemyX + " " + enemyY);
    //move to closest player's y pos then x pos then blow up when 1 square away
     }
+    public static void boomerAttack(){}
 
-    public static void moveCop(){
+    public static void copAction(){
    //stay x grids away from player and shoot
     }
+    public static void copAttack(){}
 
-    public static void moveRobot(){
-   //attack if in sight of player, else do nothing
-    }
+    public static void robotAction(){robotAttack();}
+    public static void robotAttack(){}
 
     public static void getClosestPlayer(){
         ArrayList<Integer> pLocs = new ArrayList<Integer>();
