@@ -3,9 +3,9 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
 
-public class TitleScreen {
+public class Tutorial {
     
-    private static Image img = new ImageIcon("images/Titlescreen.png").getImage();
+    private static Image img = new ImageIcon("images/Tutorial.png").getImage();
 
     public static void main(String[] args) {
         JFrame f = new JFrame();
@@ -22,11 +22,13 @@ public class TitleScreen {
                 // if(ke.getKeyCode() == KeyEvent.VK_LEFT){System.out.println("");};
             }
             public void keyPressed(KeyEvent ke) {
-                if(ke.getKeyCode() == KeyEvent.VK_SPACE){Tutorial.main(null);};
+                if(ke.getKeyCode() == KeyEvent.VK_SPACE){GameRunner.main(null);};
                 f.setVisible(false);
             }
             public void keyReleased(KeyEvent ke) {}
         });
         f.setVisible(true);
     }
+
+    
 }
