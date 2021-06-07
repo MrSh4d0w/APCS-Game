@@ -21,7 +21,6 @@ public class EnemyController {
     }
 
     public static void getClosestPlayer(){
-        int[][] entities = GameController.getEntities();
         ArrayList<Integer> pLocs = new ArrayList<Integer>();
         String[] playerLocations = GameController.getPLocations();
         for(int i=0; i<playerLocations.length;i++){
