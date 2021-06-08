@@ -33,7 +33,7 @@ public class EnemyController {
             if(enemyY-playerY<0){
                 GameController.setLocationE(c, enemyX, enemyY+112);}//move right
             else if(enemyY-playerY>0){
-                GameController.setLocationE(c, enemyX, enemyY+112);}//move left
+                GameController.setLocationE(c, enemyX, enemyY-112);}//move left
             if(enemyX-playerX<0){
                 GameController.setLocationE(c, enemyX-112, enemyY);}//move down
             else {GameController.setLocationE(c, enemyX+112, enemyY);}//move up
