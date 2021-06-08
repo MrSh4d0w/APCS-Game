@@ -16,7 +16,6 @@ public class GameRunner {
     private static console c;
     private static JLayeredPane mainPanel;
     private static ArrayList<Grid> grids;
-    private static boolean hasMoved = false;
 
     public static void main(String[] args) {
         grid = GameController.createGrid();
@@ -35,6 +34,8 @@ public class GameRunner {
 
         l = new Level(1);
         level1();
+        console.setHasMoved(false);
+        console.setHasAttacked(false);
         
         GameRunner.drawGrid();
         f.getContentPane().add(mainPanel);
@@ -314,7 +315,7 @@ public class GameRunner {
                     mainPanel.add(grids.get(counter), 6);
 
                 } else if(Math.abs(x-x2)<=(112*speed)&&Math.abs(y-y2)<(36+(112*speed))) {
-                    if(!hasMoved) {
+                    if(!console.getHasMoved()) {
                     grids.add(new Grid ("green"));
                     counter++;
                     grids.get(counter).setLocation(x2, y2);
@@ -329,11 +330,5 @@ public class GameRunner {
             g.setVisible(false);
             mainPanel.remove(g);
         }
-    }
-    public static void setHasMoved(boolean b) {
-        hasMoved = b;
-    }
-    public static boolean getHasMoved() {
-        return hasMoved;
     }
 }

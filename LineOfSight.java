@@ -1,40 +1,24 @@
 import java.util.*;
 
 public class LineOfSight {
-
     public static boolean canAttack(int startX, int startY, int endX, int endY) {
         ArrayList<String> list = drawLine((startX/112)-1, (startY/112)-1, (endX/112)-1, (endY/112)-1);
-        if(Level.getCurrentLevel() == 1){String[] levelPositions = Level.getLevel1Pos();}
-        if(Level.getCurrentLevel() == 2){String[] levelPositions = Level.getLevel2Pos();}
-        if(Level.getCurrentLevel() == 3){String[] levelPositions = Level.getLevel3Pos();}
+        String[] levelPositions = null;
+
+        if(Level.getCurrentLevel() == 1){levelPositions = Level.getLevel1Pos();}
+        if(Level.getCurrentLevel() == 2){levelPositions = Level.getLevel2Pos();}
+        if(Level.getCurrentLevel() == 3){levelPositions = Level.getLevel3Pos();}
         
-        String[] levelPositions = Level.getLevel1Pos();
         String[] linePos = new String[list.size()];
         for (int i = 0; i < list.size(); i++) {
             linePos[i] = list.get(i);
         }
         for(int i = 0; i < levelPositions.length; i++) {
             for(int f = 0; f < linePos.length-1; f++) {
-                if (levelPositions[i].equals(linePos[f])) {
-                    return false;
-                }
+                if (levelPositions[i].equals(linePos[f])) {return false;}
             }   
         }
         return true;
-        
-
-        /* ArrayList<String> list = drawLine((startX/112)-1, (startY/112)-1, (endX/112)-1, (endY/112)-1);      
-        String[][] level1Pos = Level.getLevel1Pos();
-        System.out.println(level1Pos[7][4]);
-        for(int i = 0; i < list.size(); i++) {
-            String[] arr = list.get(i).split(" ");
-            int x = Integer.parseInt(arr[i]);
-            int y = Integer.parseInt(arr[i+1]);
-            if(level1Pos[x][y] == "wall") {
-                return false;
-            } 
-        }        
-        return true; */
     } 
     
     public static ArrayList<String> drawLine(int x1, int y1, int x2, int y2) {
@@ -77,29 +61,18 @@ public class LineOfSight {
         }
         return cords;
     }
-
-    // public static boolean isObstructed(ArrayList<String> lineCords) {
-    //     for (String s : lineCords) {
-    //         for (int i = 0; i < 16; i++) {
-    //             if (s.equals(Level.getLevel1Cords()[i])) {
-    //                 return true;
-    //             }
-    //             if (s.equals(Level.getLevel1MidCords()[i])) {
-    //                 return true;
-    //             }
-    //             System.out.println(Level.getLevel1MidCords()[i]);
-    //         }
-    //     }
-    //     return false;
-    // }
 }
 
 /*
-e1  null null wall null null null null null null null
-wall wall null wall null null null null null null null 
-null null null e3   null null wall wall wall null null
-null wall null wall null null null null wall null null
-null wall e2   wall null null null p1   wall null wall
-null wall null null null null null null wall null p3
-null null null null null null null null null p2   p4
+e1wallnullnullnullnullnull
+nullwallnullwallwallwallnull
+nullnullnullnulle2nullnull
+wallwalle3wallwallnullnull
+nullnullnullnullnullnullnull
+nullnullnullnullnullnullnull
+nullnullwallnullnullnullnull
+nullnullwallnullnullnullnull
+nullnullwallwallwallwallnull
+nullnullnullnullnullp1p2
+nullnullnullnullwallp3p4
  */

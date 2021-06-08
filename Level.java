@@ -28,15 +28,15 @@ public class Level {
         return ret;
     }
     public static String[] getLevel1Pos() {
-        String[][] ret2d = new String[11][7];
         String[] ret = new String[16];  
-        for(int i = 0; i < 16; i++) {
+        for(int i = 0; i < 16; i++) { // Size of ret and conditional need to be the same as number of walls
             String[] arr = getLevel1Cords()[i].split(" "); // wall
             int oldx = (Integer.parseInt(arr[0]))/112;
             int oldy = (Integer.parseInt(arr[1]))/112;
             ret[i] = (oldx-1) + " " + (oldy-1);
         }
-        /* for(int i = 0; i < 4; i++) {
+        return ret;
+        /* for(int i = 0; i < 4; i++) { // Leave if needed for later
             String[] arr = GameRunner.getP(i).getLoc().split(" ");
             int oldx = (Integer.parseInt(arr[0]))/112;
             int oldy = (Integer.parseInt(arr[1]))/112;
@@ -50,7 +50,6 @@ public class Level {
             ret2d[oldx-1][oldy-1] = Level.getEnemy(i);
             ret[i+20] = (oldx-1) + " " + (oldy-1);
         } */
-        return ret;
     }
     public static String[] getLevel2Cords() {
         String[] ret = new String[20]; // Yes this is inefficient, but it works.
@@ -77,9 +76,8 @@ public class Level {
         return ret;
     }
     public static String[] getLevel2Pos() {
-        String[][] ret2d = new String[11][7];
         String[] ret = new String[20];  
-        for(int i = 0; i < 20; i++) {
+        for(int i = 0; i < 20; i++) { // Size of ret and conditional need to be the same as number of walls
             String[] arr = getLevel2Cords()[i].split(" "); // wall
             int oldx = (Integer.parseInt(arr[0]))/112;
             int oldy = (Integer.parseInt(arr[1]))/112;
@@ -103,9 +101,8 @@ public class Level {
         return ret;
     }
     public static String[] getLevel3Pos() {
-        String[][] ret2d = new String[11][7];
         String[] ret = new String[11];  
-        for(int i = 0; i < 20; i++) {
+        for(int i = 0; i < 11; i++) { // Size of ret and conditional need to be the same as number of walls
             String[] arr = getLevel3Cords()[i].split(" "); // wall
             int oldx = (Integer.parseInt(arr[0]))/112;
             int oldy = (Integer.parseInt(arr[1]))/112;
@@ -117,33 +114,22 @@ public class Level {
     public static int getCurrentLevel() {return currentLevel;}
     public static void setCurrentLevel(int i){currentLevel = i;}
 
-    private static String getPlayer(int i) {
+    private static String getPlayer(int i) { // Leave if needed for later
         switch(i) {
-            case 0:
-                return "p1";
-            case 1:
-                return "p2";
-            case 2:
-                return "p3";
-            case 3:
-                return "p4";
-        }
-        return "p0";
+            case 0:return "p1";
+            case 1:return "p2";
+            case 2:return "p3";
+            case 3:return "p4";
+        } return "p0";
     }
-    private static String getEnemy(int i) {
+    private static String getEnemy(int i) { // Leave if needed for later
         switch(i) {
-            case 0:
-                return "e1";
-            case 1:
-                return "e2";
-            case 2:
-                return "e3";
-            case 3:
-                return "e4";
-            case 4:
-                return "e5";
-        }
-        return "e0";
+            case 0:return "e1";
+            case 1:return "e2";
+            case 2:return "e3";
+            case 3:return "e4";
+            case 4:return "e5";
+        } return "e0";
     }
 
     public static void printThing() {
@@ -168,6 +154,5 @@ null null wall null null null null
 null null wall null null null null
 null null wall wall wall wall null
 null null null null null null null
-null nullnullnull wall nullnull
-
+null null null null wall null null
 */
