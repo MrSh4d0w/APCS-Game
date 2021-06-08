@@ -12,10 +12,10 @@ public class EnemyController {
         if(Math.abs(enemyX-playerX)<=112 && Math.abs(enemyY-playerY)<=112){
             boomerAttack();
         } else {
-            if(enemyY-playerY>0){GameController.setLocation(c, enemyX, (enemyY+112));}
-            else if(enemyY-playerY<0){GameController.setLocation(c, enemyX, enemyY-112);}//move left
-            else if(enemyX-playerX>0){GameController.setLocation(c, enemyX+112, enemyY);}//move down
-            else {GameController.setLocation(c, enemyX-112, enemyY);}//move up
+            if(enemyY-playerY>0){GameController.setLocationE(c, enemyX, (enemyY+112));}
+            else if(enemyY-playerY<0){GameController.setLocationE(c, enemyX, enemyY-112);}//move left
+            else if(enemyX-playerX>0){GameController.setLocationE(c, enemyX+112, enemyY);}//move down
+            else {GameController.setLocationE(c, enemyX-112, enemyY);}//move up
         }
 
         // System.out.println(playerX + " " + playerY + " " + enemyX + " " + enemyY);
@@ -30,10 +30,10 @@ public class EnemyController {
         getClosestPlayer();
 
         if(Math.abs(enemyX-playerX)<=112*3 && Math.abs(enemyY-playerY)<=112*3){
-            if(enemyY-playerY<0){GameController.setLocation(c, enemyX, enemyY+112);}//move right
-            else if(enemyY-playerY>0){GameController.setLocation(c, enemyX, enemyY+112);}//move left
-            else if(enemyX-playerX<0){GameController.setLocation(c, enemyX-112, enemyY);}//move down
-            else {GameController.setLocation(c, enemyX-112, enemyY);}//move up
+            if(enemyY-playerY<0){GameController.setLocationE(c, enemyX, enemyY+112);}//move right
+            if(enemyY-playerY>0){GameController.setLocationE(c, enemyX, enemyY+112);}//move left
+            if(enemyX-playerX<0){GameController.setLocationE(c, enemyX-112, enemyY);}//move down
+            {GameController.setLocationE(c, enemyX-112, enemyY);}//move up
         }
         copAttack();
    //stay x grids away from player and shoot

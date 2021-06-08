@@ -134,7 +134,7 @@ public class console extends JPanel implements ActionListener{
             case "moveEnemies":
                 EnemyController.boomerAction(1);
                 EnemyController.copAction(1);
-                insert("gamer")
+                insert("gamer");
                 break;
             default:
                 insert("That is not a command. If you need help, type \"help\"");

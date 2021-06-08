@@ -30,11 +30,11 @@ public class GameController {
         return 1;
     }
 
-    public static int setLocation(int c, int x, int y) {
-        String[] loc = GameRunner.getP(c).getLoc().split(" ");
+    public static int setLocationE(int c, int x, int y) {
+        String[] loc = GameRunner.getE(c).getLoc().split(" ");
         int oldX = Integer.parseInt(loc[0]);
         int oldY = Integer.parseInt(loc[1]);
-        int speed = GameRunner.getP(c).getSpeed();
+        int speed = GameRunner.getE(c).getSpeed();
 
         try{
             int[][] idk = GameController.getEntities();
@@ -42,7 +42,7 @@ public class GameController {
             if(Math.abs(x-oldX)>(112*speed)||Math.abs(y-oldY)>(36+112*speed)){return -2;}//return -2 if location is not valid
             if(console.getHasMoved()){return -4;}
             if (x >= 112 && y >= 112 && x < 1344 && y < 896) {
-                GameRunner.setLocation(c, x, y+36);
+                GameRunner.setLocationE(c, x, y);
                 GameRunner.removeGrid();
                 GameRunner.drawGrid();
             }
