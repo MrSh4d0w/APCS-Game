@@ -34,9 +34,8 @@ public class EnemyController {
             else if(enemyY-playerY>0){GameController.setLocation(c, enemyX, enemyY+112);}//move left
             else if(enemyX-playerX<0){GameController.setLocation(c, enemyX-112, enemyY);}//move down
             else {GameController.setLocation(c, enemyX-112, enemyY);}//move up
-        } else {
-            copAttack();
         }
+        copAttack();
    //stay x grids away from player and shoot
     }
     public static void copAttack(){}
