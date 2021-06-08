@@ -27,17 +27,29 @@ public class Level {
         ret[15] = "1008 708";
         return ret;
     }
-    public static String[] getLevel1MidCords() {
-        String[] ret = new String[16];
+    public static String[] getLevel1Pos() {
+        String[][] ret2d = new String[11][7];
+        String[] ret = new String[16];  
         for(int i = 0; i < 16; i++) {
-            String[] arr = getLevel1Cords()[i].split(" ");
-            int x = Integer.parseInt(arr[0]);
-            int y = Integer.parseInt(arr[1]);
-            int x2 = (x + (x+112))/2; // Midpoint of x
-            int y2 = (y + (y+112))/2; // Midpoint of y
-            ret[i] = String.valueOf(x2 + " " + y2);
+            String[] arr = getLevel1Cords()[i].split(" "); // wall
+            int oldx = (Integer.parseInt(arr[0]))/112;
+            int oldy = (Integer.parseInt(arr[1]))/112;
+            ret[i] = (oldx-1) + " " + (oldy-1);
         }
-
+        /* for(int i = 0; i < 4; i++) {
+            String[] arr = GameRunner.getP(i).getLoc().split(" ");
+            int oldx = (Integer.parseInt(arr[0]))/112;
+            int oldy = (Integer.parseInt(arr[1]))/112;
+            ret2d[oldx-1][oldy-1] = Level.getPlayer(i);
+            ret[i+16] = (oldx-1) + " " + (oldy-1);
+        }
+        for(int i = 0; i < 3; i++) {
+            String[] arr = GameRunner.getE(i).getLoc().split(" ");
+            int oldx = (Integer.parseInt(arr[0]))/112;
+            int oldy = (Integer.parseInt(arr[1]))/112;
+            ret2d[oldx-1][oldy-1] = Level.getEnemy(i);
+            ret[i+20] = (oldx-1) + " " + (oldy-1);
+        } */
         return ret;
     }
     public static String[] getLevel2Cords() {
@@ -64,6 +76,17 @@ public class Level {
         ret[19] = "1232 372";
         return ret;
     }
+    public static String[] getLevel2Pos() {
+        String[][] ret2d = new String[11][7];
+        String[] ret = new String[20];  
+        for(int i = 0; i < 20; i++) {
+            String[] arr = getLevel2Cords()[i].split(" "); // wall
+            int oldx = (Integer.parseInt(arr[0]))/112;
+            int oldy = (Integer.parseInt(arr[1]))/112;
+            ret[i] = (oldx-1) + " " + (oldy-1);
+        }
+        return ret;
+    }
     public static String[] getLevel3Cords() {
         String[] ret = new String[11]; // Yes this is inefficient, but it works.
         ret[0] = "224 148";
@@ -79,8 +102,72 @@ public class Level {
         ret[10] = "784 820";
         return ret;
     }
+    public static String[] getLevel3Pos() {
+        String[][] ret2d = new String[11][7];
+        String[] ret = new String[11];  
+        for(int i = 0; i < 20; i++) {
+            String[] arr = getLevel3Cords()[i].split(" "); // wall
+            int oldx = (Integer.parseInt(arr[0]))/112;
+            int oldy = (Integer.parseInt(arr[1]))/112;
+            ret[i] = (oldx-1) + " " + (oldy-1);
+        }
+        return ret;
+    }
     
     public static int getCurrentLevel() {return currentLevel;}
     public static void setCurrentLevel(int i){currentLevel = i;}
 
+    private static String getPlayer(int i) {
+        switch(i) {
+            case 0:
+                return "p1";
+            case 1:
+                return "p2";
+            case 2:
+                return "p3";
+            case 3:
+                return "p4";
+        }
+        return "p0";
+    }
+    private static String getEnemy(int i) {
+        switch(i) {
+            case 0:
+                return "e1";
+            case 1:
+                return "e2";
+            case 2:
+                return "e3";
+            case 3:
+                return "e4";
+            case 4:
+                return "e5";
+        }
+        return "e0";
+    }
+
+    public static void printThing() {
+        for(int i = 0; i < Level.getLevel1Pos().length; i++) {
+            System.out.print(Level.getLevel1Pos()[i] + ", ");
+            //for (int k = 0; k < Level.getLevel1Pos()[0].length; k++) {
+            //}
+            //System.out.println();
+        }
+    } 
 }
+
+
+/* 
+null wall null null null null null
+null wall null wall wall wall null
+null null null null null null null
+wall wall null wall wall null null
+null null null null null null null
+null null null null null null null
+null null wall null null null null
+null null wall null null null null
+null null wall wall wall wall null
+null null null null null null null
+null nullnullnull wall nullnull
+
+*/

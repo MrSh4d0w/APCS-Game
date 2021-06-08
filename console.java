@@ -93,8 +93,9 @@ public class console extends JPanel implements ActionListener{
                 break;
             case "attack":
                 state = GameController.attack(turn, text);
-                if(state == -5){insert("There is something obstructing that position");break;}
-                insert("attacked location");
+                if(state == -5){insert("Something is obstructing that position");break;}
+                Level.printThing();
+                insert("Attacked " + text[1]);
                 break;
             case "continue":
                 if(!GameController.canContinue()){insert("There are still enemies alive");} 
@@ -122,9 +123,6 @@ public class console extends JPanel implements ActionListener{
                     }
                 }
                 System.out.println(Level.getCurrentLevel());
-                break;
-            case "getHP":
-                insert("" + GameRunner.getE(0).getHP());
                 break;
             case "info":
                 insert(info());
