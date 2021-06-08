@@ -40,7 +40,7 @@ public class GameController {
             int[][] idk = GameController.getEntities();
             if(idk[x/112][y/112]>0){return -3;} else
             if(Math.abs(x-oldX)>(112*speed)||Math.abs(y-oldY)>(36+112*speed)){return -2;}//return -2 if location is not valid
-            if(console.getHasMoved()){return -4;}
+            
             if (x >= 112 && y >= 112 && x < 1344 && y < 896) {
                 GameRunner.setLocationE(c, x, y);
                 GameRunner.removeGrid();

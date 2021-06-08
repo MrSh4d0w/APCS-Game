@@ -30,10 +30,13 @@ public class EnemyController {
         getClosestPlayer();
 
         if(Math.abs(enemyX-playerX)<=112*3 && Math.abs(enemyY-playerY)<=112*3){
-            if(enemyY-playerY<0){GameController.setLocationE(c, enemyX, enemyY+112);}//move right
-            if(enemyY-playerY>0){GameController.setLocationE(c, enemyX, enemyY+112);}//move left
-            if(enemyX-playerX<0){GameController.setLocationE(c, enemyX-112, enemyY);}//move down
-            {GameController.setLocationE(c, enemyX-112, enemyY);}//move up
+            if(enemyY-playerY<0){
+                GameController.setLocationE(c, enemyX, enemyY+112);}//move right
+            else if(enemyY-playerY>0){
+                GameController.setLocationE(c, enemyX, enemyY+112);}//move left
+            if(enemyX-playerX<0){
+                GameController.setLocationE(c, enemyX-112, enemyY);}//move down
+            else {GameController.setLocationE(c, enemyX+112, enemyY);}//move up
         }
         copAttack();
    //stay x grids away from player and shoot
@@ -55,7 +58,7 @@ public class EnemyController {
             pLocs.add(y);
         }
 
-        int yMin = 0;
+        int yMin = Integer.MAX_VALUE;
         int yIndex = 0;
         for(int i=1; i<8;i+=2){
             if(Math.abs(pLocs.get(i)-enemyY) < yMin){
@@ -63,7 +66,7 @@ public class EnemyController {
                 yIndex = i;
             }
         }
-        int xMin = 0;
+        int xMin = Integer.MAX_VALUE;
         int xIndex = 0;
         for(int i=0; i<8;i+=2){
             if(Math.abs(pLocs.get(i)-enemyX) < xMin){
@@ -84,5 +87,7 @@ public class EnemyController {
             playerX = pLocs.get(xIndex);
             playerY = pLocs.get(xIndex+1);
         }
+
+        System.out.println(playerX + " " + playerY + " " + enemyX + " " + enemyY);
     }
 }
