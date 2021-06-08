@@ -45,8 +45,8 @@ public class GameController {
             for(int k = 0; k < returnArr[0].length; k++){
                 for(String s:playerLocations){
                     if(s.equals(stringGrid[i][k])){returnArr[i][k] = 1;}
-                } for(String s:enemyLocations){
-                    if(s.equals(stringGrid[i][k])){returnArr[i][k] = 2;}
+                } for(int j=0; j<enemyLocations.length;j++){
+                    if(enemyLocations[j].substring(2).equals(stringGrid[i][k])){returnArr[i][k] = j+2;}
                 } for(String s:wallLocations){
                     if(s.equals(stringGrid[i][k])){returnArr[i][k] = 1;}
                 }
@@ -79,7 +79,7 @@ public class GameController {
         if (Level.getCurrentLevel() == 3){numEnemies = 5;}
         ArrayList<String> arr = new ArrayList<String>();
         for(int i=0;i<numEnemies;i++){
-            arr.add(GameRunner.getE(i).getLoc());
+            arr.add((i+1) + " " + GameRunner.getE(i).getLoc());
         }
         String[] ret = new String[arr.size()];
         for(int i=0;i<arr.size();i++){
@@ -157,7 +157,7 @@ public class GameController {
                 int y2 = (k*112+36);
 
                 if((x2==x) && (y2==y) && totalGrid[i][k]>1){
-                    return GameRunner.getE(0);//totalGrid[i][k]-2
+                    return GameRunner.getE(totalGrid[i][k]-2);//totalGrid[i][k]-2
                 }
             }
         }
