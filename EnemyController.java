@@ -41,7 +41,7 @@ public class EnemyController {
     public static void copAttack(){}
 
     public static void robotAction(){robotAttack();}
-    public static void robotAttack(){}
+    public static void robotAttack(){}  
 
     public static void getClosestPlayer(){
         ArrayList<Integer> pLocs = new ArrayList<Integer>();

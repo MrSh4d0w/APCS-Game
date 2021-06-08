@@ -131,6 +131,11 @@ public class console extends JPanel implements ActionListener{
                 // + "\nRobot2-HP: " + GameRunner.getE(3).getHP() + " Pos: " + GameRunner.getE(3).getLoc() +
                 // "\nBoomer-HP: " + GameRunner.getE(4).getHP() + " Pos: " + GameRunner.getE(4).getLoc());
                 break;
+            case "moveEnemies":
+                EnemyController.boomerAction(1);
+                EnemyController.copAction(1);
+                insert("gamer")
+                break;
             default:
                 insert("That is not a command. If you need help, type \"help\"");
                 break;
