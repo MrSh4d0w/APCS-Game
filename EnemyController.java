@@ -4,7 +4,6 @@ import java.util.TimerTask;
 
 public class EnemyController {
     private static int playerX, playerY, enemyX, enemyY;
-    private static Timer timer = new Timer();
     private static int seconds = 0;
     private static boolean failState;
     private static String enemy;
@@ -48,42 +47,44 @@ public class EnemyController {
     }
     public static void robotAction(int c){attackTimer(c);}
     public static void attackTimer(int e){
+        Timer timer = new Timer();
         TimerTask task;
-        task = new TimerTask() {
-            private final int MAX_SECONDS = 5;
-    
-            @Override
-            public void run() { 
-                System.out.println("seconds" + seconds);
-                if (seconds <= MAX_SECONDS) {
-                    if(seconds==0){
-                        switch(e) {
-                            case 0: 
-                                copAttack();
-                                break;
-                            case 1: 
-                                copAttack();
-                                break;
-                            case 2: 
-                                robotAttack();
-                                break;
-                            case 3: 
-                                robotAttack();
-                                break;
-                            case 4: 
-                                boomerAttack();
-                                break;
-                        }
-                    }
-                    if(seconds==5){
-                        failureState();
-                    }
-                    seconds++;
-                } else {cancel();}
-            }
+        long c = System.currentTimeMillis()+1000;
 
-        };
-        timer.schedule(task, 0, 1000);
+        /*
+        For this next section, we had an issue where we needed to wait a certain amount of time,
+        but everything we tried made the game hang for that amount of time. So, instead, I (Alex),
+        though of using Threads. Threads are a way for a program to do multiple things asynchronously
+        (simultaneously). The way the following code works is that it creates a new thread and uses 
+        a lambda expression to instantiate it to whatever code we need. The lambda expression format
+        is a short way of creating a single use function where (parameters) -> {code} is the format.
+        Threads and asynchronous coding is difficult but we lucked out and managed to implement a 
+        simple thread to fit our purposes exactly.
+        */
+        Thread newThread = new Thread(() -> {//creates new thread that acts as a timer and run asynchronously
+            long cTime = System.currentTimeMillis()+5000 ;//creates value of the current time in milliseconds 
+                switch(e) {//switch statement to check to see which enemy is attacking and run their respective methods
+                    case 0: 
+                        copAttack();
+                        break;
+                    case 1: 
+                        copAttack();
+                        break;
+                    case 2: 
+                        robotAttack();
+                        break;
+                    case 3: 
+                        robotAttack();
+                        break;
+                    case 4: 
+                        boomerAttack();
+                        break;
+                }
+            while (System.currentTimeMillis() != cTime){System.out.println("g");};
+            failureState();
+            System.out.println("it works hopefully");
+        });
+        newThread.start();
     }
 
     private static void failureState(){
