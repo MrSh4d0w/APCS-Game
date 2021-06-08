@@ -134,7 +134,7 @@ public class console extends JPanel implements ActionListener{
             case "moveEnemies":
                 EnemyController.boomerAction(4);
                 EnemyController.copAction(1);
-                insert("gamer");
+                // insert("gamer");
                 break;
             default:
                 insert("That is not a command. If you need help, type \"help\"");
@@ -153,6 +153,16 @@ public class console extends JPanel implements ActionListener{
         textArea.insert(msg + "\n\n", arr[0].length());}
         textArea.insert("\n> ", 0);
     }
+
+    public static void insertMsg(String msg){
+        String[] arr = textArea.getText().split(">");
+        if(arr.length==1){
+            textArea.insert("\n" + msg + "\n\n", arr[0].length());
+        } else {
+        textArea.insert(msg + "\n\n", arr[0].length());}
+        textArea.insert("\n> ", 0);
+    }
+
     private String[] parser(){
         String txt = textField.getText().replace(",", "");
         return txt.trim().split("\s");
