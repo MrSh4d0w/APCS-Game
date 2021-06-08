@@ -32,9 +32,11 @@ public class EnemyController {
         if(Math.abs(enemyX-playerX)<=112*3 || Math.abs(enemyY-playerY)<=112*3){
             if(enemyY-playerY<0){GameController.setLocationE(c, enemyX, enemyY+112);}//move right
             else if(enemyY-playerY>0){GameController.setLocationE(c, enemyX, enemyY-112);}//move left
-            else if(enemyY==playerY){GameController.setLocationE(c, enemyX, enemyY-112);}
+            else if(enemyY-playerY == 0){GameController.setLocationE(c, enemyX, enemyY-112);}
+
             if(enemyX-playerX<0){GameController.setLocationE(c, enemyX-112, enemyY);}//move down
-            else {GameController.setLocationE(c, enemyX+112, enemyY);}//move up
+            else if(enemyX-playerX>0){GameController.setLocationE(c, enemyX+112, enemyY);}//move up
+            else if(enemyX-playerX == 0){GameController.setLocationE(c, enemyX+112, enemyY);}
         }
         copAttack();
    //stay x grids away from player and shoot
