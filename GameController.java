@@ -187,19 +187,30 @@ public class GameController {
         return null;
     }
 
-    public static Player playerAt(int x, int y){
+    public static int playerAt(int x, int y){
         int[][] totalGrid = GameController.getEntities();
+        ArrayList<Integer> pLocs = new ArrayList<Integer>();
+        String[] playerLocations = GameController.getPLocations();
+        for(int j=0; j<playerLocations.length;j++){
+            String[] tempArr = playerLocations[j].split(" ");            
+            int xx = Integer.parseInt(tempArr[0]);
+            int yy = Integer.parseInt(tempArr[1]);
+
+            pLocs.add(x);
+            pLocs.add(y);
+        }
         for(int i=0;i<totalGrid.length;i++){
             for(int k=0;k<totalGrid[0].length;k++){
                 int x2 = (i*112);
                 int y2 = (k*112+36);
 
                 if((x2==x) && (y2==y) && totalGrid[i][k]==1){
-                    return GameRunner.getP(0);//totalGrid[i][k]-2
+                    int index = pLocs.indexOf(x)/2;
+                    return index;//totalGrid[i][k]-2
                 }
             }
         }
-        return null;
+        return -1;
     }
     
     public static boolean canContinue() {
