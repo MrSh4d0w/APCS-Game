@@ -35,6 +35,7 @@ public class Player extends JPanel implements ActionListener{
     
     public Player(int HP, String c, int speed, int acc) {  
         Timer timer = new Timer(100, actionListener);
+        System.currentTimeMillis();
         timer.setInitialDelay(0);
         timer.start();
         this.HP = HP;

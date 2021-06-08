@@ -1,6 +1,9 @@
 import java.util.ArrayList;
+import java.util.Timer;
 
 public class GameController {
+    Timer timer = new Timer();
+
     public static int setLocation(int c, String[] args) {
         if(args==null){return -1;}//return -1 if the command does not start with "move to" (edge case where nothing after "move")
         if(!args[0].equalsIgnoreCase("move") && !args[1].equalsIgnoreCase("to")){return -1;}//returns -1 if the command does not start with "move to"
@@ -8,8 +11,6 @@ public class GameController {
         int oldX = Integer.parseInt(loc[0]);
         int oldY = Integer.parseInt(loc[1]);
         int speed = GameRunner.getP(c).getSpeed();
-
-        
         
         try{
             int[][] idk = GameController.getEntities();

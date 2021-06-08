@@ -9,7 +9,7 @@ import java.io.IOException;
 public class console extends JPanel implements ActionListener{
     private static JTextField textField;
     private Image decorations;
-    private JTextArea textArea;
+    private static JTextArea textArea;
     private JLabel label;
     // private JPanel background;
     private Color notBlack;
@@ -145,7 +145,7 @@ public class console extends JPanel implements ActionListener{
 
     
     
-    public void insert(String msg){
+    public static void insert(String msg){
         String[] arr = textArea.getText().split(">");
         if(arr.length==1){
             textArea.insert("\n" + msg + "\n\n", arr[0].length());
