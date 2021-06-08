@@ -118,7 +118,7 @@ public class GameController {
             int y = Character.getNumericValue(args[1].charAt(1))*112+36;
             int x = (Character.getNumericValue(args[1].charAt(0))-9)*112;
             if(console.getHasAttacked()){return -4;}
-            if(LineOfSight.canAttack(oldX, oldY, x, y) == false) {return -5;} // If character doesn't have Line of Sight to target return fail state of -5
+            if(!LineOfSight.canAttack(oldX, oldY, x, y)) {return -5;} // If character doesn't have Line of Sight to target return fail state of -5
             if(idk[x/112][y/112]==1){return -3;} else//if there is someone at new x and y then return fail state of -3
             if (x >= 112 && y >= 112 && x < 1344 && y < 896) {//checks if within bounds
                 if(GameRunner.getP(c).getPClass().equals("MELEE") && Math.abs(x-oldX)>112 && Math.abs(y-oldY)>112){ //if the char is melee. !!!!! DOESN'T WORK !!!!!
