@@ -15,7 +15,7 @@ public class console extends JPanel implements ActionListener{
     private Color notBlack;
     private Color notWhite;
     private static int turn;
-    private static boolean hasMoved;
+    private static boolean hasMoved, hasAttacked;
 
     public console(String img) {
         this(new ImageIcon(img).getImage());
@@ -66,17 +66,25 @@ public class console extends JPanel implements ActionListener{
                 else if(state == -2){insert("That location is too far away");break;}
                 else if(state == -3){insert("That location is obstructed");break;}
                 else if(state == -4){insert("You have already moved this character");break;}
-                else if(state == -5){insert("This location is not valid");break;}
-                GameRunner.setHasMoved(true);
+                else if(state == -5){insert("That location is not valid");break;}
+                console.setHasMoved(true); // Prevents from moving again
                 GameRunner.removeGrid();
                 GameRunner.drawGrid();
                 insert("Moved to " + text[2]);
+                break;
+            case "attack":
+                state = GameController.attack(turn, text);
+                if(state == -4){insert("You have already attacked with this character");break;}
+                if(state == -5){insert("That location is obstructed");break;}
+                console.setHasAttacked(true);
+                insert("Attacked " + text[1]);
                 break;
             case "next":
                 if(text.length<=1 || !text[1].equalsIgnoreCase("turn")){insert("That is not a command. If you need help, type \"help\"");break;}
                 if(turn==3){turn=0;}
                 else{turn++;}
-                GameRunner.setHasMoved(false);
+                console.setHasMoved(false);
+                console.setHasAttacked(false);
                 insert("Turn is now: " + (turn + 1));
                 GameRunner.removeGrid();
                 GameRunner.drawGrid();
@@ -90,10 +98,6 @@ public class console extends JPanel implements ActionListener{
             case "setEnemyLoc":
                 GameRunner.getE(0).setLocation(112, 112);
                 insert("Set Enemy Loc to 112, 112");
-                break;
-            case "attack":
-                state = GameController.attack(turn, text);
-                insert("attacked location");
                 break;
             case "continue":
                 if(!GameController.canContinue()){insert("There are still enemies alive");} 
@@ -121,9 +125,6 @@ public class console extends JPanel implements ActionListener{
                     }
                 }
                 System.out.println(Level.getCurrentLevel());
-                break;
-            case "getHP":
-                insert("" + GameRunner.getE(0).getHP());
                 break;
             case "info":
                 insert(info());
@@ -190,19 +191,20 @@ public class console extends JPanel implements ActionListener{
         }
     }
 
-    public static void hasMoved(boolean b) {
+    public static void setHasMoved(boolean b) {
         hasMoved = b;
     }
-    
-    /*private boolean includes(String beg,String str) {
-        if(str.length()==0) return false;
-        if(beg.toLowerCase().indexOf(str.toLowerCase())>=0){
-            return true;
-        }
-        return false;
-    }*/
+    public static boolean getHasMoved() {
+        return hasMoved;
+    }
+    public static void setHasAttacked(boolean b) {
+        hasAttacked = b;
+    }
+    public static boolean getHasAttacked() {
+        return hasAttacked;
+    }
 
-    private static String info() {
+    private static String info() { // for info command
         
         String l2 = "";
         String l3 = "";
