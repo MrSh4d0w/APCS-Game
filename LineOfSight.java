@@ -21,7 +21,7 @@ public class LineOfSight {
         return true;
     } 
     
-    public static ArrayList<String> drawLine(int x1, int y1, int x2, int y2) {
+    public static ArrayList<String> drawLine(int x1, int y1, int x2, int y2) { // Bresenham's Algorithm. I sorta understand this, but since its widely available online, stealing it should be ok, I think. -N
         // delta of exact value and rounded value of the dependent variable
         ArrayList<String> cords = new ArrayList<String>();
         int d = 0;
