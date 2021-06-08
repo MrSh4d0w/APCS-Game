@@ -196,8 +196,8 @@ public class GameController {
             int xx = Integer.parseInt(tempArr[0]);
             int yy = Integer.parseInt(tempArr[1]);
 
-            pLocs.add(x);
-            pLocs.add(y);
+            pLocs.add(xx);
+            pLocs.add(yy);
         }
         for(int i=0;i<totalGrid.length;i++){
             for(int k=0;k<totalGrid[0].length;k++){
