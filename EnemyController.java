@@ -65,6 +65,7 @@ public class EnemyController {
         console.insertMsg("The boomer at position " + GameController.letterParser(enemyX/112) + (enemyY-36)/112 + " is attacking a player at " + GameController.letterParser(playerX/112) + (playerY-36)/112);
         int c = GameController.playerAt(playerX, playerY);
         GameRunner.getP(c).setHP(GameRunner.getP(c).getHP()-100); // Takes current HP of Player object it is attacking and takes 100 HP away from it, instantly killing it
+        GameRunner.getP(GameController.playerAt(playerX, playerY)).setAlive(false);
     }
     static void copAttack() { // Attack for Cop objects
         console.insertMsg("The cop at position " + GameController.letterParser(enemyX/112) + (enemyY-36)/112 + " is attacking a player at " + GameController.letterParser(playerX/112) + (playerY-36)/112);
@@ -108,6 +109,7 @@ public class EnemyController {
     }
     
     private static void failureState(){ // Output if the enemy either fails or succeeds at hitting a Player object.
+        Player p = GameRunner.getP(GameController.playerAt(playerX, playerY));
         if(!LineOfSight.canAttack(enemyX, enemyY, playerX, playerY)){
             console.insertMsg("The " + enemy + " has failed to hit you because of an obstruction");
             return;
@@ -117,7 +119,8 @@ public class EnemyController {
                 console.insertMsg("The robot missed!");
             } else {
                 console.insertMsg("The robot has hit you! You have taken " + damageRob + " damage!");
-                GameRunner.getP(GameController.playerAt(playerX, playerY)).setHP(GameRunner.getP(GameController.playerAt(playerX, playerY)).getHP()-damageRob);
+                p.setHP(p.getHP()-damageRob);
+                if(p.getHP() <= 0){p.setAlive(false);}
             } 
             RobFail = true;
             damageRob = 0;
@@ -126,7 +129,8 @@ public class EnemyController {
                 console.insertMsg("The cop missed!");
             } else {
                 console.insertMsg("The cop has hit you! You have taken " + damageCop + " damage!");
-                GameRunner.getP(GameController.playerAt(playerX, playerY)).setHP(GameRunner.getP(GameController.playerAt(playerX, playerY)).getHP()-damageCop);
+                p.setHP(p.getHP()-damageCop);
+                if(p.getHP() <= 0){p.setAlive(false);}
             }
             CopFail = true;
             damageCop = 0;

@@ -243,6 +243,12 @@ public class console extends JPanel implements ActionListener{
             if(GameRunner.getP(i).getAlive() == false){GameRunner.getP(i).setVisible(false);}
         }
     }
+    public static void playerDied(Player p) {
+        insertMsg("Player " + p.getClass() + " has died");
+    }
+    public static void enemyDied(Enemy e) {
+        insertMsg("Enemy " + e.getClass() + " has died");
+    }
 
 
 }

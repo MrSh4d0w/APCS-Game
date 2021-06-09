@@ -66,10 +66,10 @@ public class GameRunner {
         m.setBounds(0, 0, 1456, 1080);
         mainPanel.add(m, -1);
 
-        p1 = new Player(100, "ASSAULT", 2, 75, true);// *Player Objects
-        p2 = new Player(100, "TANK", 2, 60, true);
-        p3 = new Player(100, "SNIPER", 2, 90, true);
-        p4 = new Player(100, "MELEE", 4, 0, true);
+        p1 = new Player(10, "ASSAULT", 2, 75, true);// *Player Objects
+        p2 = new Player(10, "TANK", 2, 60, true);
+        p3 = new Player(10, "SNIPER", 2, 90, true);
+        p4 = new Player(10, "MELEE", 4, 0, true);
 
         p1.setSize(new Dimension(112, 112));
         p1.setLocation(grid[10][6]); // Puts the player object on the grid.
