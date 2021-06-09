@@ -126,7 +126,7 @@ public class GameController {
     }
 
 
-    public static int attack(int c, String[] args){
+    public static int attack(int c, String[] args){ // Similar concept to the setPosition method at the top of this class. 
         if(args==null){return -1;}//return -1 if the command does not start with "move to" (edge case where nothing after "move")
         if(!args[0].equalsIgnoreCase("attack") || args[1].length()>2){return -1;}//returns -1 if the command does not start with "move to"
         
@@ -171,7 +171,7 @@ public class GameController {
     }
 
 
-    public static Enemy enemyAt(int x, int y){
+    public static Enemy enemyAt(int x, int y){ // returns which Enemy object is at the inputted location.
         int[][] totalGrid = GameController.getEntities();
         for(int i=0;i<totalGrid.length;i++){
             for(int k=0;k<totalGrid[0].length;k++){
@@ -186,7 +186,7 @@ public class GameController {
         return null;
     }
 
-    public static int playerAt(int x, int y){
+    public static int playerAt(int x, int y){  // returns which an int of which player is at the inputted location.
         int[][] totalGrid = GameController.getEntities();
         ArrayList<Integer> pLocs = new ArrayList<Integer>();
         String[] playerLocations = GameController.getPLocations();
@@ -212,7 +212,7 @@ public class GameController {
         return -1;
     }
     
-    public static boolean canContinue() {
+    public static boolean canContinue() { // Checks to see if all of the enemies are dead in each level. 
         if(Level.getCurrentLevel() == 1) {
             if (GameRunner.e1.getHP()==0 && GameRunner.e2.getHP()== 0 && GameRunner.e3.getHP()==0){return true;}
         } if(Level.getCurrentLevel() == 2) {
@@ -222,7 +222,7 @@ public class GameController {
         }
         return false;
     }
-    public static String letterParser(int i) {
+    public static String letterParser(int i) { // Returns the letter that corresponds with the inputted int. Basically it helps to turn the position 11 (not eleven, but One One) into A1.
         switch(i){
             case 1:return "A";
             case 2:return "B";

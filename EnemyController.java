@@ -87,7 +87,7 @@ public class EnemyController {
         newThread.start();
     }
 
-    private static void failureState(){
+    private static void failureState(){ // Output if the enemy either fails or succeeds at hitting a Player object.
         if(!failState){
             console.insertMsg("The " + enemy + " has failed in hitting you!");
         } else {
@@ -95,16 +95,16 @@ public class EnemyController {
         }
     }
     
-    private static void boomerAttack() {
+    private static void boomerAttack() { // Attack for Boomer. 
         console.insertMsg("Boomer is attacking a player at " + GameController.letterParser(playerX/112) + (playerY-36)/112);
         int c = GameController.playerAt(playerX, playerY);
-        GameRunner.getP(c).setHP(GameRunner.getP(c).getHP()-100);
+        GameRunner.getP(c).setHP(GameRunner.getP(c).getHP()-100); // Takes current HP of Player object it is attacking and takes 100 HP away from it, instantly killing it
     }
-    private static void copAttack() {
+    private static void copAttack() { // Attack for Cop objects
         console.insertMsg("Cop is attacking a player at " + GameController.letterParser(playerX/112) + (playerY-36)/112);
         int c = GameController.playerAt(playerX, playerY);
         int rand = (int)(Math.random()*100+1);
-        if(rand>50){
+        if(rand>50){ // Randomization for attack. 50/50 chance of the enemy attacking you and hitting you.
             failState = false;
             enemy = "Cop";
             damage = 10;
@@ -113,9 +113,9 @@ public class EnemyController {
             enemy = "Cop";
             damage = 0;
         }
-        GameRunner.getP(c).setHP(GameRunner.getP(c).getHP()-100);
+        GameRunner.getP(c).setHP(GameRunner.getP(c).getHP()-100); // Change this later
     }
-    private static void robotAttack() {
+    private static void robotAttack() { // Attack for robot objects
         console.insertMsg("Robot is attacking a player at " + GameController.letterParser(playerX/112) + (playerY-36)/112);
         int c = GameController.playerAt(playerX, playerY);
         int rand = (int)(Math.random()*100+1);
@@ -125,7 +125,7 @@ public class EnemyController {
 
 
 
-    public static void getClosestPlayer(){
+    public static void getClosestPlayer(){ // Gets the closest player from the Enemy object it is being run on. 
         ArrayList<Integer> pLocs = new ArrayList<Integer>();
         String[] playerLocations = GameController.getPLocations();
         for(int i=0; i<playerLocations.length;i++){
@@ -135,9 +135,9 @@ public class EnemyController {
 
             pLocs.add(x);
             pLocs.add(y);
-        }
+        } // Puts all of the player locations into an arraylist. Each index in the arraylist is EITHER an X or Y value. 
 
-        int yMin = Integer.MAX_VALUE;
+        int yMin = Integer.MAX_VALUE; // I don't know what this does LMAO.
         int yIndex = 0;
         for(int i=1; i<8;i+=2){
             if(Math.abs(pLocs.get(i)-enemyY) < yMin){

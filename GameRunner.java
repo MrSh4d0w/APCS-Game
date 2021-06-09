@@ -10,15 +10,15 @@ public class GameRunner {
     private static JFrame f;
     private static map m;
     private static Level l;
-    private static Player p1, p2, p3, p4;
-    public static Enemy e1, e2, e3, e4, e5;
-    private static String[][] grid;
-    private static console c;
+    private static Player p1, p2, p3, p4; // Creates player variables
+    public static Enemy e1, e2, e3, e4, e5; // Creates enemy variables
+    private static String[][] grid; // grid for the game.
+    private static console c; // Console
     private static JLayeredPane mainPanel;
     private static ArrayList<Grid> grids;
 
     public static void main(String[] args) {
-        grid = GameController.createGrid();
+        grid = GameController.createGrid(); // Creates a 13x9 grid.
 
         f = new JFrame();
         f.setSize(1920, 1080);
@@ -32,8 +32,8 @@ public class GameRunner {
         c.setBounds(1456, 0, 464, 1080);
         mainPanel.add(c, 0);
 
-        l = new Level(1);
-        level1();
+        l = new Level(1); // Creates a Level object which is mainly used to get the currentLevel and setCurrentLevel.
+        level1(); // Starts level1.
         console.setHasMoved(false);
         console.setHasAttacked(false);
         
@@ -45,21 +45,21 @@ public class GameRunner {
     }
 
 
-    public static void level1() {
+    public static void level1() { // Creates the enemy and player objects for level 1. 
         
         m = new map("images/Level1.png");// *Map
         m.setBounds(0, 0, 1456, 1080);
         mainPanel.add(m, -1);
 
-        p1 = new Player(100, "ASSAULT", 2, 75);// *Player
+        p1 = new Player(100, "ASSAULT", 2, 75);// *Player Objects
         p2 = new Player(100, "TANK", 2, 60);
         p3 = new Player(100, "SNIPER", 2, 90);
         p4 = new Player(100, "MELEE", 4, 0);
         
         p1.setSize(new Dimension(112, 112));
-        p1.setLocation(grid[10][6]);
+        p1.setLocation(grid[10][6]); // Puts the player object on the grid.
         p1.setOpaque(false);
-        mainPanel.add(p1, 1);
+        mainPanel.add(p1, 1); // Adds the Player object to a JLayeredPane which is used to layer several images on top of each other while preserving their transparency. 
 
         p2.setSize(new Dimension(112, 112));
         p2.setLocation(grid[10][7]);
@@ -76,7 +76,7 @@ public class GameRunner {
         p4.setOpaque(false);
         mainPanel.add(p4, 4);
 
-        e1 = new Enemy(0, "COP", 3, 20);
+        e1 = new Enemy(0, "COP", 3, 20); // *Enemy objects
         e2 = new Enemy(0, "COP2", 3, 20);
         e3 = new Enemy(0, "ROBOT", 3, 20);       
 
@@ -97,7 +97,7 @@ public class GameRunner {
     }
 
     public static void level2() {
-        m.setMap("images/Level2.png");
+        m.setMap("images/Level2.png"); // Changes the map to the level 2 map.
         p1.setLocation(grid[3][7]);
         p2.setLocation(grid[2][7]);
         p3.setLocation(grid[9][7]);
@@ -107,7 +107,7 @@ public class GameRunner {
         e2.setLocation(grid[6][4]);
         e3.setLocation(grid[4][3]);
 
-        e4 = new Enemy(0, "ROBOT2", 3, 20);
+        e4 = new Enemy(0, "ROBOT2", 3, 20); // Initializes a new enemy object, the second robot which only appears in this level and the next.
         e4.setSize(new Dimension(112, 112));
         e4.setLocation(grid[8][3]);
         e4.setOpaque(false);
@@ -127,7 +127,7 @@ public class GameRunner {
         e3.setLocation(grid[4][3]);
         e4.setLocation(grid[6][6]);
 
-        e5 = new Enemy(0, "BOOMER", 3, 20);
+        e5 = new Enemy(0, "BOOMER", 3, 20); // Initializes a new enemy object, the boomer which only appears in this level.
         e5.setSize(new Dimension(112, 112));
         e5.setLocation(grid[1][7]);
         e5.setOpaque(false);
@@ -135,68 +135,135 @@ public class GameRunner {
     }
 
     public static void win() {
-        m.setMap("images/Win.png");
+        m.setMap("images/Win.png"); // Displays a separate map if the player wins.
         mainPanel.moveToFront(m);
     }
     public static void lose() {
-        m.setMap("images/lose.png");
+        m.setMap("images/lose.png"); // Displays a separate map if the player loses.
         mainPanel.moveToFront(m);
     }
 
-    public static void setLocation(int c, int x, int y) {
+    public static void setLocation(int c, int x, int y) { // Primarily used, as you feed raw numbers, the actual pixel X and Y cords. 
         if (x < 112 || y < 112 || x >= 1344 || y >= 896) {
         } else {
             switch(c){
                 case 0:
-                    p1.setLocation(x, y);
-                    p1.setLoc(x,y);
-                    break;
+                p1.setLocation(x, y);
+                p1.setLoc(x,y);
+                break;
                 case 1:
-                    p2.setLocation(x, y);
-                    p2.setLoc(x,y);
-                    break;
+                p2.setLocation(x, y);
+                p2.setLoc(x,y);
+                break;
                 case 2:
-                    p3.setLocation(x, y);
-                    p3.setLoc(x,y);
-                    break;
+                p3.setLocation(x, y);
+                p3.setLoc(x,y);
+                break;
                 case 3:
-                    p4.setLocation(x, y);
-                    p4.setLoc(x,y);
+                p4.setLocation(x, y);
+                p4.setLoc(x,y);
+                break;
+            }
+        }
+        
+    }
+
+    //On line 60, setLocation (which is in the Player class) is called on p1 with the parameter of the grid. This method, still in Player class, calls the second 
+    //setLocation (in GameRunner) method with parameters of the grid and itself. That method, in GameRunner, then parses the data, then feeds it into the component setLocation.
+    //This is done like this in order to increase readability when instantiating the objects rather than efficiency of code
+    
+    public static void setLocationE(int c, int x, int y) {
+        if (x < 112 || y < 112 || x >= 1344 || y >= 896) {
+        } else {
+            switch(c){
+                case 0:
+                    e1.setLocation(x, y);
+                    e1.setLoc(x,y);
+                    break;
+                    case 1:
+                    e2.setLocation(x, y);
+                    e2.setLoc(x,y);
+                    break;
+                    case 2:
+                    e3.setLocation(x, y);
+                    e3.setLoc(x,y);
+                    break;
+                    case 3:
+                    e4.setLocation(x, y);
+                    e4.setLoc(x,y);
+                    break;
+                    case 4:
+                    e5.setLocation(x, y);
+                    e5.setLoc(x,y);
+                    break;
+                }
+            }
+            
+        }
+                
+        public static void setLocation(String str, Player p) {
+            int x;
+            int y;
+            
+            String[] arr = str.split("\s");
+            x = Integer.parseInt(arr[0]);
+            y = Integer.parseInt(arr[1]);
+            
+            switch(p.getPClass()){
+                case "ASSAULT":
+                p1.setLocation(x, y);
+                p1.setLoc(x,y);
+                break;
+                case "TANK":
+                p2.setLocation(x, y);
+                p2.setLoc(x,y);
+                break;
+                case "SNIPER":
+                p3.setLocation(x, y);
+                p3.setLoc(x,y);
+                break;
+                case "MELEE":
+                p4.setLocation(x, y);
+                p4.setLoc(x,y);
+                break;
+            }
+        }
+
+        public static void setLocation(String str, Enemy p) {
+            int x;
+            int y;
+            
+            String[] arr = str.split("\s");
+            x = Integer.parseInt(arr[0]);
+            y = Integer.parseInt(arr[1]);
+            
+            switch(p.getEClass()){
+                case "COP":
+                    e1.setLocation(x, y);
+                    e1.setLoc(x,y);
+                    break;
+                case "COP2":
+                    e2.setLocation(x, y);
+                    e2.setLoc(x,y);
+                    break;
+                case "ROBOT":
+                    e3.setLocation(x, y);
+                    e3.setLoc(x,y);
+                    break;
+                case "ROBOT2":
+                    e4.setLocation(x, y);
+                    e4.setLoc(x,y);
+                    break;
+                case "BOOMER":
+                    e5.setLocation(x, y);
+                    e5.setLoc(x,y);
                     break;
             }
         }
 
-    }
-    public static void setLocation(String str, Player p) {
-        int x;
-        int y;
-        
-        String[] arr = str.split("\s");
-        x = Integer.parseInt(arr[0]);
-        y = Integer.parseInt(arr[1]);
-        
-        switch(p.getPClass()){
-            case "ASSAULT":
-                p1.setLocation(x, y);
-                p1.setLoc(x,y);
-                break;
-            case "TANK":
-                p2.setLocation(x, y);
-                p2.setLoc(x,y);
-                break;
-            case "SNIPER":
-                p3.setLocation(x, y);
-                p3.setLoc(x,y);
-                break;
-            case "MELEE":
-                p4.setLocation(x, y);
-                p4.setLoc(x,y);
-                break;
-        }
-    }
-    public static Player getP(int c){
-        switch(c){
-            case 0:
+        public static Player getP(int c){ // Returns the player object from the inputted int.
+            switch(c){
+                case 0:
                 return p1;
             case 1:
                 return p2;
@@ -208,38 +275,7 @@ public class GameRunner {
         return null;
     }
 
-    public static void setLocation(String str, Enemy p) {
-        int x;
-        int y;
-        
-        String[] arr = str.split("\s");
-        x = Integer.parseInt(arr[0]);
-        y = Integer.parseInt(arr[1]);
-        
-        switch(p.getEClass()){
-            case "COP":
-                e1.setLocation(x, y);
-                e1.setLoc(x,y);
-                break;
-            case "COP2":
-                e2.setLocation(x, y);
-                e2.setLoc(x,y);
-                break;
-            case "ROBOT":
-                e3.setLocation(x, y);
-                e3.setLoc(x,y);
-                break;
-            case "ROBOT2":
-                e4.setLocation(x, y);
-                e4.setLoc(x,y);
-                break;
-            case "BOOMER":
-                e5.setLocation(x, y);
-                e5.setLoc(x,y);
-                break;
-        }
-    }
-    public static Enemy getE(int c){
+    public static Enemy getE(int c){ // Returns the Enemy object from the inputted int.
         switch(c){
             case 0:
                 return e1;
@@ -254,37 +290,9 @@ public class GameRunner {
         }
         return null;
     }
-    public static void setLocationE(int c, int x, int y) {
-        if (x < 112 || y < 112 || x >= 1344 || y >= 896) {
-        } else {
-            switch(c){
-                case 0:
-                    e1.setLocation(x, y);
-                    e1.setLoc(x,y);
-                    break;
-                case 1:
-                    e2.setLocation(x, y);
-                    e2.setLoc(x,y);
-                    break;
-                case 2:
-                    e3.setLocation(x, y);
-                    e3.setLoc(x,y);
-                    break;
-                case 3:
-                    e4.setLocation(x, y);
-                    e4.setLoc(x,y);
-                    break;
-                case 4:
-                    e5.setLocation(x, y);
-                    e5.setLoc(x,y);
-                    break;
-            }
-        }
-
-    }
 
 
-    public static void drawGrid(){
+    public static void drawGrid(){ // Draws the grid. This includes the green and gold squares that surround the Player object whose turn it is. 
         String[][] g = GameController.createGrid();
         String[] loc = GameRunner.getP(console.getTurn()).getLoc().split(" ");
         int x = Integer.parseInt(loc[0]);
@@ -302,19 +310,19 @@ public class GameRunner {
                 int y2 = Integer.parseInt(gLoc[1]);
                 int[][] idk = GameController.getEntities();
 
-                if(x==x2 && y==y2){
+                if(x==x2 && y==y2){ // Checks to if x=x2 and y=y2. If true then that is the position of the currently selected Player object. It then puts a gold box on the square that the Player object is at.
                     grids.add(new Grid("gold"));
                     counter++;
                     grids.get(counter).setLocation(x2, y2);
                     mainPanel.add(grids.get(counter), 6);
                 } else if(idk[i][j]==1){} 
-                else if(idk[i][j]>1){
+                else if(idk[i][j]>1){ // Uses the array from getEntities. In this case, anything greater than 1 would be any of the enemy object. This puts a red box on the square that the Enemy object is on.
                     grids.add(new Grid ("red"));
                     counter++;
                     grids.get(counter).setLocation(x2, y2);
                     mainPanel.add(grids.get(counter), 6);
-
-                } else if(Math.abs(x-x2)<=(112*speed)&&Math.abs(y-y2)<(36+(112*speed))) {
+                // Puts a green box on the squares around the currently selected characters that are within the speed. For example, if the speed is 2, green boxes will be places 2 spaces in each direction from the character. Doesn't apply to walls, other players or enemy objects.
+                } else if(Math.abs(x-x2)<=(112*speed)&&Math.abs(y-y2)<(36+(112*speed))) { 
                     if(!console.getHasMoved()) {
                     grids.add(new Grid ("green"));
                     counter++;
@@ -325,7 +333,7 @@ public class GameRunner {
             }
         }
     }
-    public static void removeGrid(){
+    public static void removeGrid(){ // removes the grid, the one with the green, red, and gold squares.
     for(Grid g:grids){
             g.setVisible(false);
             mainPanel.remove(g);
