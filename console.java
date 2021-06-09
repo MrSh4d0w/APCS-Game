@@ -48,7 +48,6 @@ public class console extends JPanel implements ActionListener{
     }
     public void actionPerformed(ActionEvent e) {
         String txt = textField.getText();
-        textArea.insert(""+txt, 0);
         String[] text = parser();
         
 
@@ -63,47 +62,47 @@ public class console extends JPanel implements ActionListener{
             case "move":
                 state = GameController.setLocation(turn, text);
                 if(state ==-1){break;}
-                else if(state == -2){insert("That location is too far away");break;}
-                else if(state == -3){insert("That location is obstructed");break;}
-                else if(state == -4){insert("You have already moved this character");break;}
-                else if(state == -5){insert("That location is not valid");break;}
+                else if(state == -2){insert("That location is too far away", txt);break;}
+                else if(state == -3){insert("That location is obstructed", txt);break;}
+                else if(state == -4){insert("You have already moved this character", txt);break;}
+                else if(state == -5){insert("That location is not valid", txt);break;}
                 console.setHasMoved(true); // Prevents from moving again
                 GameRunner.removeGrid(); // Once the player has moved, this method, and drawGrid, basically redraw the grid so the green and gold squares are aligned properly.
                 GameRunner.drawGrid();
-                insert("Moved to " + text[2]); // Outputs to the Textarea that the user has moved to the position they inputted.
+                insert("Moved to " + text[2], txt); // Outputs to the Textarea that the user has moved to the position they inputted.
                 break;
             case "attack":
                 state = GameController.attack(turn, text);
-                if(state == -4){insert("You have already attacked with this character");break;}
-                if(state == -5){insert("That location is obstructed");break;}
+                if(state == -4){insert("You have already attacked with this character", txt);break;}
+                if(state == -5){insert("That location is obstructed", txt);break;}
                 console.setHasAttacked(true); // Prevents from attacking again
-                insert("Attacked " + text[1]);
+                insert("Attacked " + text[1], txt);
                 break;
             case "next":
-                if(text.length<=1 || !text[1].equalsIgnoreCase("turn")){insert("That is not a command. If you need help, type \"help\"");break;} // Checks to see if "next turn" is inputted and not just "next"
+                if(text.length<=1 || !text[1].equalsIgnoreCase("turn")){insert("That is not a command. If you need help, type \"help\"", txt);break;} // Checks to see if "next turn" is inputted and not just "next"
                 if(turn==3){turn=0;} // if all of the characters have their turn in the round, it resets the turns back to 0.
                 else{turn++;}
                 console.setHasMoved(false); // Allows the next character to move
                 console.setHasAttacked(false); // Allows the next character to attack
-                insert("Turn is now: " + (turn + 1)); // Outputs the NEW turn. +1 is added for aesthetics. 
+                insert("Turn is now: " + (turn + 1), txt); // Outputs the NEW turn. +1 is added for aesthetics. 
                 GameRunner.removeGrid(); // Redraws grid.
                 GameRunner.drawGrid();
                 break;
             case "help": // Outputs a list of commands the user can input.
-                insert("\nMove To - Moves the currently selected character to specified position\n\nTarget - Targets a specific position\n\nAttack - Attack position that you targeted\n\nInfo - Get stats about the currently selected character\n\nNext Turn - Goes to the next turn\n\nClose - Closes the game\n\nHelp - Displays this message\n\nClear - Clears the console");
+                insert("\nMove To - Moves the currently selected character to specified position\n\nTarget - Targets a specific position\n\nAttack - Attack position that you targeted\n\nInfo - Get stats about the currently selected character\n\nNext Turn - Goes to the next turn\n\nClose - Closes the game\n\nHelp - Displays this message\n\nClear - Clears the console", txt);
                 break;
             case "clear": // clears the console textarea.
                 textArea.setText(null);
                 break;
             case "setEnemyLoc": // for testing purposes. 
                 GameRunner.getE(0).setLocation(112, 112);
-                insert("Set Enemy Loc to 112, 112");
+                insert("Set Enemy Loc to 112, 112", txt);
                 break;
             case "continue": // Goes to the next level is all enemies in the current level are dead.
-                if(!GameController.canContinue()){insert("There are still enemies alive");} 
+                if(!GameController.canContinue()){insert("There are still enemies alive", txt);} 
                 else {
                     if(Level.getCurrentLevel() == 1) {
-                        insert("Continued to level 2");
+                        insert("Continued to level 2", txt);
                         Level.setCurrentLevel(Level.getCurrentLevel()+1);
                         GameRunner.level2();
                         GameRunner.removeGrid();
@@ -111,7 +110,7 @@ public class console extends JPanel implements ActionListener{
                         break;
                     }
                     if(Level.getCurrentLevel() == 2) {
-                        insert("Continued to level 3");
+                        insert("Continued to level 3", txt);
                         Level.setCurrentLevel(Level.getCurrentLevel()+1);
                         GameRunner.level3();
                         GameRunner.removeGrid();
@@ -119,7 +118,7 @@ public class console extends JPanel implements ActionListener{
                         break;
                     }
                     if(Level.getCurrentLevel() == 3) {
-                        insert("Good job, you won!");
+                        insert("Good job, you won!", txt);
                         GameRunner.win();
                         break;
                     }
@@ -127,17 +126,17 @@ public class console extends JPanel implements ActionListener{
                 System.out.println(Level.getCurrentLevel());
                 break;
             case "info":
-                insert(info()); // See info method below.
+                insert(info(), txt); // See info method below.
                 // + "\nRobot2-HP: " + GameRunner.getE(3).getHP() + " Pos: " + GameRunner.getE(3).getLoc() +
                 // "\nBoomer-HP: " + GameRunner.getE(4).getHP() + " Pos: " + GameRunner.getE(4).getLoc());
                 break;
             case "moveEnemies": // for testing purposes, maybe.
                 EnemyController.boomerAction(4);
                 EnemyController.copAction(1);
-                insert("gamer");
+                insert("", txt);
                 break;
             default: // Outputs if the user doesn't input a valid command, or incorrectly inputs a command.
-                insert("That is not a command. If you need help, type \"help\"");
+                insert("That is not a command. If you need help, type \"help\"", txt);
                 break;
             }
         textField.setText("");
@@ -145,22 +144,13 @@ public class console extends JPanel implements ActionListener{
     // Used the insert text in the textArea. Format is as follows.
     // > (Command the user the inputted)
     // (Response to command, if any)    
-    public static void insert(String msg){ 
-        String[] arr = textArea.getText().split(">");
-        if(arr.length==1){
-            textArea.insert("\n" + msg + "\n\n", arr[0].length());
-        } else {
-        textArea.insert(msg + "\n\n", arr[0].length());}
-        textArea.insert("\n> ", 0);
+    public static void insert(String msg, String txt){ 
+        textArea.insert("\n> " + txt, 0);
+        textArea.insert("\n" + msg + "\n", txt.length()+3);
     }
 
     public static void insertMsg(String msg){
-        String[] arr = textArea.getText().split(">");
-        if(arr.length==1){
-            textArea.insert("\n" + msg + "\n\n", arr[0].length());
-        } else {
-        textArea.insert(msg + "\n\n", arr[0].length());}
-        textArea.insert("\n> ", 0);
+        textArea.insert("\n" + msg + "\n", 0);
     }
     // Gets rid of commas and spaces. 
     private String[] parser(){

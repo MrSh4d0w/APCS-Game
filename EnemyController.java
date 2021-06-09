@@ -88,26 +88,26 @@ public class EnemyController {
     }
 
     private static void failureState(){
-        if(!failState){
-            console.insertMsg("The " + enemy + " has failed in hitting you!");
+        if(failState){
+            console.insertMsg("The " + enemy + " has failed to hit you!");
         } else {
             console.insertMsg("The " + enemy + " has hit you! You have taken " + damage + " damage!");
         }
     }
     
     private static void boomerAttack() {
-        console.insertMsg("Boomer is attacking a player at " + GameController.letterParser(playerX/112) + (playerY-36)/112);
+        console.insertMsg("\nBoomer is attacking a player at " + GameController.letterParser(playerX/112) + (playerY-36)/112);
         int c = GameController.playerAt(playerX, playerY);
         GameRunner.getP(c).setHP(GameRunner.getP(c).getHP()-100);
     }
     private static void copAttack() {
-        console.insertMsg("Cop is attacking a player at " + GameController.letterParser(playerX/112) + (playerY-36)/112);
+        console.insertMsg("The Cop is attacking a player at " + GameController.letterParser(playerX/112) + (playerY-36)/112);
         int c = GameController.playerAt(playerX, playerY);
         int rand = (int)(Math.random()*100+1);
         if(rand>50){
             failState = false;
             enemy = "Cop";
-            damage = 10;
+            damage = rand/10;
         } else {
             failState = true;
             enemy = "Cop";
@@ -116,7 +116,7 @@ public class EnemyController {
         GameRunner.getP(c).setHP(GameRunner.getP(c).getHP()-100);
     }
     private static void robotAttack() {
-        console.insertMsg("Robot is attacking a player at " + GameController.letterParser(playerX/112) + (playerY-36)/112);
+        console.insertMsg("\nRobot is attacking a player at " + GameController.letterParser(playerX/112) + (playerY-36)/112);
         int c = GameController.playerAt(playerX, playerY);
         int rand = (int)(Math.random()*100+1);
         if(rand>50){}
