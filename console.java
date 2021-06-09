@@ -80,11 +80,15 @@ public class console extends JPanel implements ActionListener{
                 break;
             case "next":
                 if(text.length<=1 || !text[1].equalsIgnoreCase("turn")){insert("That is not a command. If you need help, type \"help\"", txt);break;} // Checks to see if "next turn" is inputted and not just "next"
-                if(turn==3){turn=0;} // if all of the characters have their turn in the round, it resets the turns back to 0.
+                if(turn==4){turn=0;}
                 else{turn++;}
                 console.setHasMoved(false); // Allows the next character to move
                 console.setHasAttacked(false); // Allows the next character to attack
                 insert("Turn is now: " + (turn + 1), txt); // Outputs the NEW turn. +1 is added for aesthetics. 
+                if(turn==4){
+                    EnemyController.attack();
+                    textField.setText("");
+                } // if all of the characters have their turn in the round, it resets the turns back to 0.
                 GameRunner.removeGrid(); // Redraws grid.
                 GameRunner.drawGrid();
                 break;

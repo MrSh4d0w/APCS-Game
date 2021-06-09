@@ -89,38 +89,52 @@ public class EnemyController {
 
     private static void failureState(){ // Output if the enemy either fails or succeeds at hitting a Player object.
         if(failState){
-            console.insertMsg("The " + enemy + " has failed in hitting you!");
+            if(!LineOfSight.canAttack(enemyX, enemyY, playerX, playerY)){
+                console.insertMsg("The " + enemy + " has failed to hit you because of an obstruction");
+            } else {
+                console.insertMsg("The " + enemy + " has failed to hit you!");
+            }
         } else {
             console.insertMsg("The " + enemy + " has hit you! You have taken " + damage + " damage!");
         }
     }
     
     private static void boomerAttack() { // Attack for Boomer. 
-        console.insertMsg("Boomer is attacking a player at " + GameController.letterParser(playerX/112) + (playerY-36)/112);
+        console.insertMsg("The boomer at position " + GameController.letterParser(enemyX/112) + (enemyY-36)/112 + " is attacking a player at " + GameController.letterParser(playerX/112) + (playerY-36)/112);
         int c = GameController.playerAt(playerX, playerY);
         GameRunner.getP(c).setHP(GameRunner.getP(c).getHP()-100); // Takes current HP of Player object it is attacking and takes 100 HP away from it, instantly killing it
     }
     private static void copAttack() { // Attack for Cop objects
-        console.insertMsg("Cop is attacking a player at " + GameController.letterParser(playerX/112) + (playerY-36)/112);
+        console.insertMsg("The cop at position " + GameController.letterParser(enemyX/112) + (enemyY-36)/112 + " is attacking a player at " + GameController.letterParser(playerX/112) + (playerY-36)/112);
         int c = GameController.playerAt(playerX, playerY);
-        int rand = (int)(Math.random()*100+1);
-        if(rand>50){ // Randomization for attack. 50/50 chance of the enemy attacking you and hitting you.
-            failState = false;
-            enemy = "Cop";
-            damage = rand/10;
-        } else {
-            failState = true;
-            enemy = "Cop";
-            damage = 0;
+        if(LineOfSight.canAttack(enemyX, enemyY, playerX, playerY)){
+            int rand = (int)(Math.random()*100+1);
+            if(rand>50){ // Randomization for attack. 50/50 chance of the enemy attacking you and hitting you.
+                failState = false;
+                enemy = "Cop";
+                damage = rand/10;
+            } else {
+                failState = true;
+                enemy = "Cop";
+                damage = 0;
+            }
         }
-        GameRunner.getP(c).setHP(GameRunner.getP(c).getHP()-100); // Change this later
     }
     private static void robotAttack() { // Attack for robot objects
-        console.insertMsg("Robot is attacking a player at " + GameController.letterParser(playerX/112) + (playerY-36)/112);
+        console.insertMsg("The robot at position " + GameController.letterParser(enemyX/112) + (enemyY-36)/112 + " is attacking a player at " + GameController.letterParser(playerX/112) + (playerY-36)/112);
         int c = GameController.playerAt(playerX, playerY);
-        int rand = (int)(Math.random()*100+1);
-        if(rand>50){}
-        GameRunner.getP(c).setHP(GameRunner.getP(c).getHP()-100);
+        if(LineOfSight.canAttack(enemyX, enemyY, playerX, playerY)){
+            int rand = (int)(Math.random()*100+1);
+            if(rand>50){ // Randomization for attack. 50/50 chance of the enemy attacking you and hitting you.
+                failState = false;
+                enemy = "Robot";
+                damage = (rand/10)+5;
+            } else {
+                failState = true;
+                enemy = "Robot";
+                damage = 0;
+            }
+        }
     }
 
 
@@ -168,5 +182,13 @@ public class EnemyController {
         }
 
         System.out.println(playerX + " " + playerY + " " + enemyX + " " + enemyY);
+    }
+
+    public static void attack(){
+        copAction(0);
+        copAction(1);
+        robotAction(2);
+        if(Level.getCurrentLevel()==2 || Level.getCurrentLevel()==3) {robotAction(3);}
+        if(Level.getCurrentLevel()==3){boomerAction(4);}
     }
 }
