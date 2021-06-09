@@ -83,20 +83,7 @@ public class console extends JPanel implements ActionListener{
                 checkAliveEnts();
                 break;
             case "next":
-                // if(text.length<=1){insert("That is not a command. If you need help, type \"help\"", txt);break;} // Checks to see if "next turn" is inputted and not just "next"
-                if(turn==4){turn=0;}
-                else{turn++;}
-                console.setHasMoved(false); // Allows the next character to move
-                console.setHasAttacked(false); // Allows the next character to attack
-                insert("Turn is now: " + (turn + 1), txt); // Outputs the NEW turn. +1 is added for aesthetics. 
-                if(turn==4){
-                    EnemyController.attack();
-                    textField.setText("");
-                } // if all of the characters have their turn in the round, it resets the turns back to 0.
-                else{
-                    GameRunner.removeGrid(); // Redraws grid.
-                    GameRunner.drawGrid();
-                }
+                nextTurn(txt);
                 break;
             case "help": // Outputs a list of commands the user can input.
                 insert("\nMove To - Moves the currently selected character to specified position\n\nTarget - Targets a specific position\n\nAttack - Attack position that you targeted\n\nInfo - Get stats about the currently selected character\n\nNext Turn - Goes to the next turn\n\nClose - Closes the game\n\nHelp - Displays this message\n\nClear - Clears the console", txt);
@@ -151,6 +138,22 @@ public class console extends JPanel implements ActionListener{
                 break;
             }
         textField.setText("");
+    }
+
+    private void nextTurn(String txt) {
+        turn++;
+        console.setHasMoved(false); // Allows the next character to move
+        console.setHasAttacked(false); // Allows the next character to attack
+        insert("Turn is now: " + (turn + 1), txt); // Outputs the NEW turn. +1 is added for aesthetics. 
+        if(turn==4){
+            EnemyController.attack();
+            textField.setText("");
+        } // if all of the characters have their turn in the round, it resets the turns back to 0.
+        else{
+            GameRunner.removeGrid(); // Redraws grid.
+            GameRunner.drawGrid();
+        }
+        if(turn==4){turn=-1;nextTurn(txt);}
     }
     // Used the insert text in the textArea. Format is as follows.
     // > (Command the user the inputted)
