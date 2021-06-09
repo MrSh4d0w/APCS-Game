@@ -12,7 +12,7 @@ public class Player extends JPanel implements ActionListener{
     private int HP, speed, acc; // Creates variables for HP, speed of the player (How many space it can move), and accuracy (how well it can hit a target).
     private String c; // Name of the class. "ASSAULT", "TANK", "SNIPER", "MELEE"
     private String loc; // Locations of the current player object as a string. Ex. "112 148" - This would correspond to A1 on the gameboard.
-    
+    private boolean alive;
     //private ActionListener actionListener = new ActionListener(); 
     /*{ // This is needed for the animations to work properly.
         @Override
@@ -22,7 +22,7 @@ public class Player extends JPanel implements ActionListener{
         }
     };*/
     
-    public Player(int HP, String c, int speed, int acc) { 
+    public Player(int HP, String c, int speed, int acc, boolean alive) { 
         Timer timer = new Timer(100, this);
         System.currentTimeMillis(); // This is needed for the time in EnemyController.java to work properly, I believe. 
         timer.setInitialDelay(0);
@@ -31,6 +31,7 @@ public class Player extends JPanel implements ActionListener{
         this.c = c;
         this.speed = speed;
         this.acc = acc;
+        this.alive = alive;
         setFocusable(true);
         setFocusTraversalKeysEnabled(false);
     }
@@ -47,6 +48,8 @@ public class Player extends JPanel implements ActionListener{
     public String getPClass(){return c;}     // returns status of Player object
     public int getAcc(){return acc;}         // returns accuracy
     public int getSpeed(){return speed;}     // returns speed
+    public boolean getAlive(){return alive;}
+    public void setAlive(boolean b){alive = b;}
     public void setLoc(int x, int y){loc = x + " " + y;}
     public String getLoc(){return loc;}      // return location of Player object as a string
     

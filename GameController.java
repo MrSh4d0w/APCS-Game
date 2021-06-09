@@ -151,18 +151,22 @@ public class GameController {
                     switch(GameRunner.getP(c).getPClass()){
                         case "ASSAULT":
                             enemyAt(x, y).setHP(enemyAt(x, y).getHP()-10);
+                            if(enemyAt(x, y).getHP() <= 0){enemyAt(x,y).setAlive(false);}
                             break;
                         case "MELEE":
                             enemyAt(x, y).setHP(enemyAt(x, y).getHP()-20);
+                            if(enemyAt(x, y).getHP() <= 0){enemyAt(x,y).setAlive(false);}
                             break;
                         case "SNIPER":
-                        enemyAt(x, y).setHP(enemyAt(x, y).getHP()-30);
+                            enemyAt(x, y).setHP(enemyAt(x, y).getHP()-30);
+                            if(enemyAt(x, y).getHP() <= 0){enemyAt(x,y).setAlive(false);}
                             break;
                         case "TANK":
                             enemyAt(x, y).setHP(enemyAt(x, y).getHP()-20);
+                            if(enemyAt(x, y).getHP() <= 0){enemyAt(x,y).setAlive(false);}
                             break;
                     }
-                }
+                } else {return -6;}
             }
         } catch (Exception ex){
             System.out.println("NumberFormatException: " + ex);

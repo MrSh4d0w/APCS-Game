@@ -77,11 +77,13 @@ public class console extends JPanel implements ActionListener{
                 if(state == -5){insert("That location is obstructed", txt);break;} else
                 if(state == -1){insert("That position does not exist", txt);break;} else{
                     console.setHasAttacked(true); // Prevents from attacking again
+                    if(state == -6){insert("You tried to attack an enemy, but you missed", txt);break;}
                     insert("Attacked " + text[1], txt);
                 }
+                checkAliveEnts();
                 break;
             case "next":
-                if(text.length<=1 || !text[1].equalsIgnoreCase("turn")){insert("That is not a command. If you need help, type \"help\"", txt);break;} // Checks to see if "next turn" is inputted and not just "next"
+                // if(text.length<=1){insert("That is not a command. If you need help, type \"help\"", txt);break;} // Checks to see if "next turn" is inputted and not just "next"
                 if(turn==4){turn=0;}
                 else{turn++;}
                 console.setHasMoved(false); // Allows the next character to move
@@ -235,5 +237,11 @@ public class console extends JPanel implements ActionListener{
 
     // private static void setTurn(int t){turn = t;}
     public static int getTurn(){return turn;}
+    public static void checkAliveEnts() {
+        for(int i = 0; i < 4; i++) {
+            if(GameRunner.getP(i).getAlive() == false){GameRunner.getP(i).setVisible(false);}
+        }
+    }
+
 
 }

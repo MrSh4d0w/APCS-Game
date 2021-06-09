@@ -13,8 +13,9 @@ public class Enemy extends JPanel implements ActionListener {
     private int HP, speed, acc;
     private String c;
     private String loc;
+    private boolean alive;
 
-    public Enemy(int HP, String c, int speed, int acc) {
+    public Enemy(int HP, String c, int speed, int acc, boolean alive) {
         Timer timer = new Timer(100, this);
         timer.setInitialDelay(0);
         timer.start();
@@ -22,6 +23,7 @@ public class Enemy extends JPanel implements ActionListener {
         this.c = c;
         this.speed = speed;
         this.acc = acc;
+        this.alive = alive;
         setFocusable(true);
         setFocusTraversalKeysEnabled(false);
     }
@@ -38,6 +40,8 @@ public class Enemy extends JPanel implements ActionListener {
     public String getEClass(){return c;}     // returns status of Player object
     public int getAcc(){return acc;}         // returns accuracy
     public int getSpeed(){return speed;}     // returns speed
+    public boolean getAlive(){return alive;}
+    public void setAlive(boolean b){alive = b;}
     public void setLoc(int x, int y){loc = x + " " + y;}
     public String getLoc(){return loc;}
     public String getPos() {
