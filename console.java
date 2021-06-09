@@ -89,8 +89,10 @@ public class console extends JPanel implements ActionListener{
                     EnemyController.attack();
                     textField.setText("");
                 } // if all of the characters have their turn in the round, it resets the turns back to 0.
-                GameRunner.removeGrid(); // Redraws grid.
-                GameRunner.drawGrid();
+                else{
+                    GameRunner.removeGrid(); // Redraws grid.
+                    GameRunner.drawGrid();
+                }
                 break;
             case "help": // Outputs a list of commands the user can input.
                 insert("\nMove To - Moves the currently selected character to specified position\n\nTarget - Targets a specific position\n\nAttack - Attack position that you targeted\n\nInfo - Get stats about the currently selected character\n\nNext Turn - Goes to the next turn\n\nClose - Closes the game\n\nHelp - Displays this message\n\nClear - Clears the console", txt);

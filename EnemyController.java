@@ -8,6 +8,8 @@ public class EnemyController {
     private static boolean failState;
     private static String enemy;
     private static int damage;
+    private Object lock1 = new Object();
+    private Object lock2 = new Object();
 
     public static void boomerAction(int c){
         String[] enemyLoc = GameRunner.getE(c).getLoc().split(" ");
@@ -47,10 +49,6 @@ public class EnemyController {
     }
     public static void robotAction(int c){attackTimer(c);}
     public static void attackTimer(int e){
-        Timer timer = new Timer();
-        TimerTask task;
-        long c = System.currentTimeMillis()+1000;
-
         /*
         For this next section, we had an issue where we needed to wait a certain amount of time,
         but everything we tried made the game hang for that amount of time. So, instead, I (Alex),
@@ -61,33 +59,11 @@ public class EnemyController {
         Threads and asynchronous coding is difficult but we lucked out and managed to implement a 
         simple thread to fit our purposes exactly. Also, we didn't know how threads until tuesday the week the project was due. Sorry.
         */
-        Thread newThread = new Thread(() -> {//creates new thread that acts as a timer and run asynchronously
-            long cTime = System.currentTimeMillis()+2000 ;//creates value of the current time in milliseconds 
-                switch(e) {//switch statement to check to see which enemy is attacking and run their respective methods
-                    case 0: 
-                        copAttack();
-                        break;
-                    case 1: 
-                        copAttack();
-                        break;
-                    case 2: 
-                        robotAttack();
-                        break;
-                    case 3: 
-                        robotAttack();
-                        break;
-                    case 4: 
-                        boomerAttack();
-                        break;
-                }
-            while (System.currentTimeMillis() != cTime){System.out.println("g");};
-            failureState();
-            System.out.println("it works hopefully");
-        });
-        newThread.start();
+        AttackTimer thread = new AttackTimer(e);
+        thread.start();
     }
 
-    private static void failureState(){ // Output if the enemy either fails or succeeds at hitting a Player object.
+    static void failureState(){ // Output if the enemy either fails or succeeds at hitting a Player object.
         if(failState){
             if(!LineOfSight.canAttack(enemyX, enemyY, playerX, playerY)){
                 console.insertMsg("The " + enemy + " has failed to hit you because of an obstruction");
@@ -99,16 +75,17 @@ public class EnemyController {
         }
     }
     
-    private static void boomerAttack() { // Attack for Boomer. 
+    static void boomerAttack() { // Attack for Boomer. 
         console.insertMsg("The boomer at position " + GameController.letterParser(enemyX/112) + (enemyY-36)/112 + " is attacking a player at " + GameController.letterParser(playerX/112) + (playerY-36)/112);
         int c = GameController.playerAt(playerX, playerY);
         GameRunner.getP(c).setHP(GameRunner.getP(c).getHP()-100); // Takes current HP of Player object it is attacking and takes 100 HP away from it, instantly killing it
     }
-    private static void copAttack() { // Attack for Cop objects
+    static void copAttack() { // Attack for Cop objects
         console.insertMsg("The cop at position " + GameController.letterParser(enemyX/112) + (enemyY-36)/112 + " is attacking a player at " + GameController.letterParser(playerX/112) + (playerY-36)/112);
         int c = GameController.playerAt(playerX, playerY);
         if(LineOfSight.canAttack(enemyX, enemyY, playerX, playerY)){
             int rand = (int)(Math.random()*100+1);
+            
             if(rand>50){ // Randomization for attack. 50/50 chance of the enemy attacking you and hitting you.
                 failState = false;
                 enemy = "Cop";
@@ -120,7 +97,7 @@ public class EnemyController {
             }
         }
     }
-    private static void robotAttack() { // Attack for robot objects
+    static void robotAttack() { // Attack for robot objects
         console.insertMsg("The robot at position " + GameController.letterParser(enemyX/112) + (enemyY-36)/112 + " is attacking a player at " + GameController.letterParser(playerX/112) + (playerY-36)/112);
         int c = GameController.playerAt(playerX, playerY);
         if(LineOfSight.canAttack(enemyX, enemyY, playerX, playerY)){

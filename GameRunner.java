@@ -304,6 +304,7 @@ public class GameRunner {
 
     public static void drawGrid() { // Draws the grid. This includes the green and gold squares that surround the
                                     // Player object whose turn it is.
+        if (console.getTurn() == 4) {return;}
         String[][] g = GameController.createGrid();
         String[] loc = GameRunner.getP(console.getTurn()).getLoc().split(" ");
         int x = Integer.parseInt(loc[0]);
@@ -314,46 +315,47 @@ public class GameRunner {
 
         for (int i = 1; i < g.length - 1; i++) {
             for (int j = 1; j < g[0].length - 1; j++) {
-                if (console.getTurn() != 4) {
+                
 
-                    String[] gLoc = g[i][j].split(" ");
-                    int x2 = Integer.parseInt(gLoc[0]);
-                    int y2 = Integer.parseInt(gLoc[1]);
-                    int[][] idk = GameController.getEntities();
+                String[] gLoc = g[i][j].split(" ");
+                int x2 = Integer.parseInt(gLoc[0]);
+                int y2 = Integer.parseInt(gLoc[1]);
+                int[][] idk = GameController.getEntities();
 
-                    if (x == x2 && y == y2) { // Checks to if x=x2 and y=y2. If true then that is the position of the
-                                              // currently selected Player object. It then puts a gold box on the square
-                                              // that the Player object is at.
-                        grids.add(new Grid("gold"));
+                if (x == x2 && y == y2) { // Checks to if x=x2 and y=y2. If true then that is the position of the
+                                            // currently selected Player object. It then puts a gold box on the square
+                                            // that the Player object is at.
+                    grids.add(new Grid("gold"));
+                    counter++;
+                    grids.get(counter).setLocation(x2, y2);
+                    mainPanel.add(grids.get(counter), 6);
+                } else if (idk[i][j] == 1) {
+                } else if (idk[i][j] > 1) { // Uses the array from getEntities. In this case, anything greater than
+                                            // 1 would be any of the enemy object. This puts a red box on the square
+                                            // that the Enemy object is on.
+                    grids.add(new Grid("red"));
+                    counter++;
+                    grids.get(counter).setLocation(x2, y2);
+                    mainPanel.add(grids.get(counter), 6);
+                    // Puts a green box on the squares around the currently selected characters that
+                    // are within the speed. For example, if the speed is 2, green boxes will be
+                    // places 2 spaces in each direction from the character. Doesn't apply to walls,
+                    // other players or enemy objects.
+                } else if (Math.abs(x - x2) <= (112 * speed) && Math.abs(y - y2) < (36 + (112 * speed))) {
+                    if (!console.getHasMoved()) {
+                        grids.add(new Grid("green"));
                         counter++;
                         grids.get(counter).setLocation(x2, y2);
                         mainPanel.add(grids.get(counter), 6);
-                    } else if (idk[i][j] == 1) {
-                    } else if (idk[i][j] > 1) { // Uses the array from getEntities. In this case, anything greater than
-                                                // 1 would be any of the enemy object. This puts a red box on the square
-                                                // that the Enemy object is on.
-                        grids.add(new Grid("red"));
-                        counter++;
-                        grids.get(counter).setLocation(x2, y2);
-                        mainPanel.add(grids.get(counter), 6);
-                        // Puts a green box on the squares around the currently selected characters that
-                        // are within the speed. For example, if the speed is 2, green boxes will be
-                        // places 2 spaces in each direction from the character. Doesn't apply to walls,
-                        // other players or enemy objects.
-                    } else if (Math.abs(x - x2) <= (112 * speed) && Math.abs(y - y2) < (36 + (112 * speed))) {
-                        if (!console.getHasMoved()) {
-                            grids.add(new Grid("green"));
-                            counter++;
-                            grids.get(counter).setLocation(x2, y2);
-                            mainPanel.add(grids.get(counter), 6);
-                        }
                     }
                 }
+                
             }
         }
     }
 
     public static void removeGrid() { // removes the grid, the one with the green, red, and gold squares.
+        if(grids == null){return;}
         for (Grid g : grids) {
             g.setVisible(false);
             mainPanel.remove(g);
