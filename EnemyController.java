@@ -111,6 +111,7 @@ public class EnemyController {
                 console.insertMsg("The robot missed!");
             } else {
                 console.insertMsg("The robot has hit you! You have taken " + damageRob + " damage!");
+                GameRunner.getP(GameController.playerAt(playerX, playerY)).setHP(GameRunner.getP(GameController.playerAt(playerX, playerY)).getHP()-damageRob);
             } 
             RobFail = true;
             damageRob = 0;
@@ -119,6 +120,7 @@ public class EnemyController {
                 console.insertMsg("The cop missed!");
             } else {
                 console.insertMsg("The cop has hit you! You have taken " + damageCop + " damage!");
+                GameRunner.getP(GameController.playerAt(playerX, playerY)).setHP(GameRunner.getP(GameController.playerAt(playerX, playerY)).getHP()-damageCop);
             }
             CopFail = true;
             damageCop = 0;
