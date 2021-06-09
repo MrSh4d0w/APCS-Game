@@ -126,7 +126,7 @@ public class GameController {
     }
 
 
-    public static int attack(int c, String[] args){ // Similar concept to the setPosition method at the top of this class. 
+    public static int attack(int c, String[] args, String text){ // Similar concept to the setPosition method at the top of this class. 
         if(args==null){return -1;}//return -1 if the command does not start with "move to" (edge case where nothing after "move")
         if(!args[0].equalsIgnoreCase("attack") || args[1].length()>2){return -1;}//returns -1 if the command does not start with "move to"
         
@@ -151,18 +151,22 @@ public class GameController {
                     switch(GameRunner.getP(c).getPClass()){
                         case "ASSAULT":
                             enemyAt(x, y).setHP(enemyAt(x, y).getHP()-10);
+                            console.insert("You attacked an enemy at "+ enemyAt(x,y).getPos() + " and did 10 damage!", text);
                             if(enemyAt(x, y).getHP() <= 0){enemyAt(x,y).setAlive(false);}
                             break;
                         case "MELEE":
                             enemyAt(x, y).setHP(enemyAt(x, y).getHP()-20);
+                            console.insert("You attacked an enemy at "+ enemyAt(x,y).getPos() + " and did 20 damage!", text);
                             if(enemyAt(x, y).getHP() <= 0){enemyAt(x,y).setAlive(false);}
                             break;
                         case "SNIPER":
                             enemyAt(x, y).setHP(enemyAt(x, y).getHP()-30);
+                            console.insert("You attacked an enemy at "+ enemyAt(x,y).getPos() + " and did 30 damage!", text);
                             if(enemyAt(x, y).getHP() <= 0){enemyAt(x,y).setAlive(false);}
                             break;
                         case "TANK":
                             enemyAt(x, y).setHP(enemyAt(x, y).getHP()-20);
+                            console.insert("You attacked an enemy at "+ enemyAt(x,y).getPos() + " and did 20 damage!", text);
                             if(enemyAt(x, y).getHP() <= 0){enemyAt(x,y).setAlive(false);}
                             break;
                     }

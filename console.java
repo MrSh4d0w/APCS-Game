@@ -72,13 +72,12 @@ public class console extends JPanel implements ActionListener{
                 insert("Moved to " + text[2], txt); // Outputs to the Textarea that the user has moved to the position they inputted.
                 break;
             case "attack":
-                state = GameController.attack(turn, text);
+                state = GameController.attack(turn, text, txt);
                 if(state == -4){insert("You have already attacked with this character", txt);break;}
                 if(state == -5){insert("That location is obstructed", txt);break;} else
                 if(state == -1){insert("That position does not exist", txt);break;} else{
-                    console.setHasAttacked(true); // Prevents from attacking again
+                    setHasAttacked(true); // Prevents from attacking again
                     if(state == -6){insert("You tried to attack an enemy, but you missed", txt);break;}
-                    insert("Attacked " + text[1], txt);
                 }
                 checkAliveEnts();
                 break;
@@ -142,6 +141,7 @@ public class console extends JPanel implements ActionListener{
 
     private void nextTurn(String txt) {
         turn++;
+        if(turn!=4 && !GameRunner.getP(turn).getAlive()) {nextTurn(txt);return;}
         console.setHasMoved(false); // Allows the next character to move
         console.setHasAttacked(false); // Allows the next character to attack
         insert("Turn is now: " + (turn + 1), txt); // Outputs the NEW turn. +1 is added for aesthetics. 
