@@ -50,39 +50,37 @@ public class EnemyController {
         enemyLoc = GameRunner.getE(c).getLoc().split(" ");
         enemyX = Integer.parseInt(enemyLoc[0]);
         enemyY = Integer.parseInt(enemyLoc[1]);
-        
+        copAttack();
    //stay x grids away from player and shoot
     }
-    public static void robotAction(int c){}
+    public static void robotAction(int c){
+        String[] enemyLoc = GameRunner.getE(c).getLoc().split(" ");
+        enemyX = Integer.parseInt(enemyLoc[0]);
+        enemyY = Integer.parseInt(enemyLoc[1]);
+        robotAttack();
+    }
 
     static void failureState(){ // Output if the enemy either fails or succeeds at hitting a Player object.
-        if(RobFail && damageRob==0){
-                    RobFail = true;
-                    damageRob = 0;
-                    if(!LineOfSight.canAttack(enemyX, enemyY, playerX, playerY)){
-                        console.insertMsg("The robot has failed to hit you because of an obstruction");
-                    } else {
-                        console.insertMsg("The robot has failed to hit you!");
-                    }
-                    
-        } else if (!RobFail && damageRob!=0){
-                    console.insertMsg("The " + enemy + " has hit you! You have taken " + damageRob + " damage!");        } else if(CopFail && damageCop!=0){
-                    RobFail = true;
-                    damageRob = 0;
-                        if(!LineOfSight.canAttack(enemyX, enemyY, playerX, playerY)){
-                        console.insertMsg("The robot has failed to hit you because of an obstruction");
-                    } else {
-                        console.insertMsg("The robot missed their attack!");
-                    }
-                    
-        } else if (CopFail && damageCop==0){
-                    console.insertMsg("The cop missed their attack!");
-                    CopFail = true;
-                    damageCop = 0;
-        } else if(!CopFail && damageCop!=0){
-                    console.insertMsg("The cop has hit you! You have taken " + damageCop + " damage!");
-                    CopFail = true;
-                    damageCop = 0;
+        if(!LineOfSight.canAttack(enemyX, enemyY, playerX, playerY)){
+            console.insertMsg("The " + enemy + " has failed to hit you because of an obstruction");
+            return;
+        } 
+        if(enemy.equals("robot")){
+            if(RobFail){
+                console.insertMsg("The robot missed!");
+            } else {
+                console.insertMsg("The robot has hit you! You have taken " + damageRob + " damage!");
+            } 
+            RobFail = true;
+            damageRob = 0;
+        } else {
+            if(CopFail){
+                console.insertMsg("The cop missed!");
+            } else {
+                console.insertMsg("The cop has hit you! You have taken " + damageCop + " damage!");
+            }
+            CopFail = true;
+            damageCop = 0;
         }
     }
     
@@ -97,12 +95,17 @@ public class EnemyController {
             int rand = (int)(Math.random()*100+1);
             if(rand>50){ // Randomization for attack. 50/50 chance of the enemy attacking you and hitting you.
                 CopFail = false;
+                enemy = "cop";
                 damageCop = rand/10;
             } else {
                 CopFail = true;
-                enemy = "Cop";
+                enemy = "cop";
                 damageCop = 0;
             }
+        } else {
+            CopFail = true;
+            enemy = "cop";
+            damageCop = 0;
         }
         EnemyController.failureState();
     }
@@ -112,13 +115,17 @@ public class EnemyController {
             int rand = (int)(Math.random()*100+1);
             if(rand>50){ // Randomization for attack. 50/50 chance of the enemy attacking you and hitting you.
                 RobFail = false;
-                enemy = "Robot";
+                enemy = "robot";
                 damageRob = (rand/10)+5;
             } else {
                 RobFail = true;
-                enemy = "Robot";
+                enemy = "robot";
                 damageRob = 0;
             }   
+        } else {
+            RobFail = true;
+            enemy = "robot";
+            damageRob = 0;
         }
         EnemyController.failureState();
     }
@@ -170,15 +177,11 @@ public class EnemyController {
 
         System.out.println(playerX + " " + playerY + " " + enemyX + " " + enemyY);
     }
-
     public static void attack(){
         copAction(0);
-        copAttack();
         copAction(1);
-        copAttack();
         robotAction(2);
-        robotAttack();
-        if(Level.getCurrentLevel()==2 || Level.getCurrentLevel()==3) {robotAction(3);robotAttack();}
+        if(Level.getCurrentLevel()==2 || Level.getCurrentLevel()==3) {robotAction(3);}
         if(Level.getCurrentLevel()==3){boomerAction(4);}
     }
 }
