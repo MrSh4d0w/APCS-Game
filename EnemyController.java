@@ -5,11 +5,11 @@ import java.util.TimerTask;
 public class EnemyController {
     private static int playerX, playerY, enemyX, enemyY;
     private static int seconds = 0;
-    private static boolean failState;
+    private static boolean CopFail, RobFail;
     private static String enemy;
-    private static int damage;
-    private Object lock1 = new Object();
-    private Object lock2 = new Object();
+    private static int damageCop, damageRob;
+    private static Object lock1 = new Object();
+    private static Object lock2 = new Object();
 
     public static void boomerAction(int c){
         String[] enemyLoc = GameRunner.getE(c).getLoc().split(" ");
@@ -64,16 +64,54 @@ public class EnemyController {
     }
 
     static void failureState(){ // Output if the enemy either fails or succeeds at hitting a Player object.
-        if(failState){
-            if(!LineOfSight.canAttack(enemyX, enemyY, playerX, playerY)){
-                console.insertMsg("The " + enemy + " has failed to hit you because of an obstruction");
-            } else {
-                console.insertMsg("The " + enemy + " has failed to hit you!");
-            }
-        } else {
-            console.insertMsg("The " + enemy + " has hit you! You have taken " + damage + " damage!");
+        if(RobFail && damageRob==0){
+                    RobFail = true;
+                    damageRob = 0;
+                    if(!LineOfSight.canAttack(enemyX, enemyY, playerX, playerY)){
+                        console.insertMsg("The rob has failed to hit you because of an obstruction");
+                    } else {
+                        console.insertMsg("The rob has failed to hit you!");
+                    }
+                    
+        } else if (!RobFail && damageRob!=0){
+                    console.insertMsg("The " + enemy + " has hit you! You have taken " + damageRob + " damage!");        } else if(CopFail && damageCop!=0){
+                    RobFail = true;
+                    damageRob = 0;
+                        if(!LineOfSight.canAttack(enemyX, enemyY, playerX, playerY)){
+                        console.insertMsg("The cop has failed to hit you because of an obstruction");
+                    } else {
+                        console.insertMsg("The cop has failed to hit you!");
+                    }
+                    
+        } else if (CopFail && damageCop==0){
+                    console.insertMsg("The cop has failed to hit you");
+                    CopFail = true;
+                    damageCop = 0;
+        } else if(!CopFail && damageCop!=0){
+                    console.insertMsg("The cop has hit you! You have taken " + damageCop + " damage!");
+                    CopFail = true;
+                    damageCop = 0;
         }
     }
+
+
+    static synchronized void a(int c){
+        switch (c){
+            case 0:
+                copAttack();
+                break;
+            case 1:
+                robotAttack();
+                break;
+            case 2:
+                boomerAttack();
+                break;
+        }
+    }
+
+
+
+
     
     static void boomerAttack() { // Attack for Boomer. 
         console.insertMsg("The boomer at position " + GameController.letterParser(enemyX/112) + (enemyY-36)/112 + " is attacking a player at " + GameController.letterParser(playerX/112) + (playerY-36)/112);
@@ -83,35 +121,51 @@ public class EnemyController {
     static void copAttack() { // Attack for Cop objects
         console.insertMsg("The cop at position " + GameController.letterParser(enemyX/112) + (enemyY-36)/112 + " is attacking a player at " + GameController.letterParser(playerX/112) + (playerY-36)/112);
         int c = GameController.playerAt(playerX, playerY);
+        
         if(LineOfSight.canAttack(enemyX, enemyY, playerX, playerY)){
             int rand = (int)(Math.random()*100+1);
             
             if(rand>50){ // Randomization for attack. 50/50 chance of the enemy attacking you and hitting you.
-                failState = false;
-                enemy = "Cop";
-                damage = rand/10;
+                CopFail = false;
+                damageCop = rand/10;
             } else {
-                failState = true;
+                CopFail = true;
                 enemy = "Cop";
-                damage = 0;
+                damageCop = 0;
             }
+            
+            
         }
+        
+        long cTime2 = System.currentTimeMillis()+2000 ;//creates value of the current time in milliseconds 
+        while (System.currentTimeMillis() != cTime2){System.out.println("g");};
+        EnemyController.failureState();
+        System.out.println("it works hopefully");
     }
     static void robotAttack() { // Attack for robot objects
         console.insertMsg("The robot at position " + GameController.letterParser(enemyX/112) + (enemyY-36)/112 + " is attacking a player at " + GameController.letterParser(playerX/112) + (playerY-36)/112);
         int c = GameController.playerAt(playerX, playerY);
+        
         if(LineOfSight.canAttack(enemyX, enemyY, playerX, playerY)){
             int rand = (int)(Math.random()*100+1);
+            
             if(rand>50){ // Randomization for attack. 50/50 chance of the enemy attacking you and hitting you.
-                failState = false;
+                RobFail = false;
                 enemy = "Robot";
-                damage = (rand/10)+5;
+                damageRob = (rand/10)+5;
             } else {
-                failState = true;
+                RobFail = true;
                 enemy = "Robot";
-                damage = 0;
+                damageRob = 0;
             }
+            
+            
         }
+        
+        long cTime = System.currentTimeMillis()+2000 ;//creates value of the current time in milliseconds 
+        while (System.currentTimeMillis() != cTime){System.out.println("g");};
+        EnemyController.failureState();
+        System.out.println("it works hopefully");
     }
 
 

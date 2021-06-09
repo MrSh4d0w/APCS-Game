@@ -6,26 +6,23 @@ public class AttackTimer extends Thread{
     }
 
     public void run() {
-        long cTime = System.currentTimeMillis()+2000 ;//creates value of the current time in milliseconds 
+        
                 switch(e) {//switch statement to check to see which enemy is attacking and run their respective methods
                     case 0: 
-                        EnemyController.copAttack();
+                        EnemyController.a(0);
                         break;
                     case 1: 
-                        EnemyController.copAttack();
+                        EnemyController.a(0);
                         break;
                     case 2: 
-                        EnemyController.robotAttack();
+                        EnemyController.a(1);
                         break;
                     case 3: 
-                        EnemyController.robotAttack();
+                        EnemyController.a(1);
                         break;
                     case 4: 
-                        EnemyController.boomerAttack();
+                        EnemyController.a(2);
                         break;
                 }
-            while (System.currentTimeMillis() != cTime){System.out.println("g");};
-            EnemyController.failureState();
-            System.out.println("it works hopefully");
     }
 }
