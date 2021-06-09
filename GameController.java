@@ -30,7 +30,7 @@ public class GameController {
         return 1;
     }
 
-    public static int setLocationE(int c, int x, int y) { // Does similar things as the previous method, but the values are not from what the user entered but are generated automatically with an algroithm. See EnemyController class for more info.
+    public static int setLocationE(int c, int x, int y) { // Does similar things as the previous method, but the values are not from what the user entered but are generated automatically with an algorithm. See EnemyController class for more info.
         String[] loc = GameRunner.getE(c).getLoc().split(" ");
         int oldX = Integer.parseInt(loc[0]);
         int oldY = Integer.parseInt(loc[1]);
@@ -58,7 +58,7 @@ public class GameController {
         String [] playerLocations = getPLocations();
         String [] enemyLocations = getELocations();
         String [] wallLocations = null;;
-        // Makes sure the right wallLocations are used depnding on the current level.
+        // Makes sure the right wallLocations are used depending on the current level.
         if(Level.getCurrentLevel()==1){wallLocations = Level.getLevel1Cords();} 
         else if(Level.getCurrentLevel()==2){wallLocations = Level.getLevel2Cords();}
         else if(Level.getCurrentLevel()==3){wallLocations = Level.getLevel3Cords();}
