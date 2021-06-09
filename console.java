@@ -85,7 +85,7 @@ public class console extends JPanel implements ActionListener{
                 else{turn++;}
                 console.setHasMoved(false); // Allows the next character to move
                 console.setHasAttacked(false); // Allows the next character to attack
-                insert("Turn is now: " + (turn + 1)); // Outputs the NEW turn. +1 is added for asthetics. 
+                insert("Turn is now: " + (turn + 1)); // Outputs the NEW turn. +1 is added for aesthetics. 
                 GameRunner.removeGrid(); // Redraws grid.
                 GameRunner.drawGrid();
                 break;
@@ -167,14 +167,14 @@ public class console extends JPanel implements ActionListener{
         String txt = textField.getText().replace(",", "");
         return txt.trim().split("\s");
     }
-    private void labelInitializer() { // Sets asthetics of the JLabel.
+    private void labelInitializer() { // Sets aesthetics of the JLabel.
         label.setForeground(notWhite);
         label.setBackground(notBlack);
         label.setSize(20, 30);
         label.setOpaque(true);
         label.setLocation(0, 0);
     }
-    private void textFieldInitializer() { // Sets asthetics of the textField
+    private void textFieldInitializer() { // Sets aesthetics of the textField
         textField.setBackground(notBlack);
         textField.setForeground(notWhite);
         textField.addActionListener(this);
@@ -183,7 +183,7 @@ public class console extends JPanel implements ActionListener{
         textField.setCaretColor(notWhite);
         textField.setBorder(BorderFactory.createLineBorder(notBlack));
     }
-    private void textAreaInitializer() { // Sets asthetics of the textArea
+    private void textAreaInitializer() { // Sets aesthetics of the textArea
         
         textArea.setSize(464, 1060);
         textArea.setBackground(notBlack);

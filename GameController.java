@@ -13,9 +13,9 @@ public class GameController {
         
         try{
             int[][] idk = GameController.getEntities(); // Gets the location of each all walls, all Player objects and all Enemy objects and puts them into an 2d array of ints. 
-            int y = Character.getNumericValue(args[2].charAt(1))*112; // Parses the X and Y value from the Args variable from the gameboard cords to numberical cords. Ex. A1 turns into 112 and 148.
+            int y = Character.getNumericValue(args[2].charAt(1))*112; // Parses the X and Y value from the Args variable from the gameboard cords to numerical cords. Ex. A1 turns into 112 and 148.
             int x = (Character.getNumericValue(args[2].charAt(0))-9)*112;
-            if(idk[x/112][y/112]>0){return -3;} // return -3 if the location is currently being occupied by aother Player or Enemy object, or a wall. 
+            if(idk[x/112][y/112]>0){return -3;} // return -3 if the location is currently being occupied by another Player or Enemy object, or a wall. 
             else if(Math.abs(x-oldX)>(112*speed)||Math.abs(y-oldY)>(36+112*speed)){return -2;}//return -2 if location is not valid
             if(console.getHasMoved()){return -4;}
             if (x >= 112 && y >= 112 && x < 1344 && y < 896) { // Checks to see if the location inputed is within the limits of the gameboard.
@@ -30,7 +30,7 @@ public class GameController {
         return 1;
     }
 
-    public static int setLocationE(int c, int x, int y) { // Does similar things as the previous method, but the values are not from what the user entered but are generated automatically with an algroithm. See EnemyController class for more info.
+    public static int setLocationE(int c, int x, int y) { // Does similar things as the previous method, but the values are not from what the user entered but are generated automatically with an algorithm. See EnemyController class for more info.
         String[] loc = GameRunner.getE(c).getLoc().split(" ");
         int oldX = Integer.parseInt(loc[0]);
         int oldY = Integer.parseInt(loc[1]);
@@ -58,7 +58,7 @@ public class GameController {
         String [] playerLocations = getPLocations();
         String [] enemyLocations = getELocations();
         String [] wallLocations = null;;
-        // Makes sure the right wallLocations are used depnding on the current level.
+        // Makes sure the right wallLocations are used depending on the current level.
         if(Level.getCurrentLevel()==1){wallLocations = Level.getLevel1Cords();} 
         else if(Level.getCurrentLevel()==2){wallLocations = Level.getLevel2Cords();}
         else if(Level.getCurrentLevel()==3){wallLocations = Level.getLevel3Cords();}
