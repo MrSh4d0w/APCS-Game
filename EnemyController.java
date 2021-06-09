@@ -59,10 +59,10 @@ public class EnemyController {
         a lambda expression to instantiate it to whatever code we need. The lambda expression format
         is a short way of creating a single use function where (parameters) -> {code} is the format.
         Threads and asynchronous coding is difficult but we lucked out and managed to implement a 
-        simple thread to fit our purposes exactly.
+        simple thread to fit our purposes exactly. Also, we didn't know how threads until tuesday the week the project was due. Sorry.
         */
         Thread newThread = new Thread(() -> {//creates new thread that acts as a timer and run asynchronously
-            long cTime = System.currentTimeMillis()+5000 ;//creates value of the current time in milliseconds 
+            long cTime = System.currentTimeMillis()+2000 ;//creates value of the current time in milliseconds 
                 switch(e) {//switch statement to check to see which enemy is attacking and run their respective methods
                     case 0: 
                         copAttack();

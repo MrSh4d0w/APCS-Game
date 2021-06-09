@@ -13,29 +13,24 @@ import javax.swing.Timer;
 
 
 public class Player extends JPanel implements ActionListener{
-                                             // private static int counter, assaultCounter;
-    private int HP, speed, acc;
-    private int i = 0;                       // This is for the animations DONT TOUCH
-    private String c;
-    private BufferedImage img;
-    private String loc;
-    private final int[][] spriteSheetCords = { { 0, 0, 112, 112 }, { 112, 0, 112, 112 }, { 224, 0, 112, 112 },
-                    { 336, 0, 112, 112 }, { 448, 0, 112, 112 }, { 560, 0, 112, 112 }, { 672, 0, 112, 112 },
-                    { 784, 0, 112, 112 } };
+    // private static int counter, assaultCounter;
+    private int HP, speed, acc; // Creates variables for HP, speed of the player (How many space it can move), and accuracy (how well it can hit a target).
+    private String c; // Name of the class. "ASSAULT", "TANK", "SNIPER", "MELEE"
+    private BufferedImage img; 
+    private String loc; // Locations of the current player object as a string. Ex. "112 148" - This would correspond to A1 on the gameboard.
     
-    private ActionListener actionListener = new ActionListener() { 
+    //private ActionListener actionListener = new ActionListener(); 
+    /*{ // This is needed for the animations to work properly.
         @Override
-        public void actionPerformed(ActionEvent e) {
-            i++;
-            if (i == spriteSheetCords.length) {i=0;}
+        public void actionPerformed(ActionEvent e) { // 
             revalidate();
             repaint();   
         }
-    };
+    };*/
     
-    public Player(int HP, String c, int speed, int acc) {  
-        Timer timer = new Timer(100, actionListener);
-        System.currentTimeMillis();
+    public Player(int HP, String c, int speed, int acc) { 
+        Timer timer = new Timer(100, this);
+        System.currentTimeMillis(); // This is needed for the time in EnemyController.java to work properly, I believe. 
         timer.setInitialDelay(0);
         timer.start();
         this.HP = HP;
@@ -59,11 +54,11 @@ public class Player extends JPanel implements ActionListener{
     public int getAcc(){return acc;}         // returns accuracy
     public int getSpeed(){return speed;}     // returns speed
     public void setLoc(int x, int y){loc = x + " " + y;}
-    public String getLoc(){return loc;}
+    public String getLoc(){return loc;}      // return location of Player object as a string
     
     // public void move(pClass p, int amnt){}// move char [amnt] tiles in [dir] direction
 
-    public void paintComponent(Graphics g){
+    public void paintComponent(Graphics g){ // The PaintComponent uses a switch case to detect which method to run to animate. "c" is the name of the class.  
         super.paintComponent(g);
         switch(c){
             case "ASSAULT":
@@ -82,7 +77,7 @@ public class Player extends JPanel implements ActionListener{
     }
 
     public Graphics animateASSAULT(Graphics g){        
-        Image ii = new ImageIcon(this.getClass().getResource("images/Character1_IdleGun.gif")).getImage();
+        Image ii = new ImageIcon(this.getClass().getResource("images/Character1_IdleGun.gif")).getImage(); // the "this.getClass.getResource" is something found online that gets the image from the images folder. 
         g.drawImage(ii, 0, 0, null);
         return g;
     }
@@ -115,7 +110,10 @@ public class Player extends JPanel implements ActionListener{
         getSpeed();
         getPClass();
     }
-    public void actionPerformed(ActionEvent e) {}
+    public void actionPerformed(ActionEvent e) { // Needed in order for the character animations to work properly.
+        repaint();
+        revalidate();
+    }
 
     
 }

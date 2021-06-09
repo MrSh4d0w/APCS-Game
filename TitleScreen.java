@@ -5,7 +5,7 @@ import java.awt.event.*;
 
 public class TitleScreen {
     
-    private static Image img = new ImageIcon("images/Titlescreen.png").getImage();
+    private static Image img = new ImageIcon("images/Titlescreen.png").getImage(); // Crates an image from the images folder.
 
     public static void main(String[] args) {
         JFrame f = new JFrame();
@@ -22,7 +22,9 @@ public class TitleScreen {
                 // if(ke.getKeyCode() == KeyEvent.VK_LEFT){System.out.println("");};
             }
             public void keyPressed(KeyEvent ke) {
-                if(ke.getKeyCode() == KeyEvent.VK_SPACE){Tutorial.main(null);f.setVisible(false);};
+                // Checks to see if spacebar pressed. If true, then the titlescreen will hide and the tutorial will show.
+                if(ke.getKeyCode() == KeyEvent.VK_SPACE){Tutorial.main(null);f.setVisible(false);}; 
+                
 
             }
             public void keyReleased(KeyEvent ke) {}

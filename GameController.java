@@ -1,10 +1,10 @@
 import java.util.ArrayList;
 
 public class GameController {
-    public static int setLocation(int c, String[] args) {
+    public static int setLocation(int c, String[] args) { // Used to set the location of a Player object. Method is run when user types "move to" followed by a point into the console.
         if(args==null){return -1;}//return -1 if the command does not start with "move to" (edge case where nothing after "move")
         if(!args[0].equalsIgnoreCase("move") && !args[1].equalsIgnoreCase("to")){return -1;}//returns -1 if the command does not start with "move to"
-        String[] loc = GameRunner.getP(c).getLoc().split(" ");
+        String[] loc = GameRunner.getP(c).getLoc().split(" "); // Splits the cords of the Player object "c" from a string into two ints. So "112 148" would turn into X = 112; Y = 148
         int oldX = Integer.parseInt(loc[0]);
         int oldY = Integer.parseInt(loc[1]);
         int speed = GameRunner.getP(c).getSpeed();
@@ -12,25 +12,25 @@ public class GameController {
         
         
         try{
-            int[][] idk = GameController.getEntities();
-            int y = Character.getNumericValue(args[2].charAt(1))*112;
+            int[][] idk = GameController.getEntities(); // Gets the location of each all walls, all Player objects and all Enemy objects and puts them into an 2d array of ints. 
+            int y = Character.getNumericValue(args[2].charAt(1))*112; // Parses the X and Y value from the Args variable from the gameboard cords to numberical cords. Ex. A1 turns into 112 and 148.
             int x = (Character.getNumericValue(args[2].charAt(0))-9)*112;
-            if(idk[x/112][y/112]>0){return -3;} else
-            if(Math.abs(x-oldX)>(112*speed)||Math.abs(y-oldY)>(36+112*speed)){return -2;}//return -2 if location is not valid
+            if(idk[x/112][y/112]>0){return -3;} // return -3 if the location is currently being occupied by aother Player or Enemy object, or a wall. 
+            else if(Math.abs(x-oldX)>(112*speed)||Math.abs(y-oldY)>(36+112*speed)){return -2;}//return -2 if location is not valid
             if(console.getHasMoved()){return -4;}
-            if (x >= 112 && y >= 112 && x < 1344 && y < 896) {
+            if (x >= 112 && y >= 112 && x < 1344 && y < 896) { // Checks to see if the location inputed is within the limits of the gameboard.
                 GameRunner.setLocation(c, x, y+36);
                 GameRunner.removeGrid();
                 GameRunner.drawGrid();
             }
         } catch (Exception ex){
             System.out.println("NumberFormatException: " + ex);
-            return -5;
+            return -5; // Returns only if the user has inputed a position that doesn't exist.
         }
         return 1;
     }
 
-    public static int setLocationE(int c, int x, int y) {
+    public static int setLocationE(int c, int x, int y) { // Does similar things as the previous method, but the values are not from what the user entered but are generated automatically with an algroithm. See EnemyController class for more info.
         String[] loc = GameRunner.getE(c).getLoc().split(" ");
         int oldX = Integer.parseInt(loc[0]);
         int oldY = Integer.parseInt(loc[1]);
@@ -40,7 +40,6 @@ public class GameController {
             int[][] idk = GameController.getEntities();
             if(idk[x/112][y/112]>0){return -3;} else
             if(Math.abs(x-oldX)>(112*speed)||Math.abs(y-oldY)>(36+112*speed)){return -2;}//return -2 if location is not valid
-            
             if (x >= 112 && y >= 112 && x < 1344 && y < 896) {
                 GameRunner.setLocationE(c, x, y);
                 GameRunner.removeGrid();
@@ -53,24 +52,24 @@ public class GameController {
         return 1;
     }
 
-    public static int[][] getEntities(){
+    public static int[][] getEntities(){ // Returns an int array of all entities on the board. An entity can be a Player object, Enemy Object or wall (not an object). 
         int[][] returnArr = new int[13][9];
         String[][] stringGrid = createGrid();
         String [] playerLocations = getPLocations();
         String [] enemyLocations = getELocations();
         String [] wallLocations = null;;
-
-        if(Level.getCurrentLevel()==1){wallLocations = Level.getLevel1Cords();}
+        // Makes sure the right wallLocations are used depnding on the current level.
+        if(Level.getCurrentLevel()==1){wallLocations = Level.getLevel1Cords();} 
         else if(Level.getCurrentLevel()==2){wallLocations = Level.getLevel2Cords();}
         else if(Level.getCurrentLevel()==3){wallLocations = Level.getLevel3Cords();}
-        
+        // Traverses the entirety of returnArr until it is full.
         for(int i = 0; i < returnArr.length; i++){
             for(int k = 0; k < returnArr[0].length; k++){
-                for(String s:playerLocations){
+                for(String s:playerLocations){ // Traverses the playerLocations. If any equal any position on the grid, it makes that position in the returnArr 1.
                     if(s.equals(stringGrid[i][k])){returnArr[i][k] = 1;}
-                } for(int j=0; j<enemyLocations.length;j++){
+                } for(int j=0; j<enemyLocations.length;j++){ // Similar as previous comment, but each enemy object is given its own number from 2-7
                     if(enemyLocations[j].substring(2).equals(stringGrid[i][k])){returnArr[i][k] = j+2;}
-                } for(String s:wallLocations){
+                } for(String s:wallLocations){ // if there is a wall, sets that location in the 2d to -1.  
                     if(s.equals(stringGrid[i][k])){returnArr[i][k] = 1;}
                 }
             }
@@ -78,12 +77,12 @@ public class GameController {
         return returnArr;//b2, e5
     }
 
-    public static int getPosition(int posX, int posY){
+    public static int getPosition(int posX, int posY){ // Gets what number is in the inputed values.
         int[][] grid = getEntities();
         return grid[posX][posY];
     }
 
-    public static String[] getPLocations(){
+    public static String[] getPLocations(){ // get all of the locations of all of the Player objects. 
         ArrayList<String> arr = new ArrayList<String>();
         for(int i=0; i<4; i++){
             arr.add(GameRunner.getP(i).getLoc());
@@ -95,9 +94,9 @@ public class GameController {
         return ret;
     }
 
-    public static String[] getELocations(){
+    public static String[] getELocations(){ // gets all of the locations of all of the Enemy objects. 
         int numEnemies = 3;
-        if (Level.getCurrentLevel() == 1){numEnemies = 3;}
+        if (Level.getCurrentLevel() == 1){numEnemies = 3;} // Makes sure it method is getting the right positions for the right level since some enemies don't show on each level. 
         if (Level.getCurrentLevel() == 2){numEnemies = 4;}
         if (Level.getCurrentLevel() == 3){numEnemies = 5;}
         ArrayList<String> arr = new ArrayList<String>();
@@ -112,7 +111,7 @@ public class GameController {
         return ret;
     }
 
-    public static String[][] createGrid() {
+    public static String[][] createGrid() { // Creates a 13x9 grid for the game. Although the gameboard is a technically a 11x7 grid, the 
         String[][] grid = new String[13][9];
         int rowCoords = 0;
         int columnCoords = 0;

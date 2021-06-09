@@ -5,7 +5,7 @@ import java.awt.event.*;
 
 public class Tutorial {
     
-    private static Image img = new ImageIcon("images/Tutorial.png").getImage();
+    private static Image img = new ImageIcon("images/Tutorial.png").getImage(); // Crates an image from the images folder.
 
     public static void main(String[] args) {
         JFrame f = new JFrame();
@@ -22,6 +22,7 @@ public class Tutorial {
                 // if(ke.getKeyCode() == KeyEvent.VK_LEFT){System.out.println("");};
             }
             public void keyPressed(KeyEvent ke) {
+                // Checks to see if spacebar pressed. If true, then the tutorial will hide and the game will actualyl start.
                 if(ke.getKeyCode() == KeyEvent.VK_SPACE){GameRunner.main(null);f.setVisible(false);};
             }
             public void keyReleased(KeyEvent ke) {}

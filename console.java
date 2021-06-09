@@ -7,21 +7,21 @@ import java.io.IOException;
 // import java.awt.image.*;
 
 public class console extends JPanel implements ActionListener{
-    private static JTextField textField;
+    private static JTextField textField; // Creates a text field where the user can input commands.
     private Image decorations;
-    private static JTextArea textArea;
+    private static JTextArea textArea; // Displays the text of previous commands. 
     private JLabel label;
     // private JPanel background;
     private Color notBlack;
     private Color notWhite;
-    private static int turn;
-    private static boolean hasMoved, hasAttacked;
+    private static int turn; // Controls whose turn it is currently.
+    private static boolean hasMoved, hasAttacked; // Used to determine if Player objects have moved and/or attacked yet.
 
     public console(String img) {
         this(new ImageIcon(img).getImage());
     } 
 
-    public console(Image img) {
+    public console(Image img) { // Creates the console seen on the right side of the game screen.
         notBlack = new Color(20,12,28);
         notWhite = Color.WHITE;
 
@@ -31,7 +31,7 @@ public class console extends JPanel implements ActionListener{
         
         textArea = new JTextArea(5, 20);
             textAreaInitializer();
-        label = new JLabel(">", JLabel.LEFT);
+        label = new JLabel(">", JLabel.LEFT); // Puts a ">" at the beginning of the textbox
             labelInitializer();
         textField = new JTextField(1);
             textFieldInitializer();
@@ -53,7 +53,7 @@ public class console extends JPanel implements ActionListener{
         
 
         int state;
-        switch(text[0]){
+        switch(text[0]){ // switch to see what the user has inputed.
             case "exit":
                 System.exit(0);
                 break;
@@ -68,38 +68,38 @@ public class console extends JPanel implements ActionListener{
                 else if(state == -4){insert("You have already moved this character");break;}
                 else if(state == -5){insert("That location is not valid");break;}
                 console.setHasMoved(true); // Prevents from moving again
-                GameRunner.removeGrid();
+                GameRunner.removeGrid(); // Once the player has moved, this method, and drawGrid, basically redraw the grid so the green and gold squares are aligned properly.
                 GameRunner.drawGrid();
-                insert("Moved to " + text[2]);
+                insert("Moved to " + text[2]); // Outputs to the Textarea that the user has moved to the position they inputed.
                 break;
             case "attack":
                 state = GameController.attack(turn, text);
                 if(state == -4){insert("You have already attacked with this character");break;}
                 if(state == -5){insert("That location is obstructed");break;}
-                console.setHasAttacked(true);
+                console.setHasAttacked(true); // Prevents from attacking again
                 insert("Attacked " + text[1]);
                 break;
             case "next":
-                if(text.length<=1 || !text[1].equalsIgnoreCase("turn")){insert("That is not a command. If you need help, type \"help\"");break;}
-                if(turn==3){turn=0;}
+                if(text.length<=1 || !text[1].equalsIgnoreCase("turn")){insert("That is not a command. If you need help, type \"help\"");break;} // Checks to see if "next turn" is inputed and not just "next"
+                if(turn==3){turn=0;} // if all of the characters have their turn in the round, it resets the turns back to 0.
                 else{turn++;}
-                console.setHasMoved(false);
-                console.setHasAttacked(false);
-                insert("Turn is now: " + (turn + 1));
-                GameRunner.removeGrid();
+                console.setHasMoved(false); // Allows the next character to move
+                console.setHasAttacked(false); // Allows the next character to attack
+                insert("Turn is now: " + (turn + 1)); // Outputs the NEW turn. +1 is added for asthetics. 
+                GameRunner.removeGrid(); // Redraws grid.
                 GameRunner.drawGrid();
                 break;
-            case "help":
+            case "help": // Outputs a list of commands the user can input.
                 insert("\nMove To - Moves the currently selected character to specified position\n\nTarget - Targets a specific position\n\nAttack - Attack position that you targeted\n\nInfo - Get stats about the currently selected character\n\nNext Turn - Goes to the next turn\n\nClose - Closes the game\n\nHelp - Displays this message\n\nClear - Clears the console");
                 break;
-            case "clear":
+            case "clear": // clears the console textarea.
                 textArea.setText(null);
                 break;
-            case "setEnemyLoc":
+            case "setEnemyLoc": // for testing purposes. 
                 GameRunner.getE(0).setLocation(112, 112);
                 insert("Set Enemy Loc to 112, 112");
                 break;
-            case "continue":
+            case "continue": // Goes to the next level is all enemies in the current level are dead.
                 if(!GameController.canContinue()){insert("There are still enemies alive");} 
                 else {
                     if(Level.getCurrentLevel() == 1) {
@@ -127,25 +127,25 @@ public class console extends JPanel implements ActionListener{
                 System.out.println(Level.getCurrentLevel());
                 break;
             case "info":
-                insert(info());
+                insert(info()); // See info method below.
                 // + "\nRobot2-HP: " + GameRunner.getE(3).getHP() + " Pos: " + GameRunner.getE(3).getLoc() +
                 // "\nBoomer-HP: " + GameRunner.getE(4).getHP() + " Pos: " + GameRunner.getE(4).getLoc());
                 break;
-            case "moveEnemies":
+            case "moveEnemies": // for testing purposes, maybe.
                 EnemyController.boomerAction(4);
                 EnemyController.copAction(1);
                 insert("gamer");
                 break;
-            default:
+            default: // Outputs if the user doesn't input a valid command, or incorrectly inputs a command.
                 insert("That is not a command. If you need help, type \"help\"");
                 break;
             }
         textField.setText("");
     }
-
-    
-    
-    public static void insert(String msg){
+    // Used the insert text in the textArea. Format is as follows.
+    // > (Command the user the inputed)
+    // (Response to command, if any)    
+    public static void insert(String msg){ 
         String[] arr = textArea.getText().split(">");
         if(arr.length==1){
             textArea.insert("\n" + msg + "\n\n", arr[0].length());
@@ -162,19 +162,19 @@ public class console extends JPanel implements ActionListener{
         textArea.insert(msg + "\n\n", arr[0].length());}
         textArea.insert("\n> ", 0);
     }
-
+    // Gets rid of commas and spaces. 
     private String[] parser(){
         String txt = textField.getText().replace(",", "");
         return txt.trim().split("\s");
     }
-    private void labelInitializer() {
+    private void labelInitializer() { // Sets asthetics of the JLabel.
         label.setForeground(notWhite);
         label.setBackground(notBlack);
         label.setSize(20, 30);
         label.setOpaque(true);
         label.setLocation(0, 0);
     }
-    private void textFieldInitializer() {
+    private void textFieldInitializer() { // Sets asthetics of the textField
         textField.setBackground(notBlack);
         textField.setForeground(notWhite);
         textField.addActionListener(this);
@@ -183,7 +183,7 @@ public class console extends JPanel implements ActionListener{
         textField.setCaretColor(notWhite);
         textField.setBorder(BorderFactory.createLineBorder(notBlack));
     }
-    private void textAreaInitializer() {
+    private void textAreaInitializer() { // Sets asthetics of the textArea
         
         textArea.setSize(464, 1060);
         textArea.setBackground(notBlack);
@@ -193,7 +193,7 @@ public class console extends JPanel implements ActionListener{
         textArea.setForeground(notWhite);
         textArea.setLocation(0, 25);
     }   
-    private void setFonts() {
+    private void setFonts() { // Sets font to the custom font "RulerGold". This font is used for everything in the console area. 
         try{
             Font rulerGold = Font.createFont(Font.TRUETYPE_FONT, new File("RulerGold.ttf")).deriveFont(32f);
             textArea.setFont(rulerGold);
@@ -205,7 +205,7 @@ public class console extends JPanel implements ActionListener{
             e.printStackTrace();
         }
     }
-
+    // These four are used to see/set if the current character has moved/attacked or not.
     public static void setHasMoved(boolean b) {
         hasMoved = b;
     }
@@ -218,14 +218,14 @@ public class console extends JPanel implements ActionListener{
     public static boolean getHasAttacked() {
         return hasAttacked;
     }
-
+    // Prints the info all Player and Enemy objects in the current level into the console.
     private static String info() { // for info command
-        
+        // l2 and l3 exist so that enemies that aren't in level don't appear in the info command. 
         String l2 = "";
         String l3 = "";
         if(Level.getCurrentLevel()==2 || Level.getCurrentLevel()==3){l2 = "\nRobot2-HP: " + GameRunner.getE(3).getHP() + " Pos: " + GameRunner.getE(3).getPos();}
         if(Level.getCurrentLevel()==3){l3 = "\nBoomer-HP: " + GameRunner.getE(4).getHP() + " Pos: " + GameRunner.getE(4).getPos();}
-        
+        // Gives how much health, Accuracy, and Speed each Player object has. Also gives how much health and the location on the gameboard (Ex. A1) of each Enemy object
         return "Red-HP: " + GameRunner.getP(0).getHP() + " Acc: " + GameRunner.getP(0).getAcc() + " Spd: " + GameRunner.getP(0).getSpeed() + 
             "\nGreen-HP: " + GameRunner.getP(1).getHP() + " Acc: " + GameRunner.getP(1).getAcc() + " Spd: " + GameRunner.getP(1).getSpeed() + 
             "\nPink-HP: " + GameRunner.getP(2).getHP() + " Acc: " + GameRunner.getP(2).getAcc() + " Spd: " + GameRunner.getP(2).getSpeed() + 

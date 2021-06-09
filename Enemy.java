@@ -11,32 +11,16 @@ import javax.swing.JPanel;
 import javax.swing.ImageIcon;
 import javax.swing.Timer;
 
-public class Enemy extends JPanel implements ActionListener {
+// This code is basically the same as Player. They are separate classes because when we made the Player class, we didn't forsee to make a superclass that Player and Enemy would inherit from.
+// Most comments here are unique to this class specifically. 
+public class Enemy extends JPanel implements ActionListener { 
 
     private int HP, speed, acc;
-    private int i = 0; // This is for the animations DONT TOUCH
     private String c;
-    private BufferedImage img;
     private String loc;
-    private final int[][] spriteSheetCords = { { 0, 0, 112, 112 }, { 112, 0, 112, 112 }, { 224, 0, 112, 112 },
-            { 336, 0, 112, 112 }, { 448, 0, 112, 112 }, { 560, 0, 112, 112 }, { 672, 0, 112, 112 },
-            { 784, 0, 112, 112 } };
-
-    private ActionListener actionListener = new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            i++;
-            if (i == spriteSheetCords.length) {
-                i = 0;
-            }
-            revalidate();
-            repaint();
-        }
-    };
-
 
     public Enemy(int HP, String c, int speed, int acc) {
-        Timer timer = new Timer(100, actionListener);
+        Timer timer = new Timer(100, this);
         timer.setInitialDelay(0);
         timer.start();
         this.HP = HP;
@@ -69,20 +53,20 @@ public class Enemy extends JPanel implements ActionListener {
 
     } // returns pos of enemy on the grid Ex. A1
 
-    public void paintComponent(Graphics g) {
+    public void paintComponent(Graphics g) { // Cop and Robot have 2 separate cases each in order to make accessing them in other classes properly easier. 
         super.paintComponent(g);
         switch(c) {
             case "COP":
                 g = animateCOP(g);
                 break;
             case "COP2":
-                g = animateCOP2(g);
+                g = animateCOP(g);
                 break;
             case "ROBOT": 
                 g = animateROBOT(g);
                 break;
             case "ROBOT2":
-                g =animateROBOT2(g);
+                g =animateROBOT(g);
                 break;
             case "BOOMER":
                 g = animateBOOMER(g);
@@ -94,17 +78,7 @@ public class Enemy extends JPanel implements ActionListener {
         g.drawImage(ii, 0, 0, null);
         return g;
     }
-    public Graphics animateCOP2(Graphics g) {
-        Image ii = new ImageIcon(this.getClass().getResource("images/Cop_Idle.gif")).getImage();
-        g.drawImage(ii, 0, 0, null);
-        return g;
-    }
     public Graphics animateROBOT(Graphics g) {
-        Image ii = new ImageIcon(this.getClass().getResource("images/Robot_Idle.gif")).getImage();
-        g.drawImage(ii, 0, 0, null);
-        return g;
-    }
-    public Graphics animateROBOT2(Graphics g) {
         Image ii = new ImageIcon(this.getClass().getResource("images/Robot_Idle.gif")).getImage();
         g.drawImage(ii, 0, 0, null);
         return g;
@@ -114,12 +88,8 @@ public class Enemy extends JPanel implements ActionListener {
         g.drawImage(ii, 0, 0, null);
         return g;
     }
-    private void getImg(String name){
-        try {
-            img = ImageIO.read(new File("images/" + name + ".png"));
-        } catch (IOException e) {e.printStackTrace(); }
+    public void actionPerformed(ActionEvent e) { // Needed in order for the character animations to work properly.
+        repaint();
+        revalidate();
     }
-    public void actionPerformed(ActionEvent e) {
-    }
-
 }
