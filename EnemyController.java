@@ -101,7 +101,7 @@ public class EnemyController {
         EnemyController.failureState();
     }
     
-    static void failureState(){ // Output if the enemy either fails or succeeds at hitting a Player object.
+    private static void failureState(){ // Output if the enemy either fails or succeeds at hitting a Player object.
         if(!LineOfSight.canAttack(enemyX, enemyY, playerX, playerY)){
             console.insertMsg("The " + enemy + " has failed to hit you because of an obstruction");
             return;
