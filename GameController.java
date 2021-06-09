@@ -13,19 +13,19 @@ public class GameController {
         
         try{
             int[][] idk = GameController.getEntities(); // Gets the location of each all walls, all Player objects and all Enemy objects and puts them into an 2d array of ints. 
-            int y = Character.getNumericValue(args[2].charAt(1))*112; // Parses the X and Y value from the Args variable from the gameboard cords to numberical cords. Ex. A1 turns into 112 and 148.
+            int y = Character.getNumericValue(args[2].charAt(1))*112; // Parses the X and Y value from the Args variable from the gameboard cords to numerical cords. Ex. A1 turns into 112 and 148.
             int x = (Character.getNumericValue(args[2].charAt(0))-9)*112;
-            if(idk[x/112][y/112]>0){return -3;} // return -3 if the location is currently being occupied by aother Player or Enemy object, or a wall. 
+            if(idk[x/112][y/112]>0){return -3;} // return -3 if the location is currently being occupied by another Player or Enemy object, or a wall. 
             else if(Math.abs(x-oldX)>(112*speed)||Math.abs(y-oldY)>(36+112*speed)){return -2;}//return -2 if location is not valid
             if(console.getHasMoved()){return -4;}
-            if (x >= 112 && y >= 112 && x < 1344 && y < 896) { // Checks to see if the location inputed is within the limits of the gameboard.
+            if (x >= 112 && y >= 112 && x < 1344 && y < 896) { // Checks to see if the location inputted is within the limits of the gameboard.
                 GameRunner.setLocation(c, x, y+36);
                 GameRunner.removeGrid();
                 GameRunner.drawGrid();
             }
         } catch (Exception ex){
             System.out.println("NumberFormatException: " + ex);
-            return -5; // Returns only if the user has inputed a position that doesn't exist.
+            return -5; // Returns only if the user has inputted a position that doesn't exist.
         }
         return 1;
     }
@@ -77,7 +77,7 @@ public class GameController {
         return returnArr;//b2, e5
     }
 
-    public static int getPosition(int posX, int posY){ // Gets what number is in the inputed values.
+    public static int getPosition(int posX, int posY){ // Gets what number is in the inputted values.
         int[][] grid = getEntities();
         return grid[posX][posY];
     }

@@ -56,8 +56,6 @@ public class Player extends JPanel implements ActionListener{
     public void setLoc(int x, int y){loc = x + " " + y;}
     public String getLoc(){return loc;}      // return location of Player object as a string
     
-    // public void move(pClass p, int amnt){}// move char [amnt] tiles in [dir] direction
-
     public void paintComponent(Graphics g){ // The PaintComponent uses a switch case to detect which method to run to animate. "c" is the name of the class.  
         super.paintComponent(g);
         switch(c){

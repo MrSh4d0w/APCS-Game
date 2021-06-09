@@ -22,7 +22,7 @@ public class Tutorial {
                 // if(ke.getKeyCode() == KeyEvent.VK_LEFT){System.out.println("");};
             }
             public void keyPressed(KeyEvent ke) {
-                // Checks to see if spacebar pressed. If true, then the tutorial will hide and the game will actualyl start.
+                // Checks to see if spacebar pressed. If true, then the tutorial will hide and the game will actually start.
                 if(ke.getKeyCode() == KeyEvent.VK_SPACE){GameRunner.main(null);f.setVisible(false);};
             }
             public void keyReleased(KeyEvent ke) {}

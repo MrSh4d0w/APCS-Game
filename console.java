@@ -53,7 +53,7 @@ public class console extends JPanel implements ActionListener{
         
 
         int state;
-        switch(text[0]){ // switch to see what the user has inputed.
+        switch(text[0]){ // switch to see what the user has inputted.
             case "exit":
                 System.exit(0);
                 break;
@@ -70,7 +70,7 @@ public class console extends JPanel implements ActionListener{
                 console.setHasMoved(true); // Prevents from moving again
                 GameRunner.removeGrid(); // Once the player has moved, this method, and drawGrid, basically redraw the grid so the green and gold squares are aligned properly.
                 GameRunner.drawGrid();
-                insert("Moved to " + text[2]); // Outputs to the Textarea that the user has moved to the position they inputed.
+                insert("Moved to " + text[2]); // Outputs to the Textarea that the user has moved to the position they inputted.
                 break;
             case "attack":
                 state = GameController.attack(turn, text);
@@ -80,12 +80,12 @@ public class console extends JPanel implements ActionListener{
                 insert("Attacked " + text[1]);
                 break;
             case "next":
-                if(text.length<=1 || !text[1].equalsIgnoreCase("turn")){insert("That is not a command. If you need help, type \"help\"");break;} // Checks to see if "next turn" is inputed and not just "next"
+                if(text.length<=1 || !text[1].equalsIgnoreCase("turn")){insert("That is not a command. If you need help, type \"help\"");break;} // Checks to see if "next turn" is inputted and not just "next"
                 if(turn==3){turn=0;} // if all of the characters have their turn in the round, it resets the turns back to 0.
                 else{turn++;}
                 console.setHasMoved(false); // Allows the next character to move
                 console.setHasAttacked(false); // Allows the next character to attack
-                insert("Turn is now: " + (turn + 1)); // Outputs the NEW turn. +1 is added for asthetics. 
+                insert("Turn is now: " + (turn + 1)); // Outputs the NEW turn. +1 is added for aesthetics. 
                 GameRunner.removeGrid(); // Redraws grid.
                 GameRunner.drawGrid();
                 break;
@@ -143,7 +143,7 @@ public class console extends JPanel implements ActionListener{
         textField.setText("");
     }
     // Used the insert text in the textArea. Format is as follows.
-    // > (Command the user the inputed)
+    // > (Command the user the inputted)
     // (Response to command, if any)    
     public static void insert(String msg){ 
         String[] arr = textArea.getText().split(">");
@@ -167,14 +167,14 @@ public class console extends JPanel implements ActionListener{
         String txt = textField.getText().replace(",", "");
         return txt.trim().split("\s");
     }
-    private void labelInitializer() { // Sets asthetics of the JLabel.
+    private void labelInitializer() { // Sets aesthetics of the JLabel.
         label.setForeground(notWhite);
         label.setBackground(notBlack);
         label.setSize(20, 30);
         label.setOpaque(true);
         label.setLocation(0, 0);
     }
-    private void textFieldInitializer() { // Sets asthetics of the textField
+    private void textFieldInitializer() { // Sets aesthetics of the textField
         textField.setBackground(notBlack);
         textField.setForeground(notWhite);
         textField.addActionListener(this);
@@ -183,7 +183,7 @@ public class console extends JPanel implements ActionListener{
         textField.setCaretColor(notWhite);
         textField.setBorder(BorderFactory.createLineBorder(notBlack));
     }
-    private void textAreaInitializer() { // Sets asthetics of the textArea
+    private void textAreaInitializer() { // Sets aesthetics of the textArea
         
         textArea.setSize(464, 1060);
         textArea.setBackground(notBlack);
