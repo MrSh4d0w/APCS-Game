@@ -74,9 +74,11 @@ public class console extends JPanel implements ActionListener{
             case "attack":
                 state = GameController.attack(turn, text);
                 if(state == -4){insert("You have already attacked with this character", txt);break;}
-                if(state == -5){insert("That location is obstructed", txt);break;}
-                console.setHasAttacked(true); // Prevents from attacking again
-                insert("Attacked " + text[1], txt);
+                if(state == -5){insert("That location is obstructed", txt);break;} else
+                if(state == -1){insert("That position does not exist", txt);break;} else{
+                    console.setHasAttacked(true); // Prevents from attacking again
+                    insert("Attacked " + text[1], txt);
+                }
                 break;
             case "next":
                 if(text.length<=1 || !text[1].equalsIgnoreCase("turn")){insert("That is not a command. If you need help, type \"help\"", txt);break;} // Checks to see if "next turn" is inputted and not just "next"

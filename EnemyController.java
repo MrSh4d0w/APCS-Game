@@ -128,48 +128,60 @@ public class EnemyController {
     }
     public static void getClosestPlayer(){ // Gets the closest player from the Enemy object it is being run on. 
         ArrayList<Integer> pLocs = new ArrayList<Integer>();
+        ArrayList<String> losArr1 = new ArrayList<String>();
         String[] playerLocations = GameController.getPLocations();
+        int min = Integer.MAX_VALUE;
+        int nPlayerX = 0;
+        int nPlayerY = 0;
+        int minCharacter = 0;
         for(int i=0; i<playerLocations.length;i++){
             String[] tempArr = playerLocations[i].split(" ");            
             int x = Integer.parseInt(tempArr[0]);
             int y = Integer.parseInt(tempArr[1]);
+            losArr1 = LineOfSight.drawLine(enemyX, enemyY, x, y);
+            if(losArr1.size() < min) {
+                min = losArr1.size();
+                minCharacter = i;
+                nPlayerX = x;
+                nPlayerY = y;
+             }
 
-            pLocs.add(x);
-            pLocs.add(y);
         } // Puts all of the player locations into an arraylist. Each index in the arraylist is EITHER an X or Y value. 
-
-        int yMin = Integer.MAX_VALUE; // I don't know what this does LMAO.
-        int yIndex = 0;
-        for(int i=1; i<8;i+=2){
-            if(Math.abs(pLocs.get(i)-enemyY) < yMin){
-                yMin = Math.abs(pLocs.get(i)-enemyY);
-                yIndex = i;
-            }
-        }
-
-        int xMin = Integer.MAX_VALUE;
-        int xIndex = 0;
-        for(int i=0; i<8;i+=2){
-            if(Math.abs(pLocs.get(i)-enemyX) < xMin){
-                xMin = Math.abs(pLocs.get(i)-enemyX);
-                xIndex = i;
-            }
-        }
-
-        if(pLocs.get(xIndex)<pLocs.get(yIndex)){
-            playerX = pLocs.get(xIndex);
-            playerY = pLocs.get(xIndex+1);
-        }
-        else if(pLocs.get(yIndex)<pLocs.get(xIndex)){
-            playerX = pLocs.get(yIndex-1);
-            playerY = pLocs.get(yIndex);
-        }
-        else if(pLocs.get(yIndex).equals(pLocs.get(xIndex))){
-            playerX = pLocs.get(xIndex);
-            playerY = pLocs.get(xIndex+1);
-        }
-
+        playerX = nPlayerX;
+        playerY = nPlayerY;
         System.out.println(playerX + " " + playerY + " " + enemyX + " " + enemyY);
+        // int yMin = Integer.MAX_VALUE; // I don't know what this does LMAO.
+        // int yIndex = 0;
+        // for(int i=1; i<8;i+=2){
+        //     if(Math.abs(pLocs.get(i)-enemyY) < yMin){
+        //         yMin = Math.abs(pLocs.get(i)-enemyY);
+        //         yIndex = i;
+        //     }
+        // }
+
+        // int xMin = Integer.MAX_VALUE;
+        // int xIndex = 0;
+        // for(int i=0; i<8;i+=2){
+        //     if(Math.abs(pLocs.get(i)-enemyX) < xMin){
+        //         xMin = Math.abs(pLocs.get(i)-enemyX);
+        //         xIndex = i;
+        //     }
+        // }
+
+        // if(pLocs.get(xIndex)<pLocs.get(yIndex)){
+        //     playerX = pLocs.get(xIndex);
+        //     playerY = pLocs.get(xIndex+1);
+        // }
+        // else if(pLocs.get(yIndex)<pLocs.get(xIndex)){
+        //     playerX = pLocs.get(yIndex-1);
+        //     playerY = pLocs.get(yIndex);
+        // }
+        // else if(pLocs.get(yIndex).equals(pLocs.get(xIndex))){
+        //     playerX = pLocs.get(xIndex);
+        //     playerY = pLocs.get(xIndex+1);
+        // }
+
+        // System.out.println(playerX + " " + playerY + " " + enemyX + " " + enemyY);
     }
     public static void attack(){
         copAction(0);
