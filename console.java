@@ -224,16 +224,16 @@ public class console extends JPanel implements ActionListener{
         // l2 and l3 exist so that enemies that aren't in level don't appear in the info command. 
         String l2 = "";
         String l3 = "";
-        if(Level.getCurrentLevel()==2 || Level.getCurrentLevel()==3){l2 = "\nRobot2-HP: " + GameRunner.getE(3).getHP() + " Pos: " + GameRunner.getE(3).getPos();}
-        if(Level.getCurrentLevel()==3){l3 = "\nBoomer-HP: " + GameRunner.getE(4).getHP() + " Pos: " + GameRunner.getE(4).getPos();}
+        if(Level.getCurrentLevel()==2 || Level.getCurrentLevel()==3){l2 = "\nRobot2  HP: " + GameRunner.getE(3).getHP() + " Pos: " + GameRunner.getE(3).getPos();}
+        if(Level.getCurrentLevel()==3){l3 = "\nBoomer  HP: " + GameRunner.getE(4).getHP() + " Pos: " + GameRunner.getE(4).getPos();}
         // Gives how much health, Accuracy, and Speed each Player object has. Also gives how much health and the location on the gameboard (Ex. A1) of each Enemy object
-        return "Red-HP: " + GameRunner.getP(0).getHP() + " Acc: " + GameRunner.getP(0).getAcc() + " Spd: " + GameRunner.getP(0).getSpeed() + 
-            "\nGreen-HP: " + GameRunner.getP(1).getHP() + " Acc: " + GameRunner.getP(1).getAcc() + " Spd: " + GameRunner.getP(1).getSpeed() + 
-            "\nPink-HP: " + GameRunner.getP(2).getHP() + " Acc: " + GameRunner.getP(2).getAcc() + " Spd: " + GameRunner.getP(2).getSpeed() + 
-            "\nWhite-HP: " + GameRunner.getP(3).getHP() + " Acc: " + GameRunner.getP(3).getAcc() + " Spd: " + GameRunner.getP(3).getSpeed() + '\n' +
-            "\nCop1-HP: " + GameRunner.getE(0).getHP() + " Pos: " + GameRunner.getE(0).getPos() +
-            "\nCop2-HP: " + GameRunner.getE(1).getHP() + " Pos: " + GameRunner.getE(1).getPos() +
-            "\nRobot1-HP: " + GameRunner.getE(2).getHP() + " Pos: " + GameRunner.getE(2).getPos() + l2 + l3;
+        return "Assault:  HP: " + GameRunner.getP(0).getHP() + "    Location: " + GameRunner.getP(0).getPos() +  
+            "\nTank:     HP: " + GameRunner.getP(1).getHP() + "    Location: " + GameRunner.getP(1).getPos() + 
+            "\nSniper:   HP: " + GameRunner.getP(2).getHP() + "    Location: " + GameRunner.getP(2).getPos() + 
+            "\nMelee:     HP: " + GameRunner.getP(3).getHP() + "    Location: " + GameRunner.getP(3).getPos() + '\n' +
+            "\nCop1:      HP: " + GameRunner.getE(0).getHP() + "     Location: " + GameRunner.getE(0).getPos() +
+            "\nCop2:      HP: " + GameRunner.getE(1).getHP() + "     Location: " + GameRunner.getE(1).getPos() +
+            "\nRobot1:   HP: " + GameRunner.getE(2).getHP() + "     Location: " + GameRunner.getE(2).getPos() + l2 + l3;
     }
 
     // private static void setTurn(int t){turn = t;}

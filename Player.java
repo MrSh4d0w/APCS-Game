@@ -54,6 +54,12 @@ public class Player extends JPanel implements ActionListener{
         alive = b;}
     public void setLoc(int x, int y){loc = x + " " + y;}
     public String getLoc(){return loc;}      // return location of Player object as a string
+    public String getPos() {
+        String[] arr = loc.split(" ");
+        int x = (Integer.parseInt(arr[0]))/112;
+        int y = (Integer.parseInt(arr[1]))/112;
+        return GameController.letterParser(x) + y;
+    } // returns pos of enemy on the grid Ex. A1
     public void newLevel() {
         console.setHasMoved(false);
         console.setHasAttacked(false);
