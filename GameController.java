@@ -15,7 +15,7 @@ public class GameController {
             int[][] idk = GameController.getEntities(); // Gets the location of each all walls, all Player objects and all Enemy objects and puts them into an 2d array of ints. 
             int y = Character.getNumericValue(args[2].charAt(1))*112; // Parses the X and Y value from the Args variable from the gameboard cords to numerical cords. Ex. A1 turns into 112 and 148.
             int x = (Character.getNumericValue(args[2].charAt(0))-9)*112;
-            if(idk[x/112][y/112]>0){return -3;} // return -3 if the location is currently being occupied by another Player or Enemy object, or a wall. 
+            if(idk[x/112][y/112]>0 || idk[x/112][y/112] == -1){return -3;} // return -3 if the location is currently being occupied by another Player or Enemy object, or a wall. 
             else if(Math.abs(x-oldX)>(112*speed)||Math.abs(y-oldY)>(36+112*speed)){return -2;}//return -2 if location is not valid
             if(console.getHasMoved()){return -4;}
             if (x >= 112 && y >= 112 && x < 1344 && y < 896) { // Checks to see if the location inputted is within the limits of the gameboard.
@@ -38,7 +38,7 @@ public class GameController {
 
         try{
             int[][] idk = GameController.getEntities();
-            if(idk[x/112][y/112]>0){return -3;} else
+            if(idk[x/112][y/112]>0 || idk[x/112][y/112] == -1){return -3;} else
             if(Math.abs(x-oldX)>(112*speed)||Math.abs(y-oldY)>(36+112*speed)){return -2;}//return -2 if location is not valid
             if (x >= 112 && y >= 112 && x < 1344 && y < 896) {
                 GameRunner.setLocationE(c, x, y);
@@ -70,7 +70,7 @@ public class GameController {
                 } for(int j=0; j<enemyLocations.length;j++){ // Similar as previous comment, but each enemy object is given its own number from 2-7
                     if(enemyLocations[j].substring(2).equals(stringGrid[i][k])){returnArr[i][k] = j+2;}
                 } for(String s:wallLocations){ // if there is a wall, sets that location in the 2d to -1.  
-                    if(s.equals(stringGrid[i][k])){returnArr[i][k] = 1;}
+                    if(s.equals(stringGrid[i][k])){returnArr[i][k] = -1;}
                 }
             }
         }
@@ -85,7 +85,7 @@ public class GameController {
     public static String[] getPLocations(){ // get all of the locations of all of the Player objects. 
         ArrayList<String> arr = new ArrayList<String>();
         for(int i=0; i<4; i++){
-            arr.add(GameRunner.getP(i).getLoc());
+            if(GameRunner.getP(i).getAlive()){arr.add(GameRunner.getP(i).getLoc());}
         }
         String[] ret = new String[arr.size()];
         for(int i=0;i<arr.size();i++){
@@ -101,7 +101,7 @@ public class GameController {
         if (Level.getCurrentLevel() == 3){numEnemies = 5;}
         ArrayList<String> arr = new ArrayList<String>();
         for(int i=0;i<numEnemies;i++){
-            arr.add((i+1) + " " + GameRunner.getE(i).getLoc());
+            if(GameRunner.getE(i).getAlive()){ arr.add((i+1) + " " + GameRunner.getE(i).getLoc());}
         }
         String[] ret = new String[arr.size()];
         for(int i=0;i<arr.size();i++){
@@ -218,11 +218,11 @@ public class GameController {
     
     public static boolean canContinue() { // Checks to see if all of the enemies are dead in each level. 
         if(Level.getCurrentLevel() == 1) {
-            if (GameRunner.e1.getHP()==0 && GameRunner.e2.getHP()== 0 && GameRunner.e3.getHP()==0){return true;}
+            if (GameRunner.e1.getHP()<=0 && GameRunner.e2.getHP()<= 0 && GameRunner.e3.getHP()<=0){return true;}
         } if(Level.getCurrentLevel() == 2) {
-            if (GameRunner.e1.getHP()==0 && GameRunner.e2.getHP()== 0 && GameRunner.e3.getHP()==0 && GameRunner.e4.getHP()==0){return true;}
+            if (GameRunner.e1.getHP()<=0 && GameRunner.e2.getHP()<= 0 && GameRunner.e3.getHP()<=0 && GameRunner.e4.getHP()<=0){return true;}
         } if(Level.getCurrentLevel() == 3) {
-            if (GameRunner.e1.getHP()==0 && GameRunner.e2.getHP()== 0 && GameRunner.e3.getHP()==0&& GameRunner.e4.getHP()==0 && GameRunner.e5.getHP()==0){return true;}
+            if (GameRunner.e1.getHP()<=0 && GameRunner.e2.getHP()<= 0 && GameRunner.e3.getHP()<=0&& GameRunner.e4.getHP()<=0 && GameRunner.e5.getHP()<=0){return true;}
         }
         return false;
     }

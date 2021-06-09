@@ -92,8 +92,8 @@ public class GameRunner {
         p4.setOpaque(false);
         mainPanel.add(p4, 4);
 
-        e1 = new Enemy(60, "COP", 3, 20, true); // *Enemy objects
-        e2 = new Enemy(60, "COP2", 3, 20, true);
+        e1 = new Enemy(0, "COP", 3, 20, true); // *Enemy objects
+        e2 = new Enemy(0, "COP2", 3, 20, true);
         e3 = new Enemy(20, "ROBOT", 3, 20, true);
 
         e1.setSize(new Dimension(112, 112));
@@ -115,15 +115,22 @@ public class GameRunner {
     public static void level2() {
         m.setMap("images/Level2.png"); // Changes the map to the level 2 map.
         p1.setLocation(grid[3][7]);
+        p1.newLevel();
         p2.setLocation(grid[2][7]);
+        p2.newLevel();
         p3.setLocation(grid[9][7]);
+        p3.newLevel();
         p4.setLocation(grid[10][7]);
+        p4.newLevel();
 
         e1.setLocation(grid[6][1]);
+        e1.newLevel();
         e2.setLocation(grid[6][4]);
+        e2.newLevel();
         e3.setLocation(grid[4][3]);
+        e3.newLevel();
 
-        e4 = new Enemy(0, "ROBOT2", 3, 20, true); // Initializes a new enemy object, the second robot which only appears in
+        e4 = new Enemy(20, "ROBOT2", 3, 20, true); // Initializes a new enemy object, the second robot which only appears in
                                             // this level and the next.
         e4.setSize(new Dimension(112, 112));
         e4.setLocation(grid[8][3]);
@@ -343,10 +350,8 @@ public class GameRunner {
                     counter++;
                     grids.get(counter).setLocation(x2, y2);
                     mainPanel.add(grids.get(counter), 6);
-                } else if (idk[i][j] == 1) {
-                } else if (idk[i][j] > 1) { // Uses the array from getEntities. In this case, anything greater than
-                                            // 1 would be any of the enemy object. This puts a red box on the square
-                                            // that the Enemy object is on.
+                } else if (idk[i][j] == 1 || idk[i][j] == -1) {
+                } else if (idk[i][j] > 1) { // Uses the array from getEntities. In this case, anything greater than 1 would be any of the enemy object. This puts a red box on the square that the Enemy object is on.
                     grids.add(new Grid("red"));
                     counter++;
                     grids.get(counter).setLocation(x2, y2);

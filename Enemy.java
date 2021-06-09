@@ -41,7 +41,9 @@ public class Enemy extends JPanel implements ActionListener {
     public int getAcc(){return acc;}         // returns accuracy
     public int getSpeed(){return speed;}     // returns speed
     public boolean getAlive(){return alive;}
-    public void setAlive(boolean b){alive = b;}
+    public void setAlive(boolean b){
+        if(!b){this.setVisible(false);}
+        alive = b;}
     public void setLoc(int x, int y){loc = x + " " + y;}
     public String getLoc(){return loc;}
     public String getPos() {
@@ -51,6 +53,17 @@ public class Enemy extends JPanel implements ActionListener {
         return GameController.letterParser(x) + y;
 
     } // returns pos of enemy on the grid Ex. A1
+    public void newLevel() {
+        this.setVisible(true);
+        switch(getEClass()) {
+            case "COP": setHP(60); break;
+            case "COP2": setHP(60); break;
+            case "ROBOT": setHP(20); break;
+            case "ROBOT2": setHP(20); break;
+            case "BOOMER": setHP(20);  break;
+        }
+        setAlive(true);
+    }
 
     public void paintComponent(Graphics g) { // Cop and Robot have 2 separate cases each in order to make accessing them in other classes properly easier. 
         super.paintComponent(g);

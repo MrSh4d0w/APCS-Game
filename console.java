@@ -111,6 +111,7 @@ public class console extends JPanel implements ActionListener{
             case "continue": // Goes to the next level is all enemies in the current level are dead.
                 if(!GameController.canContinue()){insert("There are still enemies alive", txt);} 
                 else {
+                    turn = 0;
                     if(Level.getCurrentLevel() == 1) {
                         insert("Continued to level 2", txt);
                         Level.setCurrentLevel(Level.getCurrentLevel()+1);

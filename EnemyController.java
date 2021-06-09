@@ -7,52 +7,58 @@ public class EnemyController {
     private static int damageCop, damageRob;
 
     public static void boomerAction(int c){
-        String[] enemyLoc = GameRunner.getE(c).getLoc().split(" ");
-        enemyX = Integer.parseInt(enemyLoc[0]);
-        enemyY = Integer.parseInt(enemyLoc[1]);
-        getClosestPlayer();
+        if(GameRunner.getE(c).getAlive()) {
+            String[] enemyLoc = GameRunner.getE(c).getLoc().split(" ");
+            enemyX = Integer.parseInt(enemyLoc[0]);
+            enemyY = Integer.parseInt(enemyLoc[1]);
+            getClosestPlayer();
 
-        if(Math.abs(enemyX-playerX)<=112 && Math.abs(enemyY-playerY)<=112){
-            boomerAttack();
-        } else {
-            if(enemyY-playerY>0){GameController.setLocationE(c, enemyX, (enemyY-112));}
-            else if(enemyY-playerY<0){GameController.setLocationE(c, enemyX, enemyY+112);}//move left
-            if(enemyX-playerX>0){GameController.setLocationE(c, enemyX-112, enemyY);}//move down
-            else if (enemyX-playerX<0){GameController.setLocationE(c, enemyX+112, enemyY);}//move up
+            if(Math.abs(enemyX-playerX)<=112 && Math.abs(enemyY-playerY)<=112){
+                boomerAttack();
+            } else {
+                if(enemyY-playerY>0){GameController.setLocationE(c, enemyX, (enemyY-112));}
+                else if(enemyY-playerY<0){GameController.setLocationE(c, enemyX, enemyY+112);}//move left
+                if(enemyX-playerX>0){GameController.setLocationE(c, enemyX-112, enemyY);}//move down
+                else if (enemyX-playerX<0){GameController.setLocationE(c, enemyX+112, enemyY);}//move up
+            }
+            enemyLoc = GameRunner.getE(c).getLoc().split(" ");
+            enemyX = Integer.parseInt(enemyLoc[0]);
+            enemyY = Integer.parseInt(enemyLoc[1]);
         }
-        enemyLoc = GameRunner.getE(c).getLoc().split(" ");
-        enemyX = Integer.parseInt(enemyLoc[0]);
-        enemyY = Integer.parseInt(enemyLoc[1]);
 
         // System.out.println(playerX + " " + playerY + " " + enemyX + " " + enemyY);
    //move to closest player's y pos then x pos then blow up when 1 square away
     }
     public static void copAction(int c){
-        String[] enemyLoc = GameRunner.getE(c).getLoc().split(" ");
-        enemyX = Integer.parseInt(enemyLoc[0]);
-        enemyY = Integer.parseInt(enemyLoc[1]);
-        getClosestPlayer();
+        if(GameRunner.getE(c).getAlive()) {
+            String[] enemyLoc = GameRunner.getE(c).getLoc().split(" ");
+            enemyX = Integer.parseInt(enemyLoc[0]);
+            enemyY = Integer.parseInt(enemyLoc[1]);
+            getClosestPlayer();
 
-        if(Math.abs(enemyX-playerX)<=112*3 || Math.abs(enemyY-playerY)<=112*3){
-            if(enemyY-playerY<0){GameController.setLocationE(c, enemyX, enemyY+112);}//move right
-            else if(enemyY-playerY>0){GameController.setLocationE(c, enemyX, enemyY-112);}//move left
-            else if(enemyY-playerY == 0){GameController.setLocationE(c, enemyX, enemyY-112);}
+            if(Math.abs(enemyX-playerX)<=112*3 || Math.abs(enemyY-playerY)<=112*3){
+                if(enemyY-playerY<0){GameController.setLocationE(c, enemyX, enemyY+112);}//move right
+                else if(enemyY-playerY>0){GameController.setLocationE(c, enemyX, enemyY-112);}//move left
+                else if(enemyY-playerY == 0){GameController.setLocationE(c, enemyX, enemyY-112);}
 
-            if(enemyX-playerX<0){GameController.setLocationE(c, enemyX-112, enemyY);}//move down
-            else if(enemyX-playerX>0){GameController.setLocationE(c, enemyX+112, enemyY);}//move up
-            else if(enemyX-playerX == 0){GameController.setLocationE(c, enemyX+112, enemyY);}
+                if(enemyX-playerX<0){GameController.setLocationE(c, enemyX-112, enemyY);}//move down
+                else if(enemyX-playerX>0){GameController.setLocationE(c, enemyX+112, enemyY);}//move up
+                else if(enemyX-playerX == 0){GameController.setLocationE(c, enemyX+112, enemyY);}
+            }
+            enemyLoc = GameRunner.getE(c).getLoc().split(" ");
+            enemyX = Integer.parseInt(enemyLoc[0]);
+            enemyY = Integer.parseInt(enemyLoc[1]);
+            copAttack();
         }
-        enemyLoc = GameRunner.getE(c).getLoc().split(" ");
-        enemyX = Integer.parseInt(enemyLoc[0]);
-        enemyY = Integer.parseInt(enemyLoc[1]);
-        copAttack();
    //stay x grids away from player and shoot
     }
     public static void robotAction(int c){
-        String[] enemyLoc = GameRunner.getE(c).getLoc().split(" ");
-        enemyX = Integer.parseInt(enemyLoc[0]);
-        enemyY = Integer.parseInt(enemyLoc[1]);
-        robotAttack();
+        if(GameRunner.getE(c).getAlive()) {
+            String[] enemyLoc = GameRunner.getE(c).getLoc().split(" ");
+            enemyX = Integer.parseInt(enemyLoc[0]);
+            enemyY = Integer.parseInt(enemyLoc[1]);
+            robotAttack();
+        }
     }
 
     static void boomerAttack() { // Attack for Boomer. 
@@ -127,7 +133,6 @@ public class EnemyController {
         }
     }
     public static void getClosestPlayer(){ // Gets the closest player from the Enemy object it is being run on. 
-        ArrayList<Integer> pLocs = new ArrayList<Integer>();
         ArrayList<String> losArr1 = new ArrayList<String>();
         String[] playerLocations = GameController.getPLocations();
         int min = Integer.MAX_VALUE;
@@ -144,8 +149,7 @@ public class EnemyController {
                 minCharacter = i;
                 nPlayerX = x;
                 nPlayerY = y;
-             }
-
+            }
         } // Puts all of the player locations into an arraylist. Each index in the arraylist is EITHER an X or Y value. 
         playerX = nPlayerX;
         playerY = nPlayerY;

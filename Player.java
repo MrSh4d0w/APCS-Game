@@ -49,10 +49,16 @@ public class Player extends JPanel implements ActionListener{
     public int getAcc(){return acc;}         // returns accuracy
     public int getSpeed(){return speed;}     // returns speed
     public boolean getAlive(){return alive;}
-    public void setAlive(boolean b){alive = b;}
+    public void setAlive(boolean b){
+        if(!b){this.setVisible(false);}
+        alive = b;}
     public void setLoc(int x, int y){loc = x + " " + y;}
     public String getLoc(){return loc;}      // return location of Player object as a string
-    
+    public void newLevel() {
+        console.setHasMoved(false);
+        console.setHasAttacked(false);
+        setHP(100);
+    }
     public void paintComponent(Graphics g){ // The PaintComponent uses a switch case to detect which method to run to animate. "c" is the name of the class.  
         super.paintComponent(g);
         switch(c){
