@@ -2,11 +2,6 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-
-import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import javax.swing.ImageIcon;
 import javax.swing.Timer;
@@ -16,7 +11,6 @@ public class Player extends JPanel implements ActionListener{
     // private static int counter, assaultCounter;
     private int HP, speed, acc; // Creates variables for HP, speed of the player (How many space it can move), and accuracy (how well it can hit a target).
     private String c; // Name of the class. "ASSAULT", "TANK", "SNIPER", "MELEE"
-    private BufferedImage img; 
     private String loc; // Locations of the current player object as a string. Ex. "112 148" - This would correspond to A1 on the gameboard.
     
     //private ActionListener actionListener = new ActionListener(); 
@@ -93,20 +87,6 @@ public class Player extends JPanel implements ActionListener{
         Image ii = new ImageIcon(this.getClass().getResource("images/Character4_IdleGun.gif")).getImage();
         g.drawImage(ii, 0, 0, null);
         return g;
-    }
-    private void getImg(String name){
-        try {
-            img = ImageIO.read(new File("images/" + name + ".png"));
-        } catch (IOException e) {e.printStackTrace(); }
-    }
-    public void iHateWarnings(){
-        getHP();
-        setHP(0);
-        removeHP(0);
-        addHP(0);
-        getAcc();
-        getSpeed();
-        getPClass();
     }
     public void actionPerformed(ActionEvent e) { // Needed in order for the character animations to work properly.
         repaint();

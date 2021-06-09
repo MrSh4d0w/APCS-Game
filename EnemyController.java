@@ -1,15 +1,10 @@
 import java.util.ArrayList;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class EnemyController {
     private static int playerX, playerY, enemyX, enemyY;
-    private static int seconds = 0;
     private static boolean CopFail, RobFail;
     private static String enemy;
     private static int damageCop, damageRob;
-    private static Object lock1 = new Object();
-    private static Object lock2 = new Object();
 
     public static void boomerAction(int c){
         String[] enemyLoc = GameRunner.getE(c).getLoc().split(" ");
@@ -60,30 +55,6 @@ public class EnemyController {
         robotAttack();
     }
 
-    static void failureState(){ // Output if the enemy either fails or succeeds at hitting a Player object.
-        if(!LineOfSight.canAttack(enemyX, enemyY, playerX, playerY)){
-            console.insertMsg("The " + enemy + " has failed to hit you because of an obstruction");
-            return;
-        } 
-        if(enemy.equals("robot")){
-            if(RobFail){
-                console.insertMsg("The robot missed!");
-            } else {
-                console.insertMsg("The robot has hit you! You have taken " + damageRob + " damage!");
-            } 
-            RobFail = true;
-            damageRob = 0;
-        } else {
-            if(CopFail){
-                console.insertMsg("The cop missed!");
-            } else {
-                console.insertMsg("The cop has hit you! You have taken " + damageCop + " damage!");
-            }
-            CopFail = true;
-            damageCop = 0;
-        }
-    }
-    
     static void boomerAttack() { // Attack for Boomer. 
         console.insertMsg("The boomer at position " + GameController.letterParser(enemyX/112) + (enemyY-36)/112 + " is attacking a player at " + GameController.letterParser(playerX/112) + (playerY-36)/112);
         int c = GameController.playerAt(playerX, playerY);
@@ -129,9 +100,30 @@ public class EnemyController {
         }
         EnemyController.failureState();
     }
-
-
-
+    
+    static void failureState(){ // Output if the enemy either fails or succeeds at hitting a Player object.
+        if(!LineOfSight.canAttack(enemyX, enemyY, playerX, playerY)){
+            console.insertMsg("The " + enemy + " has failed to hit you because of an obstruction");
+            return;
+        } 
+        if(enemy.equals("robot")){
+            if(RobFail){
+                console.insertMsg("The robot missed!");
+            } else {
+                console.insertMsg("The robot has hit you! You have taken " + damageRob + " damage!");
+            } 
+            RobFail = true;
+            damageRob = 0;
+        } else {
+            if(CopFail){
+                console.insertMsg("The cop missed!");
+            } else {
+                console.insertMsg("The cop has hit you! You have taken " + damageCop + " damage!");
+            }
+            CopFail = true;
+            damageCop = 0;
+        }
+    }
     public static void getClosestPlayer(){ // Gets the closest player from the Enemy object it is being run on. 
         ArrayList<Integer> pLocs = new ArrayList<Integer>();
         String[] playerLocations = GameController.getPLocations();

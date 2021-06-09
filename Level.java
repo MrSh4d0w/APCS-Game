@@ -114,24 +114,6 @@ public class Level {
     public static int getCurrentLevel() {return currentLevel;}
     public static void setCurrentLevel(int i){currentLevel = i;}
 
-    private static String getPlayer(int i) { // Leave if needed for later
-        switch(i) {
-            case 0:return "p1";
-            case 1:return "p2";
-            case 2:return "p3";
-            case 3:return "p4";
-        } return "p0";
-    }
-    private static String getEnemy(int i) { // Leave if needed for later
-        switch(i) {
-            case 0:return "e1";
-            case 1:return "e2";
-            case 2:return "e3";
-            case 3:return "e4";
-            case 4:return "e5";
-        } return "e0";
-    }
-
     public static void printThing() {
         for(int i = 0; i < Level.getLevel1Pos().length; i++) {
             System.out.print(Level.getLevel1Pos()[i] + ", ");

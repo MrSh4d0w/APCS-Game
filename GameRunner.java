@@ -33,7 +33,7 @@ public class GameRunner {
         c.setBounds(1456, 0, 464, 1080);
         mainPanel.add(c, 0);
 
-        l = new Level(1); // Creates a Level object which is mainly used to get the currentLevel and
+        setL(new Level(1)); // Creates a Level object which is mainly used to get the currentLevel and
                           // setCurrentLevel.
         level1(); // Starts level1.
         console.setHasMoved(false);
@@ -44,6 +44,20 @@ public class GameRunner {
         f.setResizable(false);
         f.setVisible(true);
         GameController.getEntities();
+    }
+
+    /**
+     * @return the l
+     */
+    public static Level getL() {
+        return l;
+    }
+
+    /**
+     * @param l the l to set
+     */
+    public static void setL(Level l) {
+        GameRunner.l = l;
     }
 
     public static void level1() { // Creates the enemy and player objects for level 1.
