@@ -133,7 +133,7 @@ public class EnemyController {
         int min = Integer.MAX_VALUE;
         int nPlayerX = 0;
         int nPlayerY = 0;
-        int minCharacter = 0;
+        int minCharacter = 5;
         for(int i=0; i<playerLocations.length;i++){
             String[] tempArr = playerLocations[i].split(" ");            
             int x = Integer.parseInt(tempArr[0]);
