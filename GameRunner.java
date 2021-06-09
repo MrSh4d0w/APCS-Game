@@ -92,8 +92,8 @@ public class GameRunner {
         p4.setOpaque(false);
         mainPanel.add(p4, 4);
 
-        e1 = new Enemy(0, "COP", 3, 20, true); // *Enemy objects
-        e2 = new Enemy(0, "COP2", 3, 20, true);
+        e1 = new Enemy(20, "COP", 3, 20, true); // *Enemy objects
+        e2 = new Enemy(20, "COP2", 3, 20, true);
         e3 = new Enemy(20, "ROBOT", 3, 20, true);
 
         e1.setSize(new Dimension(112, 112));
