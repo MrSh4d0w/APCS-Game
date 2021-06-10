@@ -226,6 +226,26 @@ public class console extends JPanel implements ActionListener{
     // Prints the info all Player and Enemy objects in the current level into the console.
     private static String info() { // for info command
         // l2 and l3 exist so that enemies that aren't in level don't appear in the info command. 
+        Player p1 = GameRunner.getP(0);
+        String player1Info = "";
+        if(p1.getAlive()){player1Info = "Assault:  HP: "+p1.getHP()+"    Location: "+p1.getPos();}
+
+        Player p2 = GameRunner.getP(1);
+        String player2Info = "";
+        if(p2.getAlive()){player2Info = "\nTank:     HP: "+p2.getHP()+"    Location: "+p2.getPos();}
+ 
+        Player p3 = GameRunner.getP(2);
+        String player3Info = "";
+        if(p3.getAlive()){player3Info = "\nSniper:   HP: "+p3.getHP()+"    Location: "+p3.getPos();}
+
+        Player p4 = GameRunner.getP(3);
+        String player4Info = "";
+        if(p4.getAlive()){player4Info = "\nMelee:     HP: "+p4.getHP()+"    Location: "+p4.getPos();}
+
+        Enemy e1 = GameRunner.getE(0);
+        String Cop1Info = "";
+        if(e1.getAlive()){player4Info = "\nCop1:      HP: "+e1.getHP()+"    Location: "+e1.getPos();}        
+        
         String l2 = "";
         String l3 = "";
         if(Level.getCurrentLevel()==2 || Level.getCurrentLevel()==3){l2 = "\nRobot2  HP: " + GameRunner.getE(3).getHP() + " Pos: " + GameRunner.getE(3).getPos();}
@@ -244,7 +264,7 @@ public class console extends JPanel implements ActionListener{
     public static int getTurn(){return turn;}
     public static void checkAliveEnts() {
         for(int i = 0; i < 4; i++) {
-            if(GameRunner.getP(i).getAlive() == false){GameRunner.getP(i).setVisible(false);}
+            if(!GameRunner.getP(i).getAlive()){GameRunner.getP(i).setVisible(false);}
         }
     }
     public static void playerDied(Player p) {

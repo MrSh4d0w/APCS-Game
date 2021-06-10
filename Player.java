@@ -63,7 +63,9 @@ public class Player extends JPanel implements ActionListener{
     public void newLevel() {
         console.setHasMoved(false);
         console.setHasAttacked(false);
-        setHP(100);
+        if(alive){
+            setHP(100);
+        }
     }
     public void paintComponent(Graphics g){ // The PaintComponent uses a switch case to detect which method to run to animate. "c" is the name of the class.  
         super.paintComponent(g);
