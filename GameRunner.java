@@ -140,6 +140,12 @@ public class GameRunner {
 
     public static void level3() {
         m.setMap("images/Level3.png");
+        e5 = new Enemy(0, "BOOMER", 3, 20, true); // Initializes a new enemy object, the boomer which only appears in this
+                                            // level.
+        e5.setSize(new Dimension(112, 112));
+        e5.setLocation(grid[1][7]);
+        e5.setOpaque(false);
+        mainPanel.add(e5, 5);
 
         p1.setLocation(grid[10][6]);
         p1.newLevel();
@@ -159,12 +165,7 @@ public class GameRunner {
         e4.setLocation(grid[6][6]);
         e5.newLevel();
 
-        e5 = new Enemy(0, "BOOMER", 3, 20, true); // Initializes a new enemy object, the boomer which only appears in this
-                                            // level.
-        e5.setSize(new Dimension(112, 112));
-        e5.setLocation(grid[1][7]);
-        e5.setOpaque(false);
-        mainPanel.add(e5, 5);
+        
     }
 
     public static void win() {
