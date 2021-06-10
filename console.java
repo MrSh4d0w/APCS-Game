@@ -243,7 +243,7 @@ public class console extends JPanel implements ActionListener{
     public static int getTurn(){return turn;}
     public static void checkAliveEnts() {
         for(int i = 0; i < 4; i++) {
-            if(GameRunner.getP(i).getAlive() == false){GameRunner.getP(i).setVisible(false);}
+            if(!GameRunner.getP(i).getAlive()){GameRunner.getP(i).setVisible(false);}
         }
     }
     public static void playerDied(Player p) {
