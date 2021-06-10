@@ -127,7 +127,7 @@ public class GameController {
 
 
     public static int attack(int c, String[] args, String text){ // Similar concept to the setPosition method at the top of this class. 
-        if(args==null){return -1;}//return -1 if the command does not start with "move to" (edge case where nothing after "move")
+        if(args==null || args.length<=1){return -1;}//return -1 if the command does not start with "move to" (edge case where nothing after "move")
         if(!args[0].equalsIgnoreCase("attack") || args[1].length()>2){return -1;}//returns -1 if the command does not start with "move to"
         
         String[] loc = GameRunner.getP(c).getLoc().split(" ");
@@ -141,20 +141,18 @@ public class GameController {
             int x = (Character.getNumericValue(args[1].charAt(0))-9)*112;
             if(console.getHasAttacked()){return -4;}
             if(!LineOfSight.canAttack(oldX, oldY, x, y)) {return -5;} // If character doesn't have Line of Sight to target return fail state of -5
-            if(idk[x/112][y/112]==1){return -3;} else//if there is someone at new x and y then return fail state of -3
+            if(idk[x/112][(y-36)/112]<=1){return -3;} else//if there is sosmeone at new x and y then return fail state of -3
             if (x >= 112 && y >= 112 && x < 1344 && y < 896) {//checks if within bounds
-                if(GameRunner.getP(c).getPClass().equals("MELEE") && Math.abs(x-oldX)>112 && Math.abs(y-oldY)>112){ //if the char is melee. !!!!! DOESN'T WORK !!!!!
-                    return -2;//if enemy is too far away from char return fail state of -2
-                }
+                if(GameRunner.getP(c).getPClass().equalsIgnoreCase("MELEE") && Math.abs(x-oldX)<=112 && Math.abs(y-oldY)<=112){ //if the char is melee. !!!!! DOESN'T WORK !!!!!
+                    enemyAt(x, y).setHP(enemyAt(x, y).getHP()-10);
+                    console.insert("You attacked an enemy at "+ enemyAt(x,y).getPos() + " and did 10 damage!", text);
+                    if(enemyAt(x, y).getHP() <= 0){enemyAt(x,y).setAlive(false);}
+                    return 1;
+                } else if (GameRunner.getP(c).getPClass().equalsIgnoreCase("MELEE")){return -6;}
                 int rand = (int)(Math.random()*100+1);//gen random number of 1-100
                 if(rand<acc){//if random number is lower than accuracy: attack
                     switch(GameRunner.getP(c).getPClass()){
                         case "ASSAULT":
-                            enemyAt(x, y).setHP(enemyAt(x, y).getHP()-10);
-                            console.insert("You attacked an enemy at "+ enemyAt(x,y).getPos() + " and did 10 damage!", text);
-                            if(enemyAt(x, y).getHP() <= 0){enemyAt(x,y).setAlive(false);}
-                            break;
-                        case "MELEE":
                             enemyAt(x, y).setHP(enemyAt(x, y).getHP()-20);
                             console.insert("You attacked an enemy at "+ enemyAt(x,y).getPos() + " and did 20 damage!", text);
                             if(enemyAt(x, y).getHP() <= 0){enemyAt(x,y).setAlive(false);}

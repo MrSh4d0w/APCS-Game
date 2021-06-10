@@ -73,7 +73,8 @@ public class console extends JPanel implements ActionListener{
                 break;
             case "attack":
                 state = GameController.attack(turn, text, txt);
-                if(state == -4){insert("You have already attacked with this character", txt);break;}
+                if(state == -3){insert("There is no enemy there", txt);} else
+                if(state == -4){insert("You have already attacked with this character", txt);break;} else
                 if(state == -5){insert("That location is obstructed", txt);break;} else
                 if(state == -1){insert("That position does not exist", txt);break;} else{
                     setHasAttacked(true); // Prevents from attacking again
@@ -141,7 +142,7 @@ public class console extends JPanel implements ActionListener{
 
     private void nextTurn(String txt) {
         turn++;
-        if(turn!=4 && !GameRunner.getP(turn).getAlive()) {nextTurn(txt);return;}
+        if(turn!=4 && !GameRunner.getP(turn).getAlive()) {nextTurn(txt);return;}//recursive statement to skip dead player's turns
         console.setHasMoved(false); // Allows the next character to move
         console.setHasAttacked(false); // Allows the next character to attack
         insert("Turn is now: " + (turn + 1), txt); // Outputs the NEW turn. +1 is added for aesthetics. 
@@ -153,7 +154,7 @@ public class console extends JPanel implements ActionListener{
             GameRunner.removeGrid(); // Redraws grid.
             GameRunner.drawGrid();
         }
-        if(turn==4){turn=-1;nextTurn(txt);}
+        if(turn==4){turn=-1;nextTurn(txt);}//recursive statement to 
     }
     // Used the insert text in the textArea. Format is as follows.
     // > (Command the user the inputted)
