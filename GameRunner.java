@@ -92,9 +92,9 @@ public class GameRunner {
         p4.setOpaque(false);
         mainPanel.add(p4, 4);
 
-        e1 = new Enemy(20, "COP", 3, 20, true); // *Enemy objects
-        e2 = new Enemy(20, "COP2", 3, 20, true);
-        e3 = new Enemy(20, "ROBOT", 3, 20, true);
+        e1 = new Enemy(0, "COP", 3, 20, true); // *Enemy objects
+        e2 = new Enemy(0, "COP2", 3, 20, true);
+        e3 = new Enemy(0, "ROBOT", 3, 20, true);
 
         e1.setSize(new Dimension(112, 112));
         e1.setLocation(grid[1][1]);
@@ -142,14 +142,22 @@ public class GameRunner {
         m.setMap("images/Level3.png");
 
         p1.setLocation(grid[10][6]);
+        p1.newLevel();
         p2.setLocation(grid[10][4]);
+        p2.newLevel();
         p3.setLocation(grid[11][1]);
+        p3.newLevel();
         p4.setLocation(grid[9][4]);
+        p4.newLevel();
 
         e1.setLocation(grid[4][1]);
+        e1.newLevel();
         e2.setLocation(grid[3][5]);
+        e2.newLevel();
         e3.setLocation(grid[4][3]);
+        e3.newLevel();
         e4.setLocation(grid[6][6]);
+        e5.newLevel();
 
         e5 = new Enemy(0, "BOOMER", 3, 20, true); // Initializes a new enemy object, the boomer which only appears in this
                                             // level.

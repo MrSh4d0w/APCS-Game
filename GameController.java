@@ -68,7 +68,7 @@ public class GameController {
                 for(String s:playerLocations){ // Traverses the playerLocations. If any equal any position on the grid, it makes that position in the returnArr 1.
                     if(s.equals(stringGrid[i][k])){returnArr[i][k] = 1;}
                 } for(int j=0; j<enemyLocations.length;j++){ // Similar as previous comment, but each enemy object is given its own number from 2-7
-                    if(enemyLocations[j].substring(2).equals(stringGrid[i][k])){returnArr[i][k] = j+2;}
+                    if(enemyLocations[j].equals(stringGrid[i][k])){returnArr[i][k] = j+2;}
                 } for(String s:wallLocations){ // if there is a wall, sets that location in the 2d to -1.  
                     if(s.equals(stringGrid[i][k])){returnArr[i][k] = -1;}
                 }
@@ -101,7 +101,7 @@ public class GameController {
         if (Level.getCurrentLevel() == 3){numEnemies = 5;}
         ArrayList<String> arr = new ArrayList<String>();
         for(int i=0;i<numEnemies;i++){
-            if(GameRunner.getE(i).getAlive()){ arr.add((i+1) + " " + GameRunner.getE(i).getLoc());}
+            if(GameRunner.getE(i).getAlive()){ arr.add(GameRunner.getE(i).getLoc());}
         }
         String[] ret = new String[arr.size()];
         for(int i=0;i<arr.size();i++){
@@ -129,7 +129,7 @@ public class GameController {
     public static int attack(int c, String[] args, String text){ // Similar concept to the setPosition method at the top of this class. 
         if(args==null || args.length<=1){return -1;}//return -1 if the command does not start with "move to" (edge case where nothing after "move")
         if(!args[0].equalsIgnoreCase("attack") || args[1].length()>2){return -1;}//returns -1 if the command does not start with "move to"
-        
+    
         String[] loc = GameRunner.getP(c).getLoc().split(" ");
         int oldX = Integer.parseInt(loc[0]);
         int oldY = Integer.parseInt(loc[1]);
@@ -144,8 +144,8 @@ public class GameController {
             if(idk[x/112][(y-36)/112]<=1){return -3;} else//if there is sosmeone at new x and y then return fail state of -3
             if (x >= 112 && y >= 112 && x < 1344 && y < 896) {//checks if within bounds
                 if(GameRunner.getP(c).getPClass().equalsIgnoreCase("MELEE") && Math.abs(x-oldX)<=112 && Math.abs(y-oldY)<=112){ //if the char is melee. !!!!! DOESN'T WORK !!!!!
-                    enemyAt(x, y).setHP(enemyAt(x, y).getHP()-10);
-                    console.insert("You attacked an enemy at "+ enemyAt(x,y).getPos() + " and did 10 damage!", text);
+                    enemyAt(x, y).setHP(enemyAt(x, y).getHP()-20);
+                    console.insert("You attacked an enemy at "+ enemyAt(x,y).getPos() + " and did 20 damage!", text);
                     if(enemyAt(x, y).getHP() <= 0){enemyAt(x,y).setAlive(false);}
                     return 1;
                 } else if (GameRunner.getP(c).getPClass().equalsIgnoreCase("MELEE")){return -6;}

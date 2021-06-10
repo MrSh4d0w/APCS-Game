@@ -228,11 +228,12 @@ public class console extends JPanel implements ActionListener{
         // l2 and l3 exist so that enemies that aren't in level don't appear in the info command. 
         Player p1 = GameRunner.getP(0);
         String player1Info = "";
-        if(p1.getAlive()){player1Info = "Assault:  HP: "+p1.getHP()+"    Location: "+p1.getPos();}
+        if(p1.getAlive()){player1Info = "Assault:  HP: "+p1.getHP()+"    Location: "+p1.getPos() + "\n";}
+        
 
         Player p2 = GameRunner.getP(1);
         String player2Info = "";
-        if(p2.getAlive()){player2Info = "\nTank:     HP: "+p2.getHP()+"    Location: "+p2.getPos();}
+        if(p2.getAlive()){player2Info = "Tank:     HP: "+p2.getHP()+"    Location: "+p2.getPos();}
  
         Player p3 = GameRunner.getP(2);
         String player3Info = "";
@@ -240,25 +241,38 @@ public class console extends JPanel implements ActionListener{
 
         Player p4 = GameRunner.getP(3);
         String player4Info = "";
-        if(p4.getAlive()){player4Info = "\nMelee:     HP: "+p4.getHP()+"    Location: "+p4.getPos();}
+        if(p4.getAlive()){player4Info = "\nMelee:     HP: "+p4.getHP()+"    Location: "+p4.getPos() + "\n";}
 
         Enemy e1 = GameRunner.getE(0);
         String Cop1Info = "";
-        if(e1.getAlive()){player4Info = "\nCop1:      HP: "+e1.getHP()+"    Location: "+e1.getPos();}        
-        
-        String l2 = "";
-        String l3 = "";
-        if(Level.getCurrentLevel()==2 || Level.getCurrentLevel()==3){l2 = "\nRobot2  HP: " + GameRunner.getE(3).getHP() + " Pos: " + GameRunner.getE(3).getPos();}
-        if(Level.getCurrentLevel()==3){l3 = "\nBoomer  HP: " + GameRunner.getE(4).getHP() + " Pos: " + GameRunner.getE(4).getPos();}
-        // Gives how much health, Accuracy, and Speed each Player object has. Also gives how much health and the location on the gameboard (Ex. A1) of each Enemy object
-        return "Assault:  HP: " + GameRunner.getP(0).getHP() + "    Location: " + GameRunner.getP(0).getPos() +  
-            "\nTank:     HP: " + GameRunner.getP(1).getHP() + "    Location: " + GameRunner.getP(1).getPos() + 
-            "\nSniper:   HP: " + GameRunner.getP(2).getHP() + "    Location: " + GameRunner.getP(2).getPos() + 
-            "\nMelee:     HP: " + GameRunner.getP(3).getHP() + "    Location: " + GameRunner.getP(3).getPos() + '\n' +
-            "\nCop1:      HP: " + GameRunner.getE(0).getHP() + "     Location: " + GameRunner.getE(0).getPos() +
-            "\nCop2:      HP: " + GameRunner.getE(1).getHP() + "     Location: " + GameRunner.getE(1).getPos() +
-            "\nRobot1:   HP: " + GameRunner.getE(2).getHP() + "     Location: " + GameRunner.getE(2).getPos() + l2 + l3;
-    }
+        if(e1.getAlive()){Cop1Info = "\nCop1:      HP: "+e1.getHP()+"    Location: "+e1.getPos();}        
+        else{Cop1Info = "";}
+
+        Enemy e2 = GameRunner.getE(1);
+        String Cop2Info = "";
+        if(e2.getAlive()){Cop2Info = "\nCop2:      HP: "+e2.getHP()+"    Location: "+e2.getPos();}
+        else{Cop2Info = "";}
+
+        Enemy e3 = GameRunner.getE(2);
+        String Robot1Info = "";
+        if(e3.getAlive()){Robot1Info = "\nRobot1:    HP: "+e3.getHP()+"    Location: "+e3.getPos();}
+        else{Robot1Info = "";}
+
+        Enemy e4 = GameRunner.getE(3);
+        String Robot2Info = "";
+        if(Level.getCurrentLevel()==2 || Level.getCurrentLevel()==3){
+            if(e4.getAlive()){Robot2Info = "\nrobot2:    HP: "+e4.getHP()+"    Location: "+e4.getPos();}
+            else{Robot2Info = "";}
+        } 
+
+        Enemy e5 = GameRunner.getE(4);
+        String BoomerInfo = "";
+        if(Level.getCurrentLevel()==3){
+            if(e5.getAlive()){BoomerInfo = "\nBoomer:   HP: "+e5.getHP()+"    Location: "+e5.getPos();}
+            else{BoomerInfo = "";}
+        }
+        return player1Info + player2Info + player3Info + player4Info + Cop1Info + Cop2Info + Robot1Info + Robot2Info + BoomerInfo;
+        }
 
     // private static void setTurn(int t){turn = t;}
     public static int getTurn(){return turn;}
