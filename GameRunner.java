@@ -11,7 +11,7 @@ public class GameRunner {
     private static JFrame f;
     private static map m;
     private static Level l;
-    private static Player p1, p2, p3, p4; // Creates player variables
+    public static Player p1, p2, p3, p4; // Creates player variables
     public static Enemy e1, e2, e3, e4, e5; // Creates enemy variables
     private static String[][] grid; // grid for the game.
     private static console c; // Console
@@ -92,9 +92,9 @@ public class GameRunner {
         p4.setOpaque(false);
         mainPanel.add(p4, 4);
 
-        e1 = new Enemy(0, "COP", 3, 20, true); // *Enemy objects
-        e2 = new Enemy(0, "COP2", 3, 20, true);
-        e3 = new Enemy(0, "ROBOT", 3, 20, true);
+        e1 = new Enemy(10, "COP", 3, 20, true); // *Enemy objects
+        e2 = new Enemy(10, "COP2", 3, 20, true);
+        e3 = new Enemy(10, "ROBOT", 3, 20, true);
 
         e1.setSize(new Dimension(112, 112));
         e1.setLocation(grid[1][1]);

@@ -228,6 +228,10 @@ public class GameController {
         }
         return false;
     }
+
+    public static void hasFailed() { // Checks to see if the all of the player characters are dead
+        if (GameRunner.p1.getHP()<=0 && GameRunner.p2.getHP()<= 0 && GameRunner.p3.getHP()<=0 && GameRunner.p3.getHP()<=0){GameRunner.lose();}
+    }
     public static String letterParser(int i) { // Returns the letter that corresponds with the inputted int. Basically it helps to turn the position 11 (not eleven, but One One) into A1.
         switch(i){
             case 1:return "A";

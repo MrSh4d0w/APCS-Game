@@ -66,15 +66,17 @@ public class EnemyController {
         int c = GameController.playerAt(playerX, playerY);
         GameRunner.getP(c).setHP(GameRunner.getP(c).getHP()-100); // Takes current HP of Player object it is attacking and takes 100 HP away from it, instantly killing it
         GameRunner.getP(GameController.playerAt(playerX, playerY)).setAlive(false);
+        GameController.hasFailed();
     }
     static void copAttack() { // Attack for Cop objects
         console.insertMsg("The cop at position " + GameController.letterParser(enemyX/112) + (enemyY-36)/112 + " is attacking a player at " + GameController.letterParser(playerX/112) + (playerY-36)/112);
         if(LineOfSight.canAttack(enemyX, enemyY, playerX, playerY)){
             int rand = (int)(Math.random()*100+1);
-            if(rand>50){ // Randomization for attack. 50/50 chance of the enemy attacking you and hitting you.
+            if(rand>2){ // Randomization for attack. 50/50 chance of the enemy attacking you and hitting you.
                 CopFail = false;
                 enemy = "cop";
                 damageCop = rand/10;
+                GameController.hasFailed();
             } else {
                 CopFail = true;
                 enemy = "cop";
@@ -91,10 +93,11 @@ public class EnemyController {
         console.insertMsg("The robot at position " + GameController.letterParser(enemyX/112) + (enemyY-36)/112 + " is attacking a player at " + GameController.letterParser(playerX/112) + (playerY-36)/112);
         if(LineOfSight.canAttack(enemyX, enemyY, playerX, playerY)){
             int rand = (int)(Math.random()*100+1);
-            if(rand>50){ // Randomization for attack. 50/50 chance of the enemy attacking you and hitting you.
+            if(rand>2){ // Randomization for attack. 50/50 chance of the enemy attacking you and hitting you.
                 RobFail = false;
                 enemy = "robot";
                 damageRob = (rand/10)+5;
+                GameController.hasFailed();
             } else {
                 RobFail = true;
                 enemy = "robot";

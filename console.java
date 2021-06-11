@@ -86,7 +86,7 @@ public class console extends JPanel implements ActionListener{
                 nextTurn(txt);
                 break;
             case "help": // Outputs a list of commands the user can input.
-                insert("\nMove To - Moves the currently selected character to specified position\n\nTarget - Targets a specific position\n\nAttack - Attack position that you targeted\n\nInfo - Get stats about the currently selected character\n\nNext Turn - Goes to the next turn\n\nClose - Closes the game\n\nHelp - Displays this message\n\nClear - Clears the console", txt);
+                insert("\nmove to - Moves the currently selected character to specified position\n\nattack - Attack position that you targeted\n\ninfo - Get stats about the currently selected character\n\nnext - Goes to the next turn\n\nclose - Closes the game\n\nhelp - Displays this message\n\nclear - Clears the console", txt);
                 break;
             case "clear": // clears the console textarea.
                 textArea.setText(null);
