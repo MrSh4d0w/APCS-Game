@@ -12,7 +12,7 @@
         "oldy"
     ],
     "files.exclude":{
-        "**/*.class": true,
+        // "**/*.class": true,
         "README.md": true
     }
 }
