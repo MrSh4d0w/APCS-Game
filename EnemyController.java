@@ -112,31 +112,34 @@ public class EnemyController {
     }
     
     private static void failureState(){ // Output if the enemy either fails or succeeds at hitting a Player object.
+        getClosestPlayer();
         Player p = GameRunner.getP(GameController.playerAt(playerX, playerY));
-        if(!LineOfSight.canAttack(enemyX, enemyY, playerX, playerY)){
-            console.insertMsg("The " + enemy + " has failed to hit you because of an obstruction");
-            return;
-        } 
-        if(enemy.equals("robot")){
-            if(RobFail){
-                console.insertMsg("The robot missed!");
-            } else {
-                console.insertMsg("The robot has hit you! You have taken " + damageRob + " damage!");
-                p.setHP(p.getHP()-damageRob);
-                if(p.getHP() <= 0){p.setAlive(false);}
+        if(p != null){
+            if(!LineOfSight.canAttack(enemyX, enemyY, playerX, playerY)){
+                console.insertMsg("The " + enemy + " has failed to hit you because of an obstruction");
+                return;
             } 
-            RobFail = true;
-            damageRob = 0;
-        } else {
-            if(CopFail){
-                console.insertMsg("The cop missed!");
+            if(enemy.equals("robot")){
+                if(RobFail){
+                    console.insertMsg("The robot missed!");
+                } else {
+                    console.insertMsg("The robot has hit you! You have taken " + damageRob + " damage!");
+                    p.setHP(p.getHP()-damageRob);
+                    if(p.getHP() <= 0){p.setAlive(false);}
+                } 
+                RobFail = true;
+                damageRob = 0;
             } else {
-                console.insertMsg("The cop has hit you! You have taken " + damageCop + " damage!");
-                p.setHP(p.getHP()-damageCop);
-                if(p.getHP() <= 0){p.setAlive(false);}
+                if(CopFail){
+                    console.insertMsg("The cop missed!");
+                } else {
+                    console.insertMsg("The cop has hit you! You have taken " + damageCop + " damage!");
+                    p.setHP(p.getHP()-damageCop);
+                    if(p.getHP() <= 0){p.setAlive(false);}
+                }
+                CopFail = true;
+                damageCop = 0;
             }
-            CopFail = true;
-            damageCop = 0;
         }
     }
     public static void getClosestPlayer(){ // Gets the closest player from the Enemy object it is being run on. 
@@ -147,15 +150,18 @@ public class EnemyController {
         int nPlayerY = 0;
         int minCharacter = 5;
         for(int i=0; i<playerLocations.length;i++){
-            String[] tempArr = playerLocations[i].split(" ");            
-            int x = Integer.parseInt(tempArr[0]);
-            int y = Integer.parseInt(tempArr[1]);
-            losArr1 = LineOfSight.drawLine(enemyX, enemyY, x, y);
-            if(losArr1.size() < min) {
-                min = losArr1.size();
-                minCharacter = i;
-                nPlayerX = x;
-                nPlayerY = y;
+            if(!playerLocations[i].equals("")){
+                String[] tempArr = playerLocations[i].split(" ");            
+                int x = Integer.parseInt(tempArr[0]);
+                int y = Integer.parseInt(tempArr[1]);
+                losArr1 = LineOfSight.drawLine(enemyX/112, (enemyY-36)/112, x/112, (y-36)/112);
+                if(GameController.playerAt(x, y)==-1 || !GameRunner.getP(GameController.playerAt(x, y)).getAlive()){} 
+                else if(losArr1.size() < min) {
+                    min = losArr1.size();
+                    minCharacter = i;
+                    nPlayerX = x;
+                    nPlayerY = y;
+                }
             }
         } // Puts all of the player locations into an arraylist. Each index in the arraylist is EITHER an X or Y value. 
         playerX = nPlayerX;

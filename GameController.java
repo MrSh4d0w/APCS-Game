@@ -86,6 +86,7 @@ public class GameController {
         ArrayList<String> arr = new ArrayList<String>();
         for(int i=0; i<4; i++){
             if(GameRunner.getP(i).getAlive()){arr.add(GameRunner.getP(i).getLoc());}
+            else {arr.add("");}
         }
         String[] ret = new String[arr.size()];
         for(int i=0;i<arr.size();i++){
@@ -195,23 +196,33 @@ public class GameController {
     public static int playerAt(int x, int y){  // returns which an int of which player is at the inputted location.
         int[][] totalGrid = GameController.getEntities();
         ArrayList<Integer> pLocs = new ArrayList<Integer>();
+        
+        
         String[] playerLocations = GameController.getPLocations();
+        
+        
+        
         for(int j=0; j<playerLocations.length;j++){
-            String[] tempArr = playerLocations[j].split(" ");            
-            int xx = Integer.parseInt(tempArr[0]);
-            int yy = Integer.parseInt(tempArr[1]);
+            if(!playerLocations[j].equals("")){
+                String[] tempArr = playerLocations[j].split(" ");            
+                int tempX = Integer.parseInt(tempArr[0]);
+                int tempY = Integer.parseInt(tempArr[1]);
 
-            pLocs.add(xx);
-            pLocs.add(yy);
+                pLocs.add(tempX);
+                pLocs.add(tempY);
+            } else {pLocs.add(0); pLocs.add(0);}
         }
+
         for(int i=0;i<totalGrid.length;i++){
             for(int k=0;k<totalGrid[0].length;k++){
-                int x2 = (i*112);
-                int y2 = (k*112+36);
+                int tempX = (i*112);
+                int tempY = (k*112+36);
 
-                if((x2==x) && (y2==y) && totalGrid[i][k]==1){
-                    int index = pLocs.indexOf(x)/2;
-                    return index;//totalGrid[i][k]-2
+                if((tempX==x) && (tempY==y) && totalGrid[i][k]==1){
+                    if(!GameRunner.getP(pLocs.indexOf(x)/2).getAlive()){
+                        break;
+                    }
+                    return pLocs.indexOf(x)/2;
                 }
             }
         }
