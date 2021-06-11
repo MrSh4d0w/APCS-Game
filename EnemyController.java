@@ -54,6 +54,7 @@ public class EnemyController {
     }
     public static void robotAction(int c){
         if(GameRunner.getE(c).getAlive()) {
+            getClosestPlayer();
             String[] enemyLoc = GameRunner.getE(c).getLoc().split(" ");
             enemyX = Integer.parseInt(enemyLoc[0]);
             enemyY = Integer.parseInt(enemyLoc[1]);
@@ -76,7 +77,7 @@ public class EnemyController {
                 CopFail = false;
                 enemy = "cop";
                 damageCop = rand/10;
-                GameController.hasFailed();
+                //GameController.hasFailed();
             } else {
                 CopFail = true;
                 enemy = "cop";
@@ -97,7 +98,7 @@ public class EnemyController {
                 RobFail = false;
                 enemy = "robot";
                 damageRob = (rand/10)+5;
-                GameController.hasFailed();
+                //GameController.hasFailed();
             } else {
                 RobFail = true;
                 enemy = "robot";
@@ -123,6 +124,7 @@ public class EnemyController {
             } else {
                 console.insertMsg("The robot has hit you! You have taken " + damageRob + " damage!");
                 p.setHP(p.getHP()-damageRob);
+                System.out.println(p.getHP());
                 if(p.getHP() <= 0){p.setAlive(false);}
             } 
             RobFail = true;
@@ -147,16 +149,18 @@ public class EnemyController {
         int nPlayerY = 0;
         int minCharacter = 5;
         for(int i=0; i<playerLocations.length;i++){
-            String[] tempArr = playerLocations[i].split(" ");            
-            int x = Integer.parseInt(tempArr[0]);
-            int y = Integer.parseInt(tempArr[1]);
-            losArr1 = LineOfSight.drawLine(enemyX, enemyY, x, y);
-            if(losArr1.size() < min) {
-                min = losArr1.size();
-                minCharacter = i;
-                nPlayerX = x;
-                nPlayerY = y;
-            }
+            if(!GameRunner.getP(i).getAlive()){ i++; }
+                String[] tempArr = playerLocations[i].split(" ");            
+                System.out.println(i + " " + playerLocations[i]);
+                int x = Integer.parseInt(tempArr[0]);
+                int y = Integer.parseInt(tempArr[1]);
+                losArr1 = LineOfSight.drawLine(enemyX/112, (enemyY-36)/112, x/112, (y-36)/112);
+                if(losArr1.size() < min) {
+                    min = losArr1.size();
+                    minCharacter = i;
+                    nPlayerX = x;
+                    nPlayerY = y;
+                }
         } // Puts all of the player locations into an arraylist. Each index in the arraylist is EITHER an X or Y value. 
         playerX = nPlayerX;
         playerY = nPlayerY;

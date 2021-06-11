@@ -86,6 +86,7 @@ public class GameController {
         ArrayList<String> arr = new ArrayList<String>();
         for(int i=0; i<4; i++){
             if(GameRunner.getP(i).getAlive()){arr.add(GameRunner.getP(i).getLoc());}
+            else {arr.add("");}
         }
         String[] ret = new String[arr.size()];
         for(int i=0;i<arr.size();i++){
@@ -197,12 +198,14 @@ public class GameController {
         ArrayList<Integer> pLocs = new ArrayList<Integer>();
         String[] playerLocations = GameController.getPLocations();
         for(int j=0; j<playerLocations.length;j++){
-            String[] tempArr = playerLocations[j].split(" ");            
-            int xx = Integer.parseInt(tempArr[0]);
-            int yy = Integer.parseInt(tempArr[1]);
+            if(playerLocations[j] != ""){
+                String[] tempArr = playerLocations[j].split(" ");            
+                int xx = Integer.parseInt(tempArr[0]);
+                int yy = Integer.parseInt(tempArr[1]);
 
-            pLocs.add(xx);
-            pLocs.add(yy);
+                pLocs.add(xx);
+                pLocs.add(yy);
+            } 
         }
         for(int i=0;i<totalGrid.length;i++){
             for(int k=0;k<totalGrid[0].length;k++){
