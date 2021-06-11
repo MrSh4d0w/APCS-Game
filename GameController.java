@@ -67,8 +67,10 @@ public class GameController {
             for(int k = 0; k < returnArr[0].length; k++){
                 for(String s:playerLocations){ // Traverses the playerLocations. If any equal any position on the grid, it makes that position in the returnArr 1.
                     if(s.equals(stringGrid[i][k])){returnArr[i][k] = 1;}
+
                 } for(int j=0; j<enemyLocations.length;j++){ // Similar as previous comment, but each enemy object is given its own number from 2-7
                     if(enemyLocations[j].equals(stringGrid[i][k])){returnArr[i][k] = j+2;}
+
                 } for(String s:wallLocations){ // if there is a wall, sets that location in the 2d to -1.  
                     if(s.equals(stringGrid[i][k])){returnArr[i][k] = -1;}
                 }
@@ -103,6 +105,7 @@ public class GameController {
         ArrayList<String> arr = new ArrayList<String>();
         for(int i=0;i<numEnemies;i++){
             if(GameRunner.getE(i).getAlive()){ arr.add(GameRunner.getE(i).getLoc());}
+            else {arr.add(" ");}
         }
         String[] ret = new String[arr.size()];
         for(int i=0;i<arr.size();i++){
@@ -196,12 +199,7 @@ public class GameController {
     public static int playerAt(int x, int y){  // returns which an int of which player is at the inputted location.
         int[][] totalGrid = GameController.getEntities();
         ArrayList<Integer> pLocs = new ArrayList<Integer>();
-        
-        
         String[] playerLocations = GameController.getPLocations();
-        
-        
-        
         for(int j=0; j<playerLocations.length;j++){
             if(!playerLocations[j].equals("")){
                 String[] tempArr = playerLocations[j].split(" ");            

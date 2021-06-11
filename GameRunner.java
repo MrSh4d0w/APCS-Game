@@ -92,9 +92,9 @@ public class GameRunner {
         p4.setOpaque(false);
         mainPanel.add(p4, 4);
 
-        e1 = new Enemy(10, "COP", 3, 20, true); // *Enemy objects
-        e2 = new Enemy(10, "COP2", 3, 20, true);
-        e3 = new Enemy(10, "ROBOT", 3, 20, true);
+        e1 = new Enemy(0, "COP", 3, 20, true); // *Enemy objects
+        e2 = new Enemy(0, "COP2", 3, 20, true);
+        e3 = new Enemy(0, "ROBOT", 3, 20, true);
 
         e1.setSize(new Dimension(112, 112));
         e1.setLocation(grid[1][1]);
@@ -130,7 +130,7 @@ public class GameRunner {
         e3.setLocation(grid[4][3]);
         e3.newLevel();
 
-        e4 = new Enemy(20, "ROBOT2", 3, 20, true); // Initializes a new enemy object, the second robot which only appears in
+        e4 = new Enemy(60, "ROBOT2", 3, 20, true); // Initializes a new enemy object, the second robot which only appears in
                                             // this level and the next.
         e4.setSize(new Dimension(112, 112));
         e4.setLocation(grid[8][3]);
