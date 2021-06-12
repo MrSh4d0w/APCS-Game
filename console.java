@@ -106,6 +106,7 @@ public class console extends JPanel implements ActionListener{
                         GameRunner.level2();
                         GameRunner.removeGrid();
                         GameRunner.drawGrid();
+                        nextTurn(txt);
                         break;
                     }
                     if(Level.getCurrentLevel() == 2) {
@@ -114,6 +115,7 @@ public class console extends JPanel implements ActionListener{
                         GameRunner.level3();
                         GameRunner.removeGrid();
                         GameRunner.drawGrid();
+                        nextTurn(txt);
                         break;
                     }
                     if(Level.getCurrentLevel() == 3) {
