@@ -138,6 +138,7 @@ public class console extends JPanel implements ActionListener{
                 break;
             case "restart":
                 GameRunner.restart();
+                break;
             default: // Outputs if the user doesn't input a valid command, or incorrectly inputs a command.
                 insert("That is not a command. If you need help, type \"help\"", txt);
                 break;
