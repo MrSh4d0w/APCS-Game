@@ -119,7 +119,7 @@ public class console extends JPanel implements ActionListener{
                         break;
                     }
                     if(Level.getCurrentLevel() == 3) {
-                        insert("Good job, you won!", txt);
+                        insert("Good job, you won! Type exit to close the game or restart to restart the game", txt);
                         GameRunner.win();
                         break;
                     }
@@ -136,6 +136,8 @@ public class console extends JPanel implements ActionListener{
                 EnemyController.copAction(1);
                 insert("", txt);
                 break;
+            case "restart":
+                GameRunner.restart();
             default: // Outputs if the user doesn't input a valid command, or incorrectly inputs a command.
                 insert("That is not a command. If you need help, type \"help\"", txt);
                 break;
@@ -291,6 +293,4 @@ public class console extends JPanel implements ActionListener{
     public static void enemyDied(Enemy e) {
         insertMsg("Enemy " + e.getClass() + " has died");
     }
-
-
 }

@@ -389,4 +389,9 @@ public class GameRunner {
             mainPanel.remove(g);
         }
     }
+
+    public static void restart(){
+        f.setVisible(false);
+        TitleScreen.main(null);
+    }
 }
