@@ -198,7 +198,7 @@ public class GameController {
         ArrayList<Integer> pLocs = new ArrayList<Integer>();
         String[] playerLocations = GameController.getPLocations();
         for(int j=0; j<playerLocations.length;j++){
-            if(playerLocations[j] != ""){
+            if(!playerLocations[j].equals("")){
                 String[] tempArr = playerLocations[j].split(" ");            
                 int xx = Integer.parseInt(tempArr[0]);
                 int yy = Integer.parseInt(tempArr[1]);
