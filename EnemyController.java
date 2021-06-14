@@ -172,9 +172,10 @@ public class EnemyController {
                     nPlayerY = y;
                 }
             }
-        } // Puts all of the player locations into an arraylist. Each index in the arraylist is EITHER an X or Y value. 
-        playerX = nPlayerX;
-        playerY = nPlayerY;
+            playerX = nPlayerX;
+            playerY = nPlayerY;
+        }
+        // Puts all of the player locations into an arraylist. Each index in the arraylist is EITHER an X or Y value. 
         //System.out.println(playerX + " " + playerY + " " + enemyX + " " + enemyY);
         // int yMin = Integer.MAX_VALUE; // I don't know what this does LMAO.
         // int yIndex = 0;
@@ -208,7 +209,6 @@ public class EnemyController {
         // }
 
         // System.out.println(playerX + " " + playerY + " " + enemyX + " " + enemyY);
-    }
     public static void attack(){
         copAction(0);
         copAction(1);
