@@ -56,10 +56,10 @@ public class Enemy extends JPanel implements ActionListener {
     public void newLevel() {
         this.setVisible(true);
         switch(getEClass()) {
-            case "COP": setHP(20); break;
-            case "COP2": setHP(20); break;
-            case "ROBOT": setHP(60); break;
-            case "ROBOT2": setHP(60); break;
+            case "COP": setHP(60); break;
+            case "COP2": setHP(60); break;
+            case "ROBOT": setHP(20); break;
+            case "ROBOT2": setHP(20); break;
             case "BOOMER": setHP(20);  break;
         }
         setAlive(true);

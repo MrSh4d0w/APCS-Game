@@ -6,7 +6,7 @@ public class EnemyController {
     private static String enemy;
     private static int damageCop, damageRob;
 
-    public static void boomerAction(int c){ // Controls the behavior of the boomer enemy
+    public static void boomerAction(int c){ // Controls the behavior of the boomer enemy. Basically it always goes to the nearest player.
         if(GameRunner.getE(c).getAlive()) {
             String[] enemyLoc = GameRunner.getE(c).getLoc().split(" ");
             enemyX = Integer.parseInt(enemyLoc[0]);
@@ -29,7 +29,7 @@ public class EnemyController {
         // System.out.println(playerX + " " + playerY + " " + enemyX + " " + enemyY);
    //move to closest player's y pos then x pos then blow up when 1 square away
     }
-    public static void copAction(int c){
+    public static void copAction(int c){ // Controls the behavior of the boomer enemy. In short, it always runs away from the nearest player.
         if(GameRunner.getE(c).getAlive()) {
             String[] enemyLoc = GameRunner.getE(c).getLoc().split(" ");
             enemyX = Integer.parseInt(enemyLoc[0]);
@@ -52,7 +52,7 @@ public class EnemyController {
         }
    //stay x grids away from player and shoot
     }
-    public static void robotAction(int c){
+    public static void robotAction(int c){ // Doesn't move so doesn't need move logic
         if(GameRunner.getE(c).getAlive()) {
             String[] enemyLoc = GameRunner.getE(c).getLoc().split(" ");
             enemyX = Integer.parseInt(enemyLoc[0]);
@@ -72,7 +72,7 @@ public class EnemyController {
         console.insertMsg("The cop at position " + GameController.letterParser(enemyX/112) + (enemyY-36)/112 + " is attacking a player at " + GameController.letterParser(playerX/112) + (playerY-36)/112);
         if(LineOfSight.canAttack(enemyX, enemyY, playerX, playerY)){
             int rand = (int)(Math.random()*100+1);
-            if(rand>2){ // Randomization for attack. 50/50 chance of the enemy attacking you and hitting you.
+            if(rand>50){ // Randomization for attack. 50/50 chance of the enemy attacking you and hitting you.
                 CopFail = false;
                 enemy = "cop";
                 damageCop = rand/10;
@@ -89,11 +89,11 @@ public class EnemyController {
         }
         EnemyController.failureState();
     }
-    static void robotAttack() { // Attack for robot objects
+    static void robotAttack() { // Attack for robot objects. Just a simple LOS check and then damage rolling
         console.insertMsg("The robot at position " + GameController.letterParser(enemyX/112) + (enemyY-36)/112 + " is attacking a player at " + GameController.letterParser(playerX/112) + (playerY-36)/112);
         if(LineOfSight.canAttack(enemyX, enemyY, playerX, playerY)){
             int rand = (int)(Math.random()*100+1);
-            if(rand>2){ // Randomization for attack. 50/50 chance of the enemy attacking you and hitting you.
+            if(rand>50){ // Randomization for attack. 50/50 chance of the enemy attacking you and hitting you.
                 RobFail = false;
                 enemy = "robot";
                 damageRob = (rand/10)+5;
