@@ -6,7 +6,7 @@ public class EnemyController {
     private static String enemy;
     private static int damageCop, damageRob;
 
-    public static void boomerAction(int c){
+    public static void boomerAction(int c){ // Controls the behavior of the boomer enemy. Basically it always goes to the nearest player.
         if(GameRunner.getE(c).getAlive()) {
             String[] enemyLoc = GameRunner.getE(c).getLoc().split(" ");
             enemyX = Integer.parseInt(enemyLoc[0]);
@@ -29,7 +29,7 @@ public class EnemyController {
         // System.out.println(playerX + " " + playerY + " " + enemyX + " " + enemyY);
    //move to closest player's y pos then x pos then blow up when 1 square away
     }
-    public static void copAction(int c){
+    public static void copAction(int c){ // Controls the behavior of the boomer enemy. In short, it always runs away from the nearest player.
         if(GameRunner.getE(c).getAlive()) {
             String[] enemyLoc = GameRunner.getE(c).getLoc().split(" ");
             enemyX = Integer.parseInt(enemyLoc[0]);
@@ -52,7 +52,7 @@ public class EnemyController {
         }
    //stay x grids away from player and shoot
     }
-    public static void robotAction(int c){
+    public static void robotAction(int c){ // Doesn't move so doesn't need move logic
         if(GameRunner.getE(c).getAlive()) {
             getClosestPlayer();
             String[] enemyLoc = GameRunner.getE(c).getLoc().split(" ");
@@ -73,7 +73,7 @@ public class EnemyController {
         console.insertMsg("The cop at position " + GameController.letterParser(enemyX/112) + (enemyY-36)/112 + " is attacking a player at " + GameController.letterParser(playerX/112) + (playerY-36)/112);
         if(LineOfSight.canAttack(enemyX, enemyY, playerX, playerY)){
             int rand = (int)(Math.random()*100+1);
-            if(rand>2){ // Randomization for attack. 50/50 chance of the enemy attacking you and hitting you.
+            if(rand>50){ // Randomization for attack. 50/50 chance of the enemy attacking you and hitting you.
                 CopFail = false;
                 enemy = "cop";
                 damageCop = rand/10;
@@ -90,11 +90,11 @@ public class EnemyController {
         }
         EnemyController.failureState();
     }
-    static void robotAttack() { // Attack for robot objects
+    static void robotAttack() { // Attack for robot objects. Just a simple LOS check and then damage rolling
         console.insertMsg("The robot at position " + GameController.letterParser(enemyX/112) + (enemyY-36)/112 + " is attacking a player at " + GameController.letterParser(playerX/112) + (playerY-36)/112);
         if(LineOfSight.canAttack(enemyX, enemyY, playerX, playerY)){
             int rand = (int)(Math.random()*100+1);
-            if(rand>2){ // Randomization for attack. 50/50 chance of the enemy attacking you and hitting you.
+            if(rand>50){ // Randomization for attack. 50/50 chance of the enemy attacking you and hitting you.
                 RobFail = false;
                 enemy = "robot";
                 damageRob = (rand/10)+5;
@@ -113,6 +113,7 @@ public class EnemyController {
     }
     
     private static void failureState(){ // Output if the enemy either fails or succeeds at hitting a Player object.
+        getClosestPlayer();
         Player p = GameRunner.getP(GameController.playerAt(playerX, playerY));
         if(!LineOfSight.canAttack(enemyX, enemyY, playerX, playerY)){
             console.insertMsg("The " + enemy + " has failed to hit you because of an obstruction");
@@ -127,18 +128,27 @@ public class EnemyController {
                 System.out.println(p.getHP());
                 if(p.getHP() <= 0){p.setAlive(false);}
             } 
-            RobFail = true;
-            damageRob = 0;
-        } else {
-            if(CopFail){
-                console.insertMsg("The cop missed!");
+            if(enemy.equals("robot")){
+                if(RobFail){
+                    console.insertMsg("The robot missed!");
+                } else {
+                    console.insertMsg("The robot has hit you! You have taken " + damageRob + " damage!");
+                    p.setHP(p.getHP()-damageRob);
+                    if(p.getHP() <= 0){p.setAlive(false);}
+                } 
+                RobFail = true;
+                damageRob = 0;
             } else {
-                console.insertMsg("The cop has hit you! You have taken " + damageCop + " damage!");
-                p.setHP(p.getHP()-damageCop);
-                if(p.getHP() <= 0){p.setAlive(false);}
+                if(CopFail){
+                    console.insertMsg("The cop missed!");
+                } else {
+                    console.insertMsg("The cop has hit you! You have taken " + damageCop + " damage!");
+                    p.setHP(p.getHP()-damageCop);
+                    if(p.getHP() <= 0){p.setAlive(false);}
+                }
+                CopFail = true;
+                damageCop = 0;
             }
-            CopFail = true;
-            damageCop = 0;
         }
     }
     public static void getClosestPlayer(){ // Gets the closest player from the Enemy object it is being run on. 
@@ -161,10 +171,11 @@ public class EnemyController {
                     nPlayerX = x;
                     nPlayerY = y;
                 }
+            }
         } // Puts all of the player locations into an arraylist. Each index in the arraylist is EITHER an X or Y value. 
         playerX = nPlayerX;
         playerY = nPlayerY;
-        System.out.println(playerX + " " + playerY + " " + enemyX + " " + enemyY);
+        //System.out.println(playerX + " " + playerY + " " + enemyX + " " + enemyY);
         // int yMin = Integer.MAX_VALUE; // I don't know what this does LMAO.
         // int yIndex = 0;
         // for(int i=1; i<8;i+=2){

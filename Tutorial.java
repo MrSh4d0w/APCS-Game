@@ -25,8 +25,8 @@ public class Tutorial extends JPanel implements ActionListener, KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        if (e.getKeyCode() == KeyEvent.VK_RIGHT) {System.out.println("hello world");epicMethod();}
-        if (e.getKeyCode() == KeyEvent.VK_LEFT) {System.out.println("hello world");epicMethod2();}
+        if (e.getKeyCode() == KeyEvent.VK_RIGHT) {tutorialForward();}
+        if (e.getKeyCode() == KeyEvent.VK_LEFT) {tutorialBackward();}
         if (e.getKeyCode() == KeyEvent.VK_SPACE) {GameRunner.main(null); f.setVisible(false);}
     }
 
@@ -38,7 +38,7 @@ public class Tutorial extends JPanel implements ActionListener, KeyListener {
         repaint();
     }
     
-    public void epicMethod() {
+    public void tutorialForward() { // patch work solution
         switch(currentImage) {
             case "images/tutorial/tutorial1.png":
                 img = new ImageIcon("images/tutorial/tutorial2.png").getImage();
@@ -72,7 +72,7 @@ public class Tutorial extends JPanel implements ActionListener, KeyListener {
                 break;
         }
     }
-    public void epicMethod2() {
+    public void tutorialBackward() { // patch work solution
         switch(currentImage) {
             case "images/tutorial/tutorial7.png":
                 img = new ImageIcon("images/tutorial/tutorial6.png").getImage();
@@ -109,7 +109,7 @@ public class Tutorial extends JPanel implements ActionListener, KeyListener {
 
 
     public static void main(String[] args) {
-        f = new JFrame();
+        f = new JFrame("Cyberbreak - Titlescreen");
         Tutorial t = new Tutorial();
         f.setSize(1920, 1080);
         f.setUndecorated(true);

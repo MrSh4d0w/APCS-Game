@@ -8,11 +8,11 @@ import java.io.IOException;
 
 public class console extends JPanel implements ActionListener{
     private static JTextField textField; // Creates a text field where the user can input commands.
-    private Image decorations;
+    private Image decorations; // For the background
     private static JTextArea textArea; // Displays the text of previous commands. 
     private JLabel label;
     // private JPanel background;
-    private Color notBlack;
+    private Color notBlack; // Both of these are used for coloring the console area
     private Color notWhite;
     private static int turn; // Controls whose turn it is currently.
     private static boolean hasMoved, hasAttacked; // Used to determine if Player objects have moved and/or attacked yet.

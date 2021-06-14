@@ -67,8 +67,10 @@ public class GameController {
             for(int k = 0; k < returnArr[0].length; k++){
                 for(String s:playerLocations){ // Traverses the playerLocations. If any equal any position on the grid, it makes that position in the returnArr 1.
                     if(s.equals(stringGrid[i][k])){returnArr[i][k] = 1;}
+
                 } for(int j=0; j<enemyLocations.length;j++){ // Similar as previous comment, but each enemy object is given its own number from 2-7
                     if(enemyLocations[j].equals(stringGrid[i][k])){returnArr[i][k] = j+2;}
+
                 } for(String s:wallLocations){ // if there is a wall, sets that location in the 2d to -1.  
                     if(s.equals(stringGrid[i][k])){returnArr[i][k] = -1;}
                 }
@@ -103,6 +105,7 @@ public class GameController {
         ArrayList<String> arr = new ArrayList<String>();
         for(int i=0;i<numEnemies;i++){
             if(GameRunner.getE(i).getAlive()){ arr.add(GameRunner.getE(i).getLoc());}
+            else {arr.add(" ");}
         }
         String[] ret = new String[arr.size()];
         for(int i=0;i<arr.size();i++){
@@ -199,7 +202,7 @@ public class GameController {
         String[] playerLocations = GameController.getPLocations();
         for(int j=0; j<playerLocations.length;j++){
             if(!playerLocations[j].equals("")){
-                String[] tempArr = playerLocations[j].split(" ");            
+                String[] tempArr = playerLocations[j].split(" ");
                 int xx = Integer.parseInt(tempArr[0]);
                 int yy = Integer.parseInt(tempArr[1]);
 
@@ -207,14 +210,17 @@ public class GameController {
                 pLocs.add(yy);
             } 
         }
+
         for(int i=0;i<totalGrid.length;i++){
             for(int k=0;k<totalGrid[0].length;k++){
-                int x2 = (i*112);
-                int y2 = (k*112+36);
+                int tempX = (i*112);
+                int tempY = (k*112+36);
 
-                if((x2==x) && (y2==y) && totalGrid[i][k]==1){
-                    int index = pLocs.indexOf(x)/2;
-                    return index;//totalGrid[i][k]-2
+                if((tempX==x) && (tempY==y) && totalGrid[i][k]==1){
+                    if(!GameRunner.getP(pLocs.indexOf(x)/2).getAlive()){
+                        break;
+                    }
+                    return pLocs.indexOf(x)/2;
                 }
             }
         }
