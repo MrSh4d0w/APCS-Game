@@ -1,4 +1,4 @@
-
+// You don't actually run this method. Run TitleScreen instead. This was just the name of the file when we started. The TitleScreen was added after. DO NOT RUN THIS CLASS.
 // import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -19,9 +19,10 @@ public class GameRunner {
     private static ArrayList<Grid> grids;
 
     public static void main(String[] args) {
+        System.out.println("If you are trying to start the game, do NOT run this class. Please run TitleScreen instead. Thank you.");
         grid = GameController.createGrid(); // Creates a 13x9 grid.
 
-        f = new JFrame();
+        f = new JFrame("Cyberbreak");
         f.setSize(1920, 1080);
         f.setUndecorated(true);
 
@@ -140,7 +141,7 @@ public class GameRunner {
 
     public static void level3() {
         m.setMap("images/Level3.png");
-        e5 = new Enemy(0, "BOOMER", 3, 20, true); // Initializes a new enemy object, the boomer which only appears in this
+        e5 = new Enemy(20, "BOOMER", 3, 20, true); // Initializes a new enemy object, the boomer which only appears in this
                                             // level.
         e5.setSize(new Dimension(112, 112));
         e5.setLocation(grid[1][7]);

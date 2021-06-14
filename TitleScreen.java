@@ -8,7 +8,7 @@ public class TitleScreen {
     private static Image img = new ImageIcon("images/Titlescreen.png").getImage(); // Crates an image from the images folder.
 
     public static void main(String[] args) {
-        JFrame f = new JFrame();
+        JFrame f = new JFrame("Cyberbreak - Titlescreen");
         JPanel p = new JPanel() {
             public void paintComponent(Graphics g) {
                 g.drawImage(img, 0, 0, null);

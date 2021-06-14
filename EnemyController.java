@@ -6,7 +6,7 @@ public class EnemyController {
     private static String enemy;
     private static int damageCop, damageRob;
 
-    public static void boomerAction(int c){
+    public static void boomerAction(int c){ // Controls the behavior of the boomer enemy
         if(GameRunner.getE(c).getAlive()) {
             String[] enemyLoc = GameRunner.getE(c).getLoc().split(" ");
             enemyX = Integer.parseInt(enemyLoc[0]);
@@ -166,7 +166,7 @@ public class EnemyController {
         } // Puts all of the player locations into an arraylist. Each index in the arraylist is EITHER an X or Y value. 
         playerX = nPlayerX;
         playerY = nPlayerY;
-        System.out.println(playerX + " " + playerY + " " + enemyX + " " + enemyY);
+        //System.out.println(playerX + " " + playerY + " " + enemyX + " " + enemyY);
         // int yMin = Integer.MAX_VALUE; // I don't know what this does LMAO.
         // int yIndex = 0;
         // for(int i=1; i<8;i+=2){

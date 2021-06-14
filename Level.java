@@ -8,7 +8,7 @@ public class Level {
         currentLevel = c;
     }
     public static String[] getLevel1Cords() {
-        String[] ret = new String[16]; // Yes this is inefficient, but it works.
+        String[] ret = new String[16]; // Yes this is inefficient, but it was the only way to get the cords of all of the walls in each level.
         ret[0] = "448 148";
         ret[1] = "112 260";
         ret[2] = "224 260";
@@ -114,7 +114,7 @@ public class Level {
     public static int getCurrentLevel() {return currentLevel;}
     public static void setCurrentLevel(int i){currentLevel = i;}
 
-    public static void printThing() {
+    public static void printThing() { // this is for testing dont touch.
         for(int i = 0; i < Level.getLevel1Pos().length; i++) {
             System.out.print(Level.getLevel1Pos()[i] + ", ");
             //for (int k = 0; k < Level.getLevel1Pos()[0].length; k++) {

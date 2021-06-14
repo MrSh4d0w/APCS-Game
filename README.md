@@ -1,1 +1,1 @@
-To run game run TitleScreen.java
+DO NOT RUN "GAMERUNNER" TO START THE GAME. RUN "TITLESCREEN"

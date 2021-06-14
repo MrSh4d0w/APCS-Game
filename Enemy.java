@@ -32,12 +32,12 @@ public class Enemy extends JPanel implements ActionListener {
         GameRunner.setLocation(str, this);
     }
 
-    public int getHP(){return HP;}           // returns HP of Player object
-    public void setHP(int HP){this.HP = HP;} // sets HP of Player object
-    public void removeHP(int x){HP-=x;}      // removes x HP of Player object
-    public void addHP(int x){HP+=x;}         // adds x HP of Player object
+    public int getHP(){return HP;}           // returns HP of Enemy object
+    public void setHP(int HP){this.HP = HP;} // sets HP of Enemy object
+    public void removeHP(int x){HP-=x;}      // removes x HP of Enemy object
+    public void addHP(int x){HP+=x;}         // adds x HP of Enemy object
 
-    public String getEClass(){return c;}     // returns status of Player object
+    public String getEClass(){return c;}     // returns status of Enemy object
     public int getAcc(){return acc;}         // returns accuracy
     public int getSpeed(){return speed;}     // returns speed
     public boolean getAlive(){return alive;}
@@ -60,7 +60,7 @@ public class Enemy extends JPanel implements ActionListener {
             case "COP2": setHP(20); break;
             case "ROBOT": setHP(60); break;
             case "ROBOT2": setHP(60); break;
-            case "BOOMER": setHP(1);  break;
+            case "BOOMER": setHP(20);  break;
         }
         setAlive(true);
     }
