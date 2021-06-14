@@ -81,6 +81,7 @@ public class console extends JPanel implements ActionListener{
                     if(state == -6){insert("You tried to attack an enemy, but you missed", txt);break;}
                 }
                 checkAliveEnts();
+                if(GameController.canContinue()){insertMsg("Good job you killed all the enemies! Type \"continue\" to go to the next level.");}
                 break;
             case "next":
                 nextTurn(txt);
@@ -105,6 +106,7 @@ public class console extends JPanel implements ActionListener{
                         GameRunner.level2();
                         GameRunner.removeGrid();
                         GameRunner.drawGrid();
+                        nextTurn(txt);
                         break;
                     }
                     if(Level.getCurrentLevel() == 2) {
@@ -113,10 +115,11 @@ public class console extends JPanel implements ActionListener{
                         GameRunner.level3();
                         GameRunner.removeGrid();
                         GameRunner.drawGrid();
+                        nextTurn(txt);
                         break;
                     }
                     if(Level.getCurrentLevel() == 3) {
-                        insert("Good job, you won!", txt);
+                        insert("Good job, you won! Type exit to close the game or restart to restart the game", txt);
                         GameRunner.win();
                         break;
                     }
@@ -132,6 +135,9 @@ public class console extends JPanel implements ActionListener{
                 EnemyController.boomerAction(4);
                 EnemyController.copAction(1);
                 insert("", txt);
+                break;
+            case "restart":
+                GameRunner.restart();
                 break;
             default: // Outputs if the user doesn't input a valid command, or incorrectly inputs a command.
                 insert("That is not a command. If you need help, type \"help\"", txt);
@@ -154,6 +160,7 @@ public class console extends JPanel implements ActionListener{
             GameRunner.removeGrid(); // Redraws grid.
             GameRunner.drawGrid();
         }
+        if(GameController.canContinue()){insertMsg("Good job you killed all the enemies! Type \"continue\" to go to the next level.");}
         if(turn==4){turn=-1;nextTurn(txt);}//recursive statement to 
     }
     // Used the insert text in the textArea. Format is as follows.
@@ -287,6 +294,4 @@ public class console extends JPanel implements ActionListener{
     public static void enemyDied(Enemy e) {
         insertMsg("Enemy " + e.getClass() + " has died");
     }
-
-
 }

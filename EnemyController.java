@@ -54,6 +54,7 @@ public class EnemyController {
     }
     public static void robotAction(int c){ // Doesn't move so doesn't need move logic
         if(GameRunner.getE(c).getAlive()) {
+            getClosestPlayer();
             String[] enemyLoc = GameRunner.getE(c).getLoc().split(" ");
             enemyX = Integer.parseInt(enemyLoc[0]);
             enemyY = Integer.parseInt(enemyLoc[1]);
@@ -76,7 +77,7 @@ public class EnemyController {
                 CopFail = false;
                 enemy = "cop";
                 damageCop = rand/10;
-                GameController.hasFailed();
+                //GameController.hasFailed();
             } else {
                 CopFail = true;
                 enemy = "cop";
@@ -97,7 +98,7 @@ public class EnemyController {
                 RobFail = false;
                 enemy = "robot";
                 damageRob = (rand/10)+5;
-                GameController.hasFailed();
+                //GameController.hasFailed();
             } else {
                 RobFail = true;
                 enemy = "robot";
@@ -114,10 +115,18 @@ public class EnemyController {
     private static void failureState(){ // Output if the enemy either fails or succeeds at hitting a Player object.
         getClosestPlayer();
         Player p = GameRunner.getP(GameController.playerAt(playerX, playerY));
-        if(p != null){
-            if(!LineOfSight.canAttack(enemyX, enemyY, playerX, playerY)){
-                console.insertMsg("The " + enemy + " has failed to hit you because of an obstruction");
-                return;
+        if(!LineOfSight.canAttack(enemyX, enemyY, playerX, playerY)){
+            console.insertMsg("The " + enemy + " has failed to hit you because of an obstruction");
+            return;
+        } 
+        if(enemy.equals("robot")){
+            if(RobFail){
+                console.insertMsg("The robot missed!");
+            } else {
+                console.insertMsg("The robot has hit you! You have taken " + damageRob + " damage!");
+                p.setHP(p.getHP()-damageRob);
+                System.out.println(p.getHP());
+                if(p.getHP() <= 0){p.setAlive(false);}
             } 
             if(enemy.equals("robot")){
                 if(RobFail){
@@ -150,13 +159,13 @@ public class EnemyController {
         int nPlayerY = 0;
         int minCharacter = 5;
         for(int i=0; i<playerLocations.length;i++){
-            if(!playerLocations[i].equals("")){
+            if(!GameRunner.getP(i).getAlive()){ i++; }
                 String[] tempArr = playerLocations[i].split(" ");            
+                System.out.println(i + " " + playerLocations[i]);
                 int x = Integer.parseInt(tempArr[0]);
                 int y = Integer.parseInt(tempArr[1]);
                 losArr1 = LineOfSight.drawLine(enemyX/112, (enemyY-36)/112, x/112, (y-36)/112);
-                if(GameController.playerAt(x, y)==-1 || !GameRunner.getP(GameController.playerAt(x, y)).getAlive()){} 
-                else if(losArr1.size() < min) {
+                if(losArr1.size() < min) {
                     min = losArr1.size();
                     minCharacter = i;
                     nPlayerX = x;

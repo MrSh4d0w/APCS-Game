@@ -202,13 +202,13 @@ public class GameController {
         String[] playerLocations = GameController.getPLocations();
         for(int j=0; j<playerLocations.length;j++){
             if(!playerLocations[j].equals("")){
-                String[] tempArr = playerLocations[j].split(" ");            
-                int tempX = Integer.parseInt(tempArr[0]);
-                int tempY = Integer.parseInt(tempArr[1]);
+                String[] tempArr = playerLocations[j].split(" ");
+                int xx = Integer.parseInt(tempArr[0]);
+                int yy = Integer.parseInt(tempArr[1]);
 
-                pLocs.add(tempX);
-                pLocs.add(tempY);
-            } else {pLocs.add(0); pLocs.add(0);}
+                pLocs.add(xx);
+                pLocs.add(yy);
+            } 
         }
 
         for(int i=0;i<totalGrid.length;i++){
