@@ -148,7 +148,7 @@ public class GameController {
             if(idk[x/112][(y-36)/112]<=1){return -3;} else//if there is sosmeone at new x and y then return fail state of -3
             if (x >= 112 && y >= 112 && x < 1344 && y < 896) {//checks if within bounds
                 if(GameRunner.getP(c).getPClass().equalsIgnoreCase("MELEE") && Math.abs(x-oldX)<=112 && Math.abs(y-oldY)<=112){ //if the char is melee. !!!!! DOESN'T WORK !!!!!
-                    enemyAt(x, y).setHP(enemyAt(x, y).getHP()-20);
+                    enemyAt(x, y).setHP(enemyAt(x, y).getHP()-50);
                     console.insert("You attacked an enemy at "+ enemyAt(x,y).getPos() + " and did 20 damage!", text);
                     if(enemyAt(x, y).getHP() <= 0){enemyAt(x,y).setAlive(false);}
                     return 1;
@@ -167,7 +167,7 @@ public class GameController {
                             if(enemyAt(x, y).getHP() <= 0){enemyAt(x,y).setAlive(false);}
                             break;
                         case "TANK":
-                            enemyAt(x, y).setHP(enemyAt(x, y).getHP()-20);
+                            enemyAt(x, y).setHP(enemyAt(x, y).getHP()-10);
                             console.insert("You attacked an enemy at "+ enemyAt(x,y).getPos() + " and did 20 damage!", text);
                             if(enemyAt(x, y).getHP() <= 0){enemyAt(x,y).setAlive(false);}
                             break;

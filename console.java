@@ -119,7 +119,7 @@ public class console extends JPanel implements ActionListener{
                         break;
                     }
                     if(Level.getCurrentLevel() == 3) {
-                        insert("Good job, you won! Type exit to close the game or restart to restart the game", txt);
+                        insert("Good job, you won! Type \"close\" to close the game or \"restart\" to restart the game", txt);
                         GameRunner.win();
                         break;
                     }

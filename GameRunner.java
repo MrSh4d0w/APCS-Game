@@ -67,10 +67,10 @@ public class GameRunner {
         m.setBounds(0, 0, 1456, 1080);
         mainPanel.add(m, -1);
 
-        p1 = new Player(75, "ASSAULT", 2, 75, true);// *Player Objects
-        p2 = new Player(100, "TANK", 2, 60, true);
-        p3 = new Player(60, "SNIPER", 2, 90, true);
-        p4 = new Player(50, "MELEE", 4, 0, true);
+        p1 = new Player(45, "ASSAULT", 2, 75, true);// *Player Objects
+        p2 = new Player(90, "TANK", 2, 60, true);
+        p3 = new Player(45, "SNIPER", 2, 90, true);
+        p4 = new Player(25, "MELEE", 4, 0, true);
 
         p1.setSize(new Dimension(112, 112));
         p1.setLocation(grid[10][6]); // Puts the player object on the grid.
@@ -93,9 +93,9 @@ public class GameRunner {
         p4.setOpaque(false);
         mainPanel.add(p4, 4);
 
-        e1 = new Enemy(60, "COP", 3, 20, true); // *Enemy objects
-        e2 = new Enemy(20, "COP2", 3, 20, true);
-        e3 = new Enemy(20, "ROBOT", 3, 20, true);
+        e1 = new Enemy(35, "COP", 3, 20, true); // *Enemy objects
+        e2 = new Enemy(35, "COP2", 3, 20, true);
+        e3 = new Enemy(50, "ROBOT", 3, 20, true);
 
         e1.setSize(new Dimension(112, 112));
         e1.setLocation(grid[1][1]);
@@ -131,7 +131,7 @@ public class GameRunner {
         e3.setLocation(grid[4][3]);
         e3.newLevel();
 
-        e4 = new Enemy(60, "ROBOT2", 3, 20, true); // Initializes a new enemy object, the second robot which only appears in
+        e4 = new Enemy(50, "ROBOT2", 3, 20, true); // Initializes a new enemy object, the second robot which only appears in
                                             // this level and the next.
         e4.setSize(new Dimension(112, 112));
         e4.setLocation(grid[8][3]);
@@ -141,7 +141,7 @@ public class GameRunner {
 
     public static void level3() {
         m.setMap("images/Level3.png");
-        e5 = new Enemy(20, "BOOMER", 3, 20, true); // Initializes a new enemy object, the boomer which only appears in this
+        e5 = new Enemy(10, "BOOMER", 3, 20, true); // Initializes a new enemy object, the boomer which only appears in this
                                             // level.
         e5.setSize(new Dimension(112, 112));
         e5.setLocation(grid[1][7]);
