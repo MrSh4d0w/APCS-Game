@@ -72,7 +72,7 @@ public class Level {
         ret[16] = "336 708";
         ret[17] = "1008 708";
         ret[18] = "1120 708";
-        ret[19] = "1232 372";
+        ret[19] = "1232 708";
         return ret;
     }
     public static String[] getLevel2Pos() {
